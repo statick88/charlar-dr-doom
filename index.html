@@ -122,6 +122,21 @@
         .hint { display: flex; align-items: center; gap: 8px; margin-top: 0.6em; padding: 0.5em 0.8em; background: var(--bg-card); border-radius: 6px; font-size: 0.7em; color: var(--text-muted); text-align: left; }
 
         .footer { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font-size: 0.55em; color: var(--text-muted); }
+        
+        /* Watermark */
+        .watermark {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8em;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        
+        .watermark img {
+            height: 40px;
+            opacity: 0.2;
+        }
 
         /* Title */
         .title-slide h1 { font-size: 3em; }
@@ -145,15 +160,25 @@
         <div class="slides">
             
             <section class="title-slide">
-                <img src="images/dr-doom.png" alt="Dr. Doom" style="height:180px;margin:0 auto 0.3em;border-radius:12px;">
-                <h1>Dr. Doom</h1>
-                <p class="subtitle">Introducción al Bug Bounty</p>
-                <div>
-                    <span class="badge green">FLISOL 2026</span>
-                    <span class="badge">Ethical Hacking</span>
-                    <span class="badge pink">Seguridad Ofensiva</span>
+                <div style="display:flex;align-items:center;justify-content:center;gap:40px">
+                    <div>
+                        <img src="images/dr-doom.png" alt="Dr. Doom" style="height:180px;border-radius:12px;">
+                    </div>
+                    <div style="text-align:left">
+                        <h1>Dr. Doom</h1>
+                        <p class="subtitle">Introducción al Bug Bounty</p>
+                        <div>
+                            <span class="badge green">FLISOL 2026</span>
+                            <span class="badge">Ethical Hacking</span>
+                            <span class="badge pink">Seguridad Ofensiva</span>
+                        </div>
+                        <p class="author">Diego Medardo Saavedra García</p>
+                    </div>
+                    <div style="text-align:center">
+                        <img src="images/qr.png" alt="QR Code" style="width:100px;border-radius:8px;">
+                        <p style="font-size:0.6em;color:var(--text-muted);margin-top:0.3em">Escanea para ver</p>
+                    </div>
                 </div>
-                <p class="author">Diego Medardo Saavedra García</p>
             </section>
 
             <section>
