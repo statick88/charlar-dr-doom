@@ -3,689 +3,140 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Doom: Bug Bounty | Charla FLISOL</title>
-    <meta name="description" content="Charla sobre Bug Bounty y plataformas de práctica para seguridad ofensiva">
+    <title>Dr. Doom: Bug Bounty | FLISOL 2026</title>
+    <meta name="description" content="Presentación sobre Bug Bounty y plataformas de práctica para seguridad ofensiva">
     <meta name="author" content="Diego Medardo Saavedra García">
     
-    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦹‍♂️</text></svg>">
     
-    <!-- Fonts: Inter + FiraCode Nerd Font -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- Reveal.js -->
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
     <link rel="stylesheet" href="dist/theme/black.css">
     <link rel="stylesheet" href="plugin/highlight/monokai.css">
     
     <style>
-        /* ===== TOKYO NIGHT-inspired color palette ===== */
         :root {
-            --bg-primary: #1a1b26;
-            --bg-secondary: #16161e;
-            --bg-tertiary: #24283b;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            
-            --text-primary: #c0caf5;
-            --text-secondary: #565f89;
-            --text-muted: #414868;
-            
-            --accent-green: #9ece6a;
-            --accent-cyan: #7dcfff;
-            --accent-blue: #bb9af7;
-            --accent-pink: #f7768e;
-            --accent-orange: #ff9e64;
-            --accent-yellow: #e0af68;
-            
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
-            
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 16px;
-            
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'Fira Code', 'FiraCode Nerd Font', monospace;
+            --bg: #1a1b26;
+            --bg-card: rgba(255,255,255,0.02);
+            --text: #c0caf5;
+            --text-muted: #565f89;
+            --green: #9ece6a;
+            --cyan: #7dcfff;
+            --pink: #f7768e;
+            --orange: #ff9e64;
+            --border: rgba(255,255,255,0.05);
+            --font: 'Inter', sans-serif;
+            --mono: 'Fira Code', monospace;
         }
 
-        /* ===== BASE ===== */
         .reveal {
-            font-family: var(--font-sans);
-            font-weight: 400;
-            color: var(--text-primary);
-            font-size: 24px;
-            line-height: 1.6;
+            font-family: var(--font);
+            font-size: 22px;
         }
 
-        /* ===== TYPOGRAPHY ===== */
-        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
-            font-family: var(--font-sans);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5em;
-            text-transform: none;
-            letter-spacing: -0.02em;
-        }
-
-        .reveal h1 {
-            font-size: 3.5em;
-            font-weight: 700;
-            line-height: 1.1;
-        }
-
-        .reveal h2 {
-            font-size: 2em;
-            color: var(--accent-green);
-            border-bottom: 2px solid var(--accent-green);
-            padding-bottom: 0.3em;
-            display: inline-block;
-        }
-
-        .reveal h3 {
-            font-size: 1.3em;
-            color: var(--accent-cyan);
-        }
-
-        .reveal p {
-            font-size: 1.1em;
-            line-height: 1.7;
-            color: var(--text-secondary);
-        }
-
-        /* Links */
-        .reveal a {
-            color: var(--accent-cyan);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: all 0.2s ease;
-        }
-
-        .reveal a:hover {
-            color: var(--accent-green);
-            border-bottom-color: var(--accent-green);
-        }
-
-        /* Code */
-        .reveal code {
-            font-family: var(--font-mono);
-            font-size: 0.85em;
-            background: var(--bg-tertiary);
-            padding: 3px 10px;
-            border-radius: var(--radius-sm);
-            color: var(--accent-orange);
-        }
-
-        .reveal pre {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-card);
-            margin: 1.5em 0;
-            font-size: 0.8em;
-        }
-
-        .reveal pre code {
-            font-family: var(--font-mono);
-            background: transparent;
-            padding: 1.5em;
-            display: block;
-            line-height: 1.7;
-            font-size: 1em;
-            color: var(--text-primary);
-        }
-
-        /* Lists */
-        .reveal ul, .reveal ol {
-            display: block;
-            text-align: left;
-            margin-left: 1.5em;
-            font-size: 1em;
-        }
-
-        .reveal li {
-            margin: 0.7em 0;
-            line-height: 1.6;
-            color: var(--text-secondary);
-        }
-
-        .reveal ul li::marker {
-            color: var(--accent-green);
-        }
-
-        .reveal ol li::marker {
-            color: var(--accent-cyan);
-            font-weight: 600;
-        }
-
-        /* Fragments */
-        .reveal .fragment {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal .fragment.fade-up {
-            opacity: 0;
-            transform: translateY(15px);
-        }
-
-        .reveal .fragment.fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== COMPONENTS ===== */
-
-        /* Title Slide */
-        .slide-title {
-            text-align: center;
-        }
-
-        .slide-title h1 {
-            font-size: 4.5em;
-            margin-bottom: 0.2em;
-        }
-
-        .slide-title .subtitle {
-            font-size: 1.8em;
-            color: var(--accent-pink);
-            font-weight: 500;
-            margin-bottom: 0.5em;
-        }
-
-        .slide-title .author {
-            margin-top: 2em;
-            color: var(--text-muted);
-            font-size: 1em;
-        }
-
-        /* Badges */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-subtle);
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 0.75em;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin: 4px;
-        }
-
-        .badge.green {
-            background: rgba(158, 206, 106, 0.15);
-            border-color: var(--accent-green);
-            color: var(--accent-green);
-        }
-
-        .badge.pink {
-            background: rgba(247, 118, 142, 0.15);
-            border-color: var(--accent-pink);
-            color: var(--accent-pink);
-        }
-
-        .badge.cyan {
-            background: rgba(125, 207, 255, 0.15);
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-        }
-
-        .badge.blue {
-            background: rgba(187, 154, 247, 0.15);
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
-        }
-
-        .badge.orange {
-            background: rgba(255, 158, 100, 0.15);
-            border-color: var(--accent-orange);
-            color: var(--accent-orange);
-        }
-
-        /* Cards */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 1.5em;
-            text-align: left;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: var(--accent-green);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(158, 206, 106, 0.1);
-        }
-
-        .card h4 {
-            font-size: 1em;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card p, .card li {
-            font-size: 0.9em;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-            margin-top: 1.5em;
-        }
-
-        /* Info Box */
-        .info-box {
-            background: rgba(158, 206, 106, 0.05);
-            border: 1px solid rgba(158, 206, 106, 0.2);
-            border-radius: var(--radius-md);
-            padding: 1.5em;
-            margin: 1em 0;
-        }
-
-        .info-box.cyan {
-            background: rgba(125, 207, 255, 0.05);
-            border-color: rgba(125, 207, 255, 0.2);
-        }
-
-        .info-box.pink {
-            background: rgba(247, 118, 142, 0.05);
-            border-color: rgba(247, 118, 142, 0.2);
-        }
-
-        .info-box.blue {
-            background: rgba(187, 154, 247, 0.05);
-            border-color: rgba(187, 154, 247, 0.2);
-        }
-
-        .info-box h4 {
-            font-size: 0.95em;
-            font-weight: 600;
-            margin-bottom: 0.5em;
-            color: var(--accent-green);
-        }
-
-        .info-box.cyan h4 { color: var(--accent-cyan); }
-        .info-box.pink h4 { color: var(--accent-pink); }
-        .info-box.blue h4 { color: var(--accent-blue); }
-
-        .info-box ul {
-            margin: 0;
-            font-size: 0.9em;
-        }
-
-        .info-box li {
-            margin: 0.4em 0;
-        }
-
-        /* Quote */
-        .quote {
-            font-size: 1.3em;
-            font-style: normal;
-            color: var(--text-primary);
-            border-left: 3px solid var(--accent-cyan);
-            padding-left: 1.5em;
-            margin: 1.5em 0;
-            line-height: 1.6;
-        }
-
-        /* Columns */
-        .columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            align-items: start;
-            margin-top: 1em;
-        }
-
-        .columns.three {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        /* Terminal */
-        .terminal {
-            background: #0d0d14;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            padding: 1.5em;
-            font-family: var(--font-mono);
-            font-size: 0.85em;
-            line-height: 1.6;
-            position: relative;
-        }
-
-        .terminal::before {
-            content: '●●●';
-            position: absolute;
-            top: 12px;
-            left: 15px;
-            color: var(--text-muted);
-            font-size: 10px;
-            letter-spacing: 3px;
-        }
-
-        .terminal .line {
-            margin: 0.3em 0;
-        }
-
-        .terminal .prompt {
-            color: var(--accent-cyan);
-        }
-
-        .terminal .command {
-            color: var(--accent-green);
-        }
-
-        .terminal .comment {
-            color: var(--text-muted);
-        }
-
-        .terminal .output {
-            color: var(--text-secondary);
-            padding-left: 1em;
-        }
-
-        /* Logo Grid */
-        .logo-grid {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            flex-wrap: wrap;
-            margin: 2em 0;
-        }
-
-        .logo-item {
-            width: 90px;
-            height: 90px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            font-size: 0.8em;
-            text-align: center;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .logo-item:hover {
-            border-color: var(--accent-green);
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 24px rgba(158, 206, 106, 0.15);
-            color: var(--text-primary);
-        }
-
-        .logo-item .icon {
-            font-size: 2em;
-            margin-bottom: 6px;
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 35px;
-            margin-top: 1.5em;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 8px;
-            top: 10px;
-            bottom: 10px;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent-green), var(--accent-cyan));
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 1.2em;
-            padding: 1em 1.2em;
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -31px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 10px;
-            height: 10px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            box-shadow: 0 0 15px var(--accent-green);
-        }
-
-        .timeline-item h4 {
-            font-size: 0.95em;
-            font-weight: 600;
-            margin-bottom: 0.3em;
-        }
-
-        .timeline-item p {
-            font-size: 0.85em;
-            margin: 0;
-        }
-
-        /* Table */
-        .comparison {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85em;
-            margin-top: 1em;
-        }
-
-        .comparison th {
-            text-align: left;
-            padding: 1em;
-            background: var(--bg-secondary);
-            color: var(--accent-green);
-            font-weight: 600;
-            border-bottom: 2px solid var(--accent-green);
-        }
-
-        .comparison td {
-            padding: 1em;
-            border-bottom: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-        }
-
-        .comparison tr:hover td {
-            background: var(--bg-card);
-        }
-
-        /* Progress */
-        .progress-container {
-            margin: 1.5em 0;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8em;
-            color: var(--text-muted);
-            margin-bottom: 0.5em;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: var(--bg-tertiary);
-            border-radius: 100px;
+        .reveal .slides section {
+            padding: 15px 30px;
+            box-sizing: border-box;
+            max-height: 100vh;
             overflow: hidden;
-        }
-
-        .progress-bar .fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
-            border-radius: 100px;
-        }
-
-        /* Icon List */
-        .icon-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .icon-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            margin: 1em 0;
-            padding: 1em;
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .icon-list .icon {
-            font-size: 1.5em;
-            width: 40px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .icon-list strong {
-            display: block;
-            color: var(--text-primary);
-            margin-bottom: 0.2em;
-            font-size: 0.95em;
-        }
-
-        .icon-list p {
-            font-size: 0.85em;
-            margin: 0;
-        }
-
-        /* Hint */
-        .hint {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 1.5em;
-            padding: 1em 1.5em;
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            font-size: 0.9em;
-            color: var(--text-muted);
-        }
-
-        .hint .icon {
-            font-size: 1.3em;
-        }
-
-        /* Footer */
-        .slide-footer {
-            position: absolute;
-            bottom: 25px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 0.65em;
-            color: var(--text-muted);
-        }
-
-        /* Thank You Slide */
-        .slide-thanks {
-            text-align: center;
-        }
-
-        .slide-thanks h1 {
-            font-size: 4em;
-            color: var(--accent-pink);
-            margin-bottom: 0.3em;
-        }
-
-        .speaker-name {
-            font-size: 1.6em;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5em;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 12px;
+            display: flex !important;
+            flex-direction: column;
             justify-content: center;
-            margin-top: 1.5em;
         }
 
-        /* Q&A */
-        .slide-qa {
-            text-align: center;
-        }
+        .reveal h1 { font-size: 2.5em; font-weight: 700; margin: 0 0 0.2em; color: var(--text); }
+        .reveal h2 { font-size: 1.4em; font-weight: 600; color: var(--green); margin: 0 0 0.6em; border-bottom: 2px solid var(--green); padding-bottom: 0.2em; display: inline-block; }
+        .reveal h3 { font-size: 0.9em; font-weight: 600; color: var(--cyan); margin: 0 0 0.3em; }
+        .reveal p { font-size: 0.8em; line-height: 1.4; color: var(--text-muted); margin: 0.2em 0; }
+        .reveal a { color: var(--cyan); text-decoration: none; }
+        .reveal a:hover { color: var(--green); }
+        .reveal code { font-family: var(--mono); font-size: 0.75em; background: rgba(255,158,100,0.1); padding: 2px 5px; border-radius: 3px; color: var(--orange); }
+        .reveal pre { margin: 0.4em 0; font-size: 0.7em; }
+        .reveal pre code { background: #0d0d14; padding: 0.8em; display: block; }
+        .reveal ul, .reveal ol { margin: 0; padding-left: 1em; font-size: 0.8em; text-align: left; }
+        .reveal li { margin: 0.25em 0; color: var(--text-muted); line-height: 1.4; }
+        .reveal li::marker { color: var(--green); }
 
-        .slide-qa .question-icon {
-            font-size: 10em;
-            color: var(--accent-cyan);
-            opacity: 0.15;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 0.6em; font-weight: 500; margin: 2px; }
+        .badge.green { background: rgba(158,206,106,0.15); color: var(--green); }
+        .badge.pink { background: rgba(247,118,142,0.15); color: var(--pink); }
+        .badge.cyan { background: rgba(125,207,255,0.15); color: var(--cyan); }
 
-        .slide-qa h2 {
-            color: var(--accent-green);
-            margin-top: 2em;
-        }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.6em; text-align: left; }
+        .card h4 { font-size: 0.75em; margin: 0 0 0.2em; color: var(--text); }
+        .card p { font-size: 0.7em; margin: 0; }
+        .card-grid { display: grid; gap: 10px; margin-top: 0.6em; }
+        .card-grid.two { grid-template-columns: repeat(2, 1fr); }
+        .card-grid.three { grid-template-columns: repeat(3, 1fr); }
+        .card-grid.four { grid-template-columns: repeat(4, 1fr); }
 
-        /* ===== RESPONSIVE ===== */
+        .info-box { background: rgba(158,206,106,0.05); border: 1px solid rgba(158,206,106,0.15); border-radius: 8px; padding: 0.6em; }
+        .info-box.cyan { background: rgba(125,207,255,0.05); border-color: rgba(125,207,255,0.15); }
+        .info-box.pink { background: rgba(247,118,142,0.05); border-color: rgba(247,118,142,0.15); }
+        .info-box h4 { font-size: 0.7em; margin: 0 0 0.3em; color: var(--green); }
+        .info-box.cyan h4 { color: var(--cyan); }
+        .info-box.pink h4 { color: var(--pink); }
+        .info-box ul { margin: 0; padding-left: 1em; }
+        .info-box li { font-size: 0.75em; margin: 0.15em 0; }
+
+        .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; }
+        .columns.three { grid-template-columns: repeat(3, 1fr); }
+
+        .terminal { background: #0d0d14; border: 1px solid var(--border); border-radius: 8px; padding: 0.6em; font-family: var(--mono); font-size: 0.65em; }
+        .terminal .line { margin: 0.1em 0; }
+        .terminal .prompt { color: var(--cyan); }
+        .terminal .command { color: var(--green); }
+        .terminal .comment { color: var(--text-muted); }
+        .terminal .output { color: var(--text-muted); padding-left: 1em; }
+
+        .logo-grid { display: flex; justify-content: center; gap: 12px; margin: 0.8em 0; }
+        .logo-item { width: 65px; height: 65px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.65em; color: var(--text-muted); }
+        .logo-item .icon { font-size: 1.6em; margin-bottom: 4px; }
+
+        .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: left; margin-top: 0.8em; }
+        .timeline-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.6em; }
+        .timeline-item h4 { font-size: 0.75em; margin: 0 0 0.15em; }
+        .timeline-item p { font-size: 0.65em; margin: 0; }
+
+        .icon-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: left; }
+        .icon-list li { display: flex; align-items: center; gap: 8px; padding: 0.5em; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; margin: 0; }
+        .icon-list .icon { font-size: 1.2em; }
+        .icon-list strong { font-size: 0.7em; }
+        .icon-list p { font-size: 0.6em; margin: 0; }
+
+        .progress { margin: 0.6em 0; max-width: 280px; }
+        .progress-label { display: flex; justify-content: space-between; font-size: 0.65em; color: var(--text-muted); margin-bottom: 0.2em; }
+        .progress-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 100px; overflow: hidden; }
+        .progress-bar .fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--cyan)); width: 85%; }
+
+        .comparison { width: 100%; border-collapse: collapse; font-size: 0.7em; margin-top: 0.6em; }
+        .comparison th { text-align: left; padding: 0.5em; background: rgba(158,206,106,0.1); color: var(--green); border-bottom: 1px solid var(--green); }
+        .comparison td { padding: 0.4em; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+
+        .quote { font-size: 0.9em; color: var(--text); border-left: 3px solid var(--cyan); padding-left: 0.8em; margin: 0.6em 0; text-align: left; }
+        .hint { display: flex; align-items: center; gap: 8px; margin-top: 0.6em; padding: 0.5em 0.8em; background: var(--bg-card); border-radius: 6px; font-size: 0.7em; color: var(--text-muted); text-align: left; }
+
+        .footer { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font-size: 0.55em; color: var(--text-muted); }
+
+        /* Title */
+        .title-slide h1 { font-size: 3em; }
+        .title-slide .subtitle { font-size: 1.3em; color: var(--pink); margin: 0.1em 0 0.4em; }
+        .title-slide .author { margin-top: 1.2em; color: var(--text-muted); }
+        .thanks-slide h1 { font-size: 2.8em; color: var(--pink); }
+        .thanks-slide .name { font-size: 1.2em; font-weight: 600; margin: 0.3em 0; }
+        .qa-slide h2 { font-size: 2.2em; color: var(--green); }
+
         @media (max-width: 768px) {
-            .columns {
-                grid-template-columns: 1fr;
-            }
-            
-            .columns.three {
-                grid-template-columns: 1fr;
-            }
-            
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .logo-grid {
-                gap: 16px;
-            }
-            
-            .logo-item {
-                width: 75px;
-                height: 75px;
-            }
-            
-            .reveal h1 {
-                font-size: 2.5em;
-            }
-            
-            .reveal h2 {
-                font-size: 1.5em;
-            }
-        }
-
-        /* ===== SLIDE NUMBER ===== */
-        .reveal .slide-number {
-            font-family: var(--font-mono);
-            font-size: 14px;
-            color: var(--text-muted);
-            background: transparent;
-            padding: 15px 20px;
+            .reveal { font-size: 18px; }
+            .columns { grid-template-columns: 1fr; }
+            .card-grid.two, .card-grid.three, .card-grid.four { grid-template-columns: 1fr; }
+            .timeline { grid-template-columns: 1fr; }
+            .icon-list { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -693,11 +144,10 @@
     <div class="reveal">
         <div class="slides">
             
-            <!-- SLIDE 1: TÍTULO -->
-            <section class="slide-title">
+            <section class="title-slide">
                 <h1>Dr. Doom</h1>
                 <p class="subtitle">Introducción al Bug Bounty</p>
-                <div style="margin-top: 1.5em;">
+                <div>
                     <span class="badge green">FLISOL 2026</span>
                     <span class="badge">Ethical Hacking</span>
                     <span class="badge pink">Seguridad Ofensiva</span>
@@ -705,579 +155,218 @@
                 <p class="author">Diego Medardo Saavedra García</p>
             </section>
 
-            <!-- SLIDE 2: QUIÉN SOY -->
             <section>
                 <h2>¿Quién soy?</h2>
-                <div class="card-grid">
-                    <div class="card">
-                        <h4>🎓 Docente</h4>
-                        <p>ESPE, UIDE, Abacom, Codings Academy, IST Juan Montalvo</p>
-                    </div>
-                    <div class="card">
-                        <h4>💻 FullStack Dev</h4>
-                        <p>+10 años de experiencia en desarrollo de software</p>
-                    </div>
-                    <div class="card">
-                        <h4>🦹‍♂️ Bug Bounty Hunter</h4>
-                        <p>Cazando vulnerabilidades en plataformas profesionales</p>
-                    </div>
-                    <div class="card">
-                        <h4>🎓 Estudiante</h4>
-                        <p>Máster en Ciberseguridad Ofensiva y Defensiva - UCM</p>
-                    </div>
+                <div class="card-grid four">
+                    <div class="card"><h4>🎓 Docente</h4><p>ESPE, UIDE, Abacom, Codings</p></div>
+                    <div class="card"><h4>💻 FullStack Dev</h4><p>+10 años de experiencia</p></div>
+                    <div class="card"><h4>🦹‍♂️ Bug Bounty</h4><p>Intigriti, Bugcrowd</p></div>
+                    <div class="card"><h4>🎓 Estudiante</h4><p>Máster UCM</p></div>
                 </div>
             </section>
 
-            <!-- SLIDE 3: QUÉ ES BUG BOUNTY -->
             <section>
                 <h2>¿Qué es Bug Bounty?</h2>
-                <p class="quote">
-                    Programa que recompensa a investigadores de seguridad por encontrar y reportar vulnerabilidades de forma responsable.
-                </p>
+                <p class="quote">Programa que recompensa a investigadores de seguridad por encontrar y reportar vulnerabilidades de forma responsable.</p>
                 <div class="columns">
-                    <div class="info-box">
-                        <h4>Para las empresas</h4>
-                        <ul>
-                            <li>Descubre vulnerabilidades antes que atacantes</li>
-                            <li>Más económico que pentests tradicionales</li>
-                            <li>Acceso a miles de investigadores globales</li>
-                        </ul>
-                    </div>
-                    <div class="info-box cyan">
-                        <h4>Para los hunters</h4>
-                        <ul>
-                            <li>Gana dinero encontrando bugs</li>
-                            <li>Aprende hacking real con práctica</li>
-                            <li>Construye tu reputación profesional</li>
-                        </ul>
-                    </div>
+                    <div class="info-box"><h4>Para empresas</h4><ul><li>Descubre vulns antes que atacantes</li><li>Más económico que pentests</li><li>Miles de investigadores</li></ul></div>
+                    <div class="info-box cyan"><h4>Para hunters</h4><ul><li>Gana dinero</li><li>Aprende hacking real</li><li>Construye reputación</li></ul></div>
                 </div>
             </section>
 
-            <!-- SLIDE 4: PLATAFORMAS PRINCIPALES -->
             <section>
                 <h2>Plataformas de Bug Bounty</h2>
                 <div class="logo-grid">
-                    <div class="logo-item">
-                        <span class="icon">🔴</span>
-                        <span>HackerOne</span>
-                    </div>
-                    <div class="logo-item">
-                        <span class="icon">🟡</span>
-                        <span>Bugcrowd</span>
-                    </div>
-                    <div class="logo-item">
-                        <span class="icon">🟢</span>
-                        <span>Intigriti</span>
-                    </div>
-                    <div class="logo-item">
-                        <span class="icon">🔵</span>
-                        <span>YesWeHack</span>
-                    </div>
+                    <div class="logo-item"><span class="icon">🔴</span>HackerOne</div>
+                    <div class="logo-item"><span class="icon">🟡</span>Bugcrowd</div>
+                    <div class="logo-item"><span class="icon">🟢</span>Intigriti</div>
+                    <div class="logo-item"><span class="icon">🔵</span>YesWeHack</div>
                 </div>
-                <div class="progress-container" style="max-width: 350px; margin: 1.5em auto 0;">
-                    <div class="progress-label">
-                        <span>Recompensas pagadas en 2024</span>
-                        <span style="color: var(--accent-green);">$50M+</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="fill" style="width: 85%;"></div>
-                    </div>
+                <div class="progress">
+                    <div class="progress-label"><span>Recompensas 2024</span><span style="color:var(--green)">$50M+</span></div>
+                    <div class="progress-bar"><div class="fill" style="width:85%"></div></div>
                 </div>
             </section>
 
-            <!-- SLIDE 5: INTIGRITI -->
             <section>
                 <h2>Intigriti</h2>
                 <div class="columns">
-                    <div class="info-box">
-                        <h4>Características principales</h4>
-                        <ul>
-                            <li>125,000+ investigadores activos</li>
-                            <li>Ranged Bounties (mínimo y máximo)</li>
-                            <li>5 niveles de recompensa</li>
-                            <li>API para empresas</li>
-                            <li>Programas en 180+ países</li>
-                        </ul>
-                    </div>
+                    <div class="info-box"><h4>Características</h4><ul><li>125,000+ investigadores</li><li>Ranged Bounties (5 niveles)</li><li>API para empresas</li><li>180+ países</li></ul></div>
                     <div>
-                        <div class="terminal">
-                            <div class="line"><span class="comment"># Ver programas activos</span></div>
-                            <div class="line"><span class="prompt">$</span> <span class="command">curl -H "Authorization: Bearer TOKEN" \</span></div>
-                            <div class="line"><span class="command">    https://api.intigriti.com/programs</span></div>
-                            <div class="line"><span class="output">→ Lista de programas disponibles</span></div>
-                        </div>
-                        <p style="margin-top: 1em;">
-                            <span class="badge green">Más popular en Europa</span>
-                        </p>
+                        <div class="terminal"><div class="line"><span class="comment"># Ver programas</span></div><div class="line"><span class="prompt">$</span> <span class="command">curl api.intigriti.com/programs</span></div><div class="line"><span class="output">→ Lista de programas</span></div></div>
+                        <p style="margin-top:0.4em"><span class="badge green">Más popular en Europa</span></p>
                     </div>
                 </div>
             </section>
 
-            <!-- SLIDE 6: BUGCROWD -->
             <section>
                 <h2>Bugcrowd</h2>
                 <div class="columns">
-                    <div class="info-box">
-                        <h4>AI-Powered Platform</h4>
-                        <ul>
-                            <li>AI Triage Assistant</li>
-                            <li>AI Analytics</li>
-                            <li>Crowdcontrol</li>
-                            <li>Reward Ranges configurables</li>
-                            <li>Penetration Testing on-demand</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>📋 Tipos de Engagement</h4>
-                        <ul style="margin-top: 1em;">
-                            <li><strong>Bug Bounty</strong> — Continuo, siempre activo</li>
-                            <li><strong>On-Demand</strong> — 2 semanas, tiempo limitado</li>
-                            <li><strong>Pen Test</strong> — Pentesting tradicional</li>
-                        </ul>
-                    </div>
+                    <div class="info-box"><h4>AI-Powered</h4><ul><li>AI Triage Assistant</li><li>AI Analytics</li><li>Crowdcontrol</li><li>Reward Ranges</li></ul></div>
+                    <div class="info-box"><h4>Tipos</h4><ul><li><strong>Bug Bounty</strong> — Continuo</li><li><strong>On-Demand</strong> — 2 semanas</li><li><strong>Pen Test</strong> — Tradicional</li></ul></div>
                 </div>
-                <p style="margin-top: 1em;">
-                    <span class="badge blue">AI-Powered</span>
-                </p>
             </section>
 
-            <!-- SLIDE 7: HACKERONE -->
             <section>
                 <h2>HackerOne</h2>
                 <div class="columns">
-                    <div class="info-box">
-                        <h4>La plataforma #1</h4>
-                        <ul>
-                            <li>Líder del mercado global</li>
-                            <li>Hai — Agente AI nativo</li>
-                            <li>Bounty Insights</li>
-                            <li>ID-verified researchers</li>
-                            <li>Integración con SDLC</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>⭐ Programas destacados</h4>
-                        <ul style="margin-top: 1em;">
-                            <li>Google VRP</li>
-                            <li>Microsoft VRP</li>
-                            <li>1Password CTF</li>
-                            <li>Uber, Shopify, Dropbox</li>
-                        </ul>
-                    </div>
+                    <div class="info-box"><h4>La plataforma #1</h4><ul><li>Líder del mercado</li><li>Hai — Agente AI</li><li>Bounty Insights</li><li>ID-verified researchers</li></ul></div>
+                    <div class="info-box"><h4>Programas destacados</h4><ul><li>Google VRP</li><li>Microsoft VRP</li><li>1Password CTF</li><li>Uber, Shopify</li></ul></div>
                 </div>
             </section>
 
-            <!-- SLIDE 8: YESWESHACK -->
             <section>
                 <h2>YesWeHack</h2>
                 <div class="columns">
-                    <div class="info-box">
-                        <h4>Enfoque europeo</h4>
-                        <ul>
-                            <li>Vulnerability Disclosure Policies</li>
-                            <li>Bug Bounty Programs</li>
-                            <li>Code Review</li>
-                            <li>Scope personalizado</li>
-                            <li>Integración SOC</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>🏢 Para Empresas</h4>
-                        <ul style="margin-top: 1em;">
-                            <li>Reward Caps configurables</li>
-                            <li>Whitepapers de seguridad</li>
-                            <li>Dashboard de analytics</li>
-                            <li>Soporte técnico dedicado</li>
-                        </ul>
-                    </div>
+                    <div class="info-box"><h4>Enfoque europeo</h4><ul><li>VDP + Bug Bounty</li><li>Code Review</li><li>Integración SOC</li></ul></div>
+                    <div class="info-box"><h4>Para Empresas</h4><ul><li>Reward Caps</li><li>Whitepapers</li><li>Dashboard analytics</li><li>Soporte dedicado</li></ul></div>
                 </div>
             </section>
 
-            <!-- SLIDE 9: COMPARATIVA -->
             <section>
-                <h2>Comparativa de Plataformas</h2>
+                <h2>Comparativa</h2>
                 <table class="comparison">
-                    <thead>
-                        <tr>
-                            <th>Plataforma</th>
-                            <th>Foco</th>
-                            <th>Bounty Promedio</th>
-                            <th>Nivel</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>Plataforma</th><th>Foco</th><th>Bounty</th><th>Nivel</th></tr></thead>
                     <tbody>
-                        <tr>
-                            <td><strong style="color: var(--accent-orange);">HackerOne</strong></td>
-                            <td>Enterprise, VRP</td>
-                            <td>$5,000 - $50,000+</td>
-                            <td>⬆️⬆️⬆️⬆️⬆️</td>
-                        </tr>
-                        <tr>
-                            <td><strong style="color: var(--accent-yellow);">Bugcrowd</strong></td>
-                            <td>Startups, SaaS</td>
-                            <td>$500 - $10,000</td>
-                            <td>⬆️⬆️⬆️⬆️</td>
-                        </tr>
-                        <tr>
-                            <td><strong style="color: var(--accent-green);">Intigriti</strong></td>
-                            <td>Europa, Mid-market</td>
-                            <td>$1,000 - $15,000</td>
-                            <td>⬆️⬆️⬆️</td>
-                        </tr>
-                        <tr>
-                            <td><strong style="color: var(--accent-pink);">YesWeHack</strong></td>
-                            <td>Francia, UE</td>
-                            <td>$500 - $5,000</td>
-                            <td>⬆️⬆️⬆️</td>
-                        </tr>
+                        <tr><td><strong style="color:var(--orange)">HackerOne</strong></td><td>Enterprise</td><td>$5K-$50K+</td><td>⬆️⬆️⬆️⬆️⬆️</td></tr>
+                        <tr><td><strong style="color:var(--orange)">Bugcrowd</strong></td><td>Startups</td><td>$500-$10K</td><td>⬆️⬆️⬆️⬆️</td></tr>
+                        <tr><td><strong style="color:var(--green)">Intigriti</strong></td><td>Europa</td><td>$1K-$15K</td><td>⬆️⬆️⬆️</td></tr>
+                        <tr><td><strong style="color:var(--pink)">YesWeHack</strong></td><td>Francia, UE</td><td>$500-$5K</td><td>⬆️⬆️⬆️</td></tr>
                     </tbody>
                 </table>
-                <div class="hint">
-                    <span class="icon">💡</span>
-                    <span>Empieza en plataformas más pequeñas para ganar experiencia antes de ir a los programas VIP.</span>
-                </div>
+                <div class="hint">💡 Empieza en plataformas pequeñas para ganar experiencia antes de los programas VIP.</div>
             </section>
 
-            <!-- SLIDE 10: PLATAFORMAS DE PRÁCTICA -->
             <section>
                 <h2>Plataformas de Práctica</h2>
-                <p style="color: var(--text-muted); margin-bottom: 1em;">
-                    Antes de cazar bugs reales, domina estas plataformas
-                </p>
-                <div class="card-grid">
-                    <div class="card">
-                        <h4>🎯 HackTheBox</h4>
-                        <p>CTFs, Labs, Machines</p>
-                        <p style="color: var(--accent-green); margin-top: 0.5em;">Dificultad: Alta</p>
-                    </div>
-                    <div class="card">
-                        <h4>🏠 TryHackMe</h4>
-                        <p>Tutoriales, Rooms, Learning Paths</p>
-                        <p style="color: var(--accent-cyan); margin-top: 0.5em;">Dificultad: Media-Baja</p>
-                    </div>
-                    <div class="card">
-                        <h4>🐳 Docker Labs</h4>
-                        <p>VulnHub, DVWA, Juice Shop</p>
-                        <p style="color: var(--accent-pink); margin-top: 0.5em;">Dificultad: Variable</p>
-                    </div>
+                <div class="card-grid three">
+                    <div class="card"><h4>🎯 HackTheBox</h4><p>CTFs, Labs, Machines</p><p style="color:var(--green)">Alta dificultad</p></div>
+                    <div class="card"><h4>🏠 TryHackMe</h4><p>Tutoriales, Rooms</p><p style="color:var(--cyan)">Media-Baja</p></div>
+                    <div class="card"><h4>🐳 Docker Labs</h4><p>DVWA, Juice Shop</p><p style="color:var(--pink)">Variable</p></div>
                 </div>
             </section>
 
-            <!-- SLIDE 11: HACKTHEBOX -->
             <section>
                 <h2>HackTheBox</h2>
                 <div class="columns">
-                    <div class="info-box">
-                        <h4>Contenido disponible</h4>
-                        <ul>
-                            <li><strong>Retired Machines</strong> — Labs para practicar</li>
-                            <li><strong>Active Machines</strong> — Desafíos actuales</li>
-                            <li><strong>CTFs</strong> — Capture The Flag</li>
-                            <li><strong>Fortress</strong> — Ataque y defensa</li>
-                            <li><strong>Pro Labs</strong> — Escenarios empresariales</li>
-                            <li><strong>Starting Points</strong> — Para principiantes</li>
-                        </ul>
-                    </div>
+                    <div class="info-box"><h4>Contenido</h4><ul><li><strong>Retired Machines</strong> — Labs</li><li><strong>Active Machines</strong> — Desafíos</li><li><strong>CTFs</strong> — Capture The Flag</li><li><strong>Pro Labs</strong> — Escenarios</li></ul></div>
                     <div>
-                        <div class="terminal">
-                            <div class="line"><span class="prompt">$</span> <span class="command">htb</span></div>
-                            <div class="line"><span class="comment"># Hack The Box CLI</span></div>
-                            <div class="line"></div>
-                            <div class="line"><span class="prompt">$</span> <span class="command">htb connect --machine EasyLinux</span></div>
-                            <div class="line"><span class="output">✓ Machine deployed</span></div>
-                        </div>
-                        <div class="progress-container" style="margin-top: 1em;">
-                            <div class="progress-label">
-                                <span>Hackers que usan HTB</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="fill" style="width: 75%;"></div>
-                            </div>
-                        </div>
+                        <div class="terminal"><div class="line"><span class="prompt">$</span> <span class="command">htb connect --machine EasyLinux</span></div><div class="line"><span class="output">✓ Machine deployed</span></div></div>
+                        <div class="progress"><div class="progress-label"><span>Hackers HTB</span><span>75%</span></div><div class="progress-bar"><div class="fill" style="width:75%"></div></div></div>
                     </div>
                 </div>
             </section>
 
-            <!-- SLIDE 12: TRYHACKME -->
             <section>
                 <h2>TryHackMe</h2>
                 <div class="columns">
-                    <div class="info-box cyan">
-                        <h4>Learning Paths</h4>
-                        <ul>
-                            <li>Introduction to Cyber Security</li>
-                            <li>Web Fundamentals</li>
-                            <li>Network Security</li>
-                            <li>Privilege Escalation</li>
-                            <li>CTF Fundamentals</li>
-                            <li>Offensive Pentesting</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>🔥 Rooms Populares</h4>
-                        <ul style="margin-top: 1em;">
-                            <li>OWASP Top 10</li>
-                            <li>Blue Team Tools</li>
-                            <li>Linux Fundamentals</li>
-                            <li>Windows Fundamentals</li>
-                            <li>Burp Suite Basics</li>
-                            <li>Nmap Mastery</li>
-                        </ul>
-                    </div>
+                    <div class="info-box cyan"><h4>Learning Paths</h4><ul><li>Introduction to Cyber Security</li><li>Web Fundamentals</li><li>Network Security</li><li>Privilege Escalation</li></ul></div>
+                    <div class="info-box"><h4>Rooms Populares</h4><ul><li>OWASP Top 10</li><li>Blue Team Tools</li><li>Burp Suite Basics</li><li>Nmap Mastery</li></ul></div>
                 </div>
-                <p style="margin-top: 1em;">
-                    <span class="badge cyan">Beginner Friendly</span>
-                </p>
+                <p style="margin-top:0.4em"><span class="badge cyan">Beginner Friendly</span></p>
             </section>
 
-            <!-- SLIDE 13: DOCKER LABS -->
             <section>
                 <h2>Docker Labs Vulnerables</h2>
                 <div class="columns">
                     <div class="terminal">
-                        <div class="line"><span class="comment"># DVWA - Damn Vulnerable Web App</span></div>
-                        <div class="line"><span class="prompt">$</span> <span class="command">docker run -d \</span></div>
-                        <div class="line">        <span class="command">-p 8080:80 \</span></div>
-                        <div class="line">        <span class="command">vulnerables/web-dvwa</span></div>
-                        <div class="line"></div>
-                        <div class="line"><span class="comment"># OWASP Juice Shop</span></div>
-                        <div class="line"><span class="prompt">$</span> <span class="command">docker run -d \</span></div>
-                        <div class="line">        <span class="command">-p 3000:3000 \</span></div>
-                        <div class="line">        <span class="command">bkimminich/juice-shop</span></div>
+                        <div class="line"><span class="comment"># DVWA</span></div>
+                        <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 8080:80 vulnerables/web-dvwa</span></div>
+                        <div class="line" style="margin-top:0.5em"><span class="comment"># Juice Shop</span></div>
+                        <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 3000:3000 bkimminich/juice-shop</span></div>
                     </div>
-                    <div class="card-grid">
-                        <div class="card">
-                            <h4>🕷️ DVWA</h4>
-                            <p>SQLi, XSS, CSRF, LFI</p>
-                        </div>
-                        <div class="card">
-                            <h4>🥤 Juice Shop</h4>
-                            <p>OWASP Top 10 completo</p>
-                        </div>
-                        <div class="card">
-                            <h4>🐱‍💻 Metasploitable</h4>
-                            <p>Linux vulnerable</p>
-                        </div>
-                        <div class="card">
-                            <h4>🔴 VulnHub</h4>
-                            <p>VMs descargables</p>
-                        </div>
+                    <div class="card-grid two">
+                        <div class="card"><h4>🕷️ DVWA</h4><p>SQLi, XSS, LFI</p></div>
+                        <div class="card"><h4>🥤 Juice Shop</h4><p>OWASP Top 10</p></div>
+                        <div class="card"><h4>🐱‍💻 Metasploitable</h4><p>Linux vuln</p></div>
+                        <div class="card"><h4>🔴 VulnHub</h4><p>VMs descargables</p></div>
                     </div>
                 </div>
             </section>
 
-            <!-- SLIDE 14: MI CURSO -->
             <section>
                 <h2>Mi Curso de Ethical Hacking</h2>
-                <p style="margin-bottom: 1em;">
-                    <a href="https://statick88.github.io">statick88.github.io</a>
-                </p>
-                <div class="card-grid">
-                    <div class="card">
-                        <h4>📅 Modalidad</h4>
-                        <p>Clases en vivo de 19:00 a 22:00</p>
-                        <p style="color: var(--accent-green);">16-27 de marzo 2026</p>
-                    </div>
-                    <div class="card">
-                        <h4>📜 Certificación</h4>
-                        <p>Aval del Ministerio del Trabajo</p>
-                        <p style="color: var(--accent-cyan);">Certificado profesional</p>
-                    </div>
-                    <div class="card">
-                        <h4>🖥️ Simuladores</h4>
-                        <p>Core i5, 8GB RAM mínimo</p>
-                        <p style="color: var(--accent-pink);">Hands-on labs</p>
-                    </div>
+                <p><a href="https://statick88.github.io">statick88.github.io</a></p>
+                <div class="card-grid three">
+                    <div class="card"><h4>📅 Modalidad</h4><p>Clases en vivo 19:00-22:00</p><p style="color:var(--green)">16-27 marzo 2026</p></div>
+                    <div class="card"><h4>📜 Certificación</h4><p>Aval Ministerio del Trabajo</p><p style="color:var(--cyan)">Certificado profesional</p></div>
+                    <div class="card"><h4>🖥️ Simuladores</h4><p>Core i5, 8GB RAM</p><p style="color:var(--pink)">Hands-on labs</p></div>
                 </div>
-                <div class="info-box cyan" style="margin-top: 1em; text-align: center;">
-                    <p style="margin: 0;">
-                        <strong style="color: var(--accent-cyan);">Próximamente:</strong> ebook de FastAPI con Quarto — <span style="color: var(--text-muted);">lanzamiento abierto</span>
-                    </p>
-                </div>
+                <p style="margin-top:0.6em;font-size:0.85em"><strong style="color:var(--cyan)">Próximamente:</strong> ebook de FastAPI con Quarto — lanzamiento abierto</p>
             </section>
 
-            <!-- SLIDE 15: METODOLOGÍA -->
             <section>
                 <h2>Metodología Bug Bounty</h2>
                 <div class="timeline">
-                    <div class="timeline-item">
-                        <h4 style="color: var(--accent-cyan);">1. Reconocimiento</h4>
-                        <p>Subdomain enumeration, asset discovery, tech fingerprinting</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4 style="color: var(--accent-green);">2. Enumeración</h4>
-                        <p>Parameters, endpoints, API analysis, Crawling</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4 style="color: var(--accent-pink);">3. Explotación</h4>
-                        <p>SQLi, XSS, SSRF, IDOR, RCE (solo con autorización)</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4 style="color: var(--accent-yellow);">4. Reporte</h4>
-                        <p>PoC, CVSS, remediación, comunicación con programa</p>
-                    </div>
+                    <div class="timeline-item"><h4 style="color:var(--cyan)">1. Recon</h4><p>Subdomain enum, asset discovery</p></div>
+                    <div class="timeline-item"><h4 style="color:var(--green)">2. Enum</h4><p>Parameters, endpoints, API</p></div>
+                    <div class="timeline-item"><h4 style="color:var(--pink)">3. Exploit</h4><p>SQLi, XSS, SSRF, IDOR</p></div>
+                    <div class="timeline-item"><h4 style="color:var(--orange)">4. Reporte</h4><p>PoC, CVSS, remediación</p></div>
                 </div>
             </section>
 
-            <!-- SLIDE 16: HERRAMIENTAS -->
             <section>
                 <h2>Herramientas Esenciales</h2>
                 <div class="columns">
                     <div class="icon-list">
-                        <li>
-                            <span class="icon">🔍</span>
-                            <div>
-                                <strong>Reconocimiento</strong>
-                                <p>subfinder, amass, assetfinder, httpx</p>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="icon">🕵️</span>
-                            <div>
-                                <strong>Enumeración</strong>
-                                <p>ffuf, dirsearch, nuclei, nmap</p>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="icon">💉</span>
-                            <div>
-                                <strong>Explotación</strong>
-                                <p>Burp Suite, SQLMap, SSRFmap, XSSer</p>
-                            </div>
-                        </li>
+                        <li><span class="icon">🔍</span><div><strong>Recon</strong><p>subfinder, amass, httpx</p></div></li>
+                        <li><span class="icon">🕵️</span><div><strong>Enum</strong><p>ffuf, dirsearch, nuclei</p></div></li>
+                        <li><span class="icon">💉</span><div><strong>Exploit</strong><p>Burp, SQLMap, SSRFmap</p></div></li>
                     </div>
                     <div class="terminal">
                         <div class="line"><span class="prompt">#</span> <span class="command">subfinder -d target.com</span></div>
                         <div class="line"><span class="output">→ subdomains.txt</span></div>
-                        <div class="line"></div>
-                        <div class="line"><span class="prompt">#</span> <span class="command">nuclei -l subdomains.txt \</span></div>
-                        <div class="line">       <span class="command">-t vulnerabilities/</span></div>
+                        <div class="line"><span class="prompt">#</span> <span class="command">nuclei -l subs.txt -t vuln/</span></div>
                         <div class="line"><span class="output">→ findings.json</span></div>
                     </div>
                 </div>
             </section>
 
-            <!-- SLIDE 17: MI EXPERIENCIA -->
             <section>
                 <h2>Mi Experiencia en Bug Bounty</h2>
                 <div class="columns">
-                    <div class="info-box">
-                        <h4>Lo que he aprendido</h4>
-                        <ul>
-                            <li>La paciencia es clave</li>
-                            <li>El recon es 70% del trabajo</li>
-                            <li>Lee el scope dos veces</li>
-                            <li>Documenta TODO</li>
-                            <li>No todos los bugs pagan, pero todos enseñan</li>
-                        </ul>
-                    </div>
-                    <div class="info-box pink">
-                        <h4>Errores comunes a evitar</h4>
-                        <ul>
-                            <li>Ir directo a exploit sin recon</li>
-                            <li>Reportar fuera de scope</li>
-                            <li>PoC incompleto</li>
-                            <li>No leer el brief del programa</li>
-                            <li>Desanimarse con duplicates</li>
-                        </ul>
-                    </div>
+                    <div class="info-box"><h4>Lo que he aprendido</h4><ul><li>La paciencia es clave</li><li>El recon es 70%</li><li>Lee el scope dos veces</li><li>Documenta TODO</li></ul></div>
+                    <div class="info-box pink"><h4>Errores a evitar</h4><ul><li>Ir directo a exploit</li><li>Reportar fuera de scope</li><li>PoC incompleto</li><li>Desanimarse con duplicates</li></ul></div>
                 </div>
-                <p class="quote" style="margin-top: 1em; font-size: 1.1em;">
-                    "El mejor hack es donde no hay huella"
-                </p>
+                <p class="quote">"El mejor hack es donde no hay huella"</p>
             </section>
 
-            <!-- SLIDE 18: TIPS -->
             <section>
                 <h2>Tips para Empezar</h2>
-                <div class="card-grid">
-                    <div class="card">
-                        <h4>📚 Estudia</h4>
-                        <p>OWASP Top 10, PortSwigger Academy, HTB Academy</p>
-                    </div>
-                    <div class="card">
-                        <h4>🏠 Practica</h4>
-                        <p>DVWA, Juice Shop, TryHackMe, HackTheBox</p>
-                    </div>
-                    <div class="card">
-                        <h4>📝 Documenta</h4>
-                        <p>Keep notes, screenshot everything, usa Obsidian</p>
-                    </div>
-                    <div class="card">
-                        <h4>🤝 Comunidad</h4>
-                        <p>Twitter infosec, Discord, writeups, bounties públicas</p>
-                    </div>
-                    <div class="card">
-                        <h4>⏳ Paciencia</h4>
-                        <p>Los primeros meses son difíciles, persiste</p>
-                    </div>
-                    <div class="card">
-                        <h4>🎯 Especializa</h4>
-                        <p>Elige un nicho: API, mobile, IoT, etc.</p>
-                    </div>
+                <div class="card-grid three">
+                    <div class="card"><h4>📚 Estudia</h4><p>OWASP, PortSwigger, HTB</p></div>
+                    <div class="card"><h4>🏠 Practica</h4><p>DVWA, THM, HTB</p></div>
+                    <div class="card"><h4>📝 Documenta</h4><p>Screenshots, Obsidian</p></div>
+                    <div class="card"><h4>🤝 Comunidad</h4><p>Twitter, Discord, writeups</p></div>
+                    <div class="card"><h4>⏳ Paciencia</h4><p>Los primeros meses son difíciles</p></div>
+                    <div class="card"><h4>🎯 Especializa</h4><p>API, mobile, IoT</p></div>
                 </div>
             </section>
 
-            <!-- SLIDE 19: RECURSOS -->
             <section>
                 <h2>Recursos</h2>
                 <div class="columns three">
-                    <div class="card">
-                        <h4>📖 Learning</h4>
-                        <ul>
-                            <li><a href="https://portswigger.net/web-security" target="_blank">PortSwigger Academy</a></li>
-                            <li><a href="https://academy.hackthebox.com" target="_blank">HTB Academy</a></li>
-                            <li><a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank">OWASP WSTG</a></li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>🛠️ Tools</h4>
-                        <ul>
-                            <li>Burp Suite Pro</li>
-                            <li>Nuclei Templates</li>
-                            <li>Subfinder + Chaos</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>💰 Platforms</h4>
-                        <ul>
-                            <li><a href="https://hackerone.com" target="_blank">HackerOne</a></li>
-                            <li><a href="https://bugcrowd.com" target="_blank">Bugcrowd</a></li>
-                            <li><a href="https://intigriti.com" target="_blank">Intigriti</a></li>
-                            <li><a href="https://yeswehack.com" target="_blank">YesWeHack</a></li>
-                        </ul>
-                    </div>
+                    <div class="card"><h4>📖 Learning</h4><ul><li><a href="https://portswigger.net/web-security">PortSwigger</a></li><li><a href="https://academy.hackthebox.com">HTB Academy</a></li><li><a href="https://owasp.org/www-project-web-security-testing-guide/">OWASP WSTG</a></li></ul></div>
+                    <div class="card"><h4>🛠️ Tools</h4><ul><li>Burp Suite Pro</li><li>Nuclei Templates</li><li>Subfinder + Chaos</li></ul></div>
+                    <div class="card"><h4>💰 Platforms</h4><ul><li><a href="https://hackerone.com">HackerOne</a></li><li><a href="https://bugcrowd.com">Bugcrowd</a></li><li><a href="https://intigriti.com">Intigriti</a></li><li><a href="https://yeswehack.com">YesWeHack</a></li></ul></div>
                 </div>
             </section>
 
-            <!-- SLIDE 20: CIERRE -->
-            <section class="slide-thanks">
+            <section class="thanks-slide">
                 <h1>¡Gracias!</h1>
-                <p class="speaker-name">Diego Medardo Saavedra García</p>
-                <div class="social-links">
-                    <span class="badge">GitHub: statick88</span>
-                    <span class="badge">statick88.github.io</span>
-                </div>
-                <div class="slide-footer">
-                    Dr. Doom: Bug Bounty | Charla FLISOL 2026
-                </div>
+                <p class="name">Diego Medardo Saavedra García</p>
+                <div><span class="badge">GitHub: statick88</span><span class="badge">statick88.github.io</span></div>
+                <div class="footer">Dr. Doom: Bug Bounty | FLISOL 2026</div>
             </section>
 
-            <!-- SLIDE 21: Q&A -->
-            <section class="slide-qa">
-                <span class="question-icon">?</span>
+            <section class="qa-slide">
                 <h2>¿Preguntas?</h2>
-                <div class="slide-footer">
-                    Charla Bug Bounty | FLISOL 2026
-                </div>
+                <div class="footer">Bug Bounty | FLISOL 2026</div>
             </section>
 
         </div>
     </div>
 
-    <!-- Reveal.js -->
     <script src="dist/reveal.js"></script>
     <script src="plugin/zoom/zoom.js"></script>
     <script src="plugin/notes/notes.js"></script>
@@ -1288,25 +377,13 @@
     <script>
         Reveal.initialize({
             hash: true,
-            hashOneBasedIndex: true,
             slideNumber: 'c/t',
             showSlideNumber: 'all',
             progress: true,
             controls: true,
             controlsTutorial: false,
-            controlsLayout: 'bottom-right',
             transition: 'slide',
-            transitionSpeed: 'default',
-            backgroundTransition: 'fade',
-            pdfSeparateFragments: false,
-            pdfMaxPagesPerSlide: 1,
-            plugins: [
-                RevealMarkdown,
-                RevealHighlight,
-                RevealNotes,
-                RevealZoom,
-                RevealSearch
-            ]
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom, RevealSearch]
         });
     </script>
 </body>
