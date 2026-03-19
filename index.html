@@ -337,7 +337,7 @@
                     <div class="progress-bar"><div class="fill" style="width:92%"></div></div>
                 </div>
                 <div class="doom-tip"><strong>[DOOM TIP]</strong> Conoce el SCOPE de cada reino antes de atacar. Duplicates = pérdida de tiempo.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Cada reino tiene城门 (puertas). Encuéntralas antes de atacar.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Cada reino tiene puertas ocultas. Encuéntralas antes de atacar.</div>
                 <div class="slide-footer">
                     
                     <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
@@ -512,32 +512,184 @@
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 14: LABORATORIOS VULNERABLES                                  -->
+            <!-- SLIDE 14: DOCKER LAB — DVWA + Juice Shop                            -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>Castillos Vulnerables</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Doom ha capturado estos castillos para práctica. Todos son suyos.</p>
-                <div class="card-grid three">
-                    <div class="card"><h4>🐳 Docker</h4><p>DVWA, Juice Shop</p><p style="font-size:0.52em;color:var(--text-muted)">docker run -d -p 8080:80</p></div>
-                    <div class="card"><h4>📦 VirtualBox</h4><p>Metasploitable, VMs</p><p style="font-size:0.52em;color:var(--text-muted)">Oracle VM VirtualBox</p></div>
-                    <div class="card"><h4>🍎 VMware Fusion</h4><p>macOS Labs</p><p style="font-size:0.52em;color:var(--text-muted)">Metasploitable, Kioptrix</p></div>
+                <h2>🐳 Docker Lab <span style="color:var(--cyan)">— Cómo Iniciar</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Contenedores ligeros. Reinicia en segundos. El laboratorio perfecto.</p>
+                <div class="columns">
+                    <div class="info-box green"><h4>Paso 1: Instalar Docker</h4><ul><li>macOS: <code>brew install --cask docker</code></li><li>Linux: <code>sudo apt install docker.io</code></li><li>Windows: Docker Desktop</li><li>Verificar: <code>docker --version</code></li></ul></div>
+                    <div class="info-box cyan"><h4>Paso 2: Descargar Labs</h4><ul><li>DVWA: <code>vulnerables/web-dvwa</code></li><li>Juice Shop: <code>bkimminich/juice-shop</code></li><li>WebGoat: <code>webgoat/webgoat</code></li></ul></div>
                 </div>
-                <div class="card-grid two" style="margin-top:0.35em">
-                    <div class="card"><h4>🕷️ DVWA</h4><p>SQLi, XSS, LFI — Mis favoritos</p></div>
-                    <div class="card"><h4>🥤 Juice Shop</h4><p>OWASP Top 10 — Completo</p></div>
-                    <div class="card"><h4>🐱‍💻 Metasploitable</h4><p>Linux vulnerable — Clásico</p></div>
-                    <div class="card"><h4>🔴 VulnHub</h4><p>VMs descargables — Infinitas</p></div>
+                <div class="terminal" style="margin-top:0.35em">
+                    <div class="line"><span class="comment"># Iniciar DVWA</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 8080:80 vulnerables/web-dvwa</span></div>
+                    <div class="line"><span class="output">→ http://localhost:8080 (admin/password)</span></div>
+                    <div class="line"><span class="comment"># Iniciar Juice Shop</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 3000:3000 bkimminich/juice-shop</span></div>
+                    <div class="line"><span class="output">→ http://localhost:3000</span></div>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> DVWA en "impossible" = el verdadero reto. Medium es para rendirse.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> No pratiques en fácil. Practica en IMPOSIBLE.</div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Docker te permite resetear el lab en segundos: <code>docker rm -f</code> y vuelve a correr.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Docker = rapidez. No pierdas tiempo instalando, empieza a hackear.</div>
                 <div class="slide-footer">
-                    
                     <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 15: MI CURSO                                                  -->
+            <!-- SLIDE 15: DVWA DEEP DIVE                                            -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🕷️ DVWA <span style="color:var(--pink)">— Damn Vulnerable Web App</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">El laboratorio clásico de Doom. SQLi, XSS, LFI y más.</p>
+                <div class="columns">
+                    <div class="info-box pink"><h4>Vulnerabilidades incluidas</h4><ul><li><strong>SQL Injection</strong> — clásico y blind</li><li><strong>XSS</strong> — reflected, stored, DOM</li><li><strong>LFI/RFI</strong> — inclusión de archivos</li><li><strong>CSRF</strong> — Cross-Site Request Forgery</li><li><strong>Command Injection</strong> — OS commands</li></ul></div>
+                    <div>
+                        <div class="terminal">
+                            <div class="line"><span class="comment"># Iniciar y configurar</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 8080:80 vulnerables/web-dvwa</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">firefox http://localhost:8080</span></div>
+                            <div class="line"><span class="output">→ Login: admin / password</span></div>
+                            <div class="line"><span class="output">→ Setup → Create Database</span></div>
+                            <div class="line"><span class="output">→ Security Level: Low → Medium → High</span></div>
+                        </div>
+                        <p style="margin-top:0.25em"><span class="badge pink">4 niveles de dificultad</span></p>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Empieza en Low, sube a Medium, luego High. Impossible es para graduarte.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> DVWA en "impossible" = el verdadero reto. Medium es para rendirse.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 16: JUICE SHOP DEEP DIVE                                      -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🥤 Juice Shop <span style="color:var(--orange)">— OWASP Top 10</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Aplicación moderna con 100+ challenges. Creada por OWASP.</p>
+                <div class="columns">
+                    <div class="info-box orange"><h4>Challenges por categoría</h4><ul><li><strong>Injection</strong> — SQLi, NoSQLi</li><li><strong>Broken Auth</strong> — JWT, sesiones</li><li><strong>XSS</strong> — reflected, stored, DOM</li><li><strong>SSRF</strong> — Server-Side Request Forgery</li><li><strong>Broken Access</strong> — IDOR, privilege escalation</li></ul></div>
+                    <div>
+                        <div class="terminal">
+                            <div class="line"><span class="comment"># Iniciar Juice Shop</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 3000:3000 bkimminich/juice-shop</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">firefox http://localhost:3000</span></div>
+                            <div class="line"><span class="output">→ Score Board: /#/score-board</span></div>
+                            <div class="line"><span class="output">→ 100+ challenges de 1 a 6 estrellas</span></div>
+                        </div>
+                        <p style="margin-top:0.25em"><span class="badge orange">100+ challenges</span> <span class="badge green">Gamificado</span></p>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Accede al Score Board oculto (/#/score-board) para trackear tu progreso.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Juice Shop simula una app REAL. Lo que aprendes aquí, lo aplicas en Bug Bounty.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 17: VIRTUALBOX — Metasploitable                               -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>📦 VirtualBox <span style="color:var(--cyan)">— Metasploitable</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Máquinas virtuales completas. El campo de batalla clásico de Doom.</p>
+                <div class="columns">
+                    <div class="info-box cyan"><h4>Paso a paso</h4><ul><li>1. Descargar <a href="https://www.virtualbox.org" target="_blank">VirtualBox</a></li><li>2. Descargar <a href="https://sourceforge.net/projects/metasploitable/" target="_blank">Metasploitable 2</a> (.vmdk)</li><li>3. New VM → Linux → Ubuntu 64-bit</li><li>4. Use existing disk → seleccionar .vmdk</li><li>5. Network: Host-Only Adapter</li></ul></div>
+                    <div>
+                        <div class="terminal">
+                            <div class="line"><span class="comment"># Encontrar IP de Metasploitable</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">nmap -sn 192.168.56.0/24</span></div>
+                            <div class="line"><span class="output">→ 192.168.56.101 (Metasploitable)</span></div>
+                            <div class="line"><span class="comment"># Escanear servicios</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">nmap -sV 192.168.56.101</span></div>
+                            <div class="line"><span class="output">→ 21/ftp, 22/ssh, 80/http, 3306/mysql...</span></div>
+                        </div>
+                        <p style="margin-top:0.25em"><span class="badge cyan">Login: msfadmin/msfadmin</span></p>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Usa Host-Only Adapter para aislar la VM. NUNCA la pongas en Bridged.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Metasploitable tiene 20+ servicios vulnerables. Explóralos todos.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 18: VMWARE FUSION — macOS Labs                                -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🍎 VMware Fusion <span style="color:var(--green)">— macOS Labs</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Para hunters con Mac. VMware Fusion es gratuito para uso personal.</p>
+                <div class="columns">
+                    <div class="info-box green"><h4>Setup en macOS</h4><ul><li>1. Descargar <a href="https://www.vmware.com/products/fusion.html" target="_blank">VMware Fusion</a> (gratis)</li><li>2. Importar .vmdk o .ova</li><li>3. Network: Custom (vmnet)</li><li>4. Labs recomendados:</li></ul></div>
+                    <div class="info-box"><h4>Labs compatibles</h4><ul><li><strong>Metasploitable 2</strong> — clásico Linux</li><li><strong>Kioptrix</strong> — serie de 5 niveles</li><li><strong>Mr-Robot</strong> — CTF temático</li><li><strong>VulnHub VMs</strong> — cientos de opciones</li></ul></div>
+                </div>
+                <div class="terminal" style="margin-top:0.35em">
+                    <div class="line"><span class="comment"># Verificar red de la VM</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">ifconfig vmnet1</span></div>
+                    <div class="line"><span class="output">→ inet 192.168.72.1 netmask 0xffffff00</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">nmap -sn 192.168.72.0/24</span></div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> VMware Fusion Player es GRATIS para uso personal desde 2024. No pagues.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> macOS + VMware = laboratorio portátil. Doom siempre lleva su arsenal.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 19: METASPLOITABLE DEEP DIVE                                  -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🐱‍💻 Metasploitable <span style="color:var(--pink)">— Linux Vulnerable</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">20+ servicios vulnerables en una sola VM. El clásico de Doom.</p>
+                <div class="columns">
+                    <div class="info-box pink"><h4>Servicios vulnerables</h4><ul><li><strong>vsftpd 2.3.4</strong> — backdoor conocido</li><li><strong>Samba 3.x</strong> — RCE username map</li><li><strong>Apache Tomcat</strong> — default creds</li><li><strong>MySQL</strong> — sin password root</li><li><strong>PostgreSQL</strong> — acceso abierto</li><li><strong>UnrealIRCd</strong> — backdoor</li></ul></div>
+                    <div>
+                        <div class="terminal">
+                            <div class="line"><span class="comment"># Explotar vsftpd backdoor</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">msfconsole</span></div>
+                            <div class="line"><span class="prompt">msf></span> <span class="command">use exploit/unix/ftp/vsftpd_234_backdoor</span></div>
+                            <div class="line"><span class="prompt">msf></span> <span class="command">set RHOSTS 192.168.56.101</span></div>
+                            <div class="line"><span class="prompt">msf></span> <span class="command">exploit</span></div>
+                            <div class="line"><span class="output">→ Command shell session 1 opened</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Practica cada servicio con nmap + Metasploit. Documenta cada exploit.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Un servicio vulnerable = una puerta abierta. Doom las encuentra todas.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 20: VULNHUB                                                   -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🔴 VulnHub <span style="color:var(--doom-gold)">— VMs Descargables</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Cientos de máquinas vulnerables creadas por la comunidad. Infinitas.</p>
+                <div class="columns">
+                    <div class="info-box"><h4>Cómo empezar</h4><ul><li>1. Ir a <a href="https://www.vulnhub.com" target="_blank">vulnhub.com</a></li><li>2. Filtrar por dificultad: Easy → Medium</li><li>3. Descargar .ova o .vmdk</li><li>4. Importar en VirtualBox o VMware</li><li>5. Encontrar IP con <code>nmap -sn</code></li></ul></div>
+                    <div class="info-box cyan"><h4>VMs recomendadas para empezar</h4><ul><li><strong>Kioptrix Level 1</strong> — ideal para principiantes</li><li><strong>Mr-Robot</strong> — CTF temático, divertido</li><li><strong>DC-1</strong> — Drupal exploitation</li><li><strong>Stapler</strong> — múltiples vectores</li><li><strong>Bulldog</strong> — Django vulnerable</li></ul></div>
+                </div>
+                <div class="terminal" style="margin-top:0.35em">
+                    <div class="line"><span class="comment"># Importar VM descargada</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">VBoxManage import Kioptrix.ova</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">nmap -sn 192.168.56.0/24</span></div>
+                    <div class="line"><span class="output">→ Target found at 192.168.56.102</span></div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Empieza con Kioptrix Level 1. Writeups disponibles si te atascas.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> VulnHub es infinito. Doom nunca se queda sin enemigos que conquistar.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 21: MI CURSO                                                  -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
                 <h2>El Curso de Doom <span class="badge gold" style="font-size:0.45em">— Entrena Súbditos</span></h2>
