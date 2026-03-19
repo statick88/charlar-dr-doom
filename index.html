@@ -1935,7 +1935,306 @@
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 40: GRACIAS                                                    -->
+            <!-- SLIDE 42: CTF INTERACTIVO - INTRO                                    -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🎮 CTF Interactivo <span style="color:var(--doom-gold)">— ¡TU TURNO!</span></h2>
+                <p style="font-size:0.65em;color:var(--text-muted)">Oigan bacán, ahora les toca a ustedes. 3 challenges,难度 progresivo. ¿Quién agarra la primera flag?</p>
+                <div class="savitar-alert">
+                    <h4>📋 REGLAS DEL CTF FLISOL 2026</h4>
+                    <ul style="font-size:0.58em">
+                        <li>✅ <strong>Solo uso educativo</strong> — esto es una charla, ¿sí?</li>
+                        <li>✅ Las flags son <code style="color:var(--doom-gold)">FLISOL{...}</code></li>
+                        <li>✅ Pista 1 vale 50pts, Pista 2 vale 25pts, Resolución vale 100pts</li>
+                        <li>✅ Primero en enviar la flag correcta gana</li>
+                        <li>❌ No Google, no AI — solo ustedes y su cerebro</li>
+                    </ul>
+                </div>
+                <div class="card-grid three" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">🟢 Challenge 1</h4>
+                        <p style="font-size:0.55em">Crypto / Encoding</p>
+                        <p style="color:var(--green);font-size:0.5em">Fácil — 5 min</p>
+                    </div>
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">🟡 Challenge 2</h4>
+                        <p style="font-size:0.55em">Web / Source Code</p>
+                        <p style="color:var(--orange);font-size:0.5em">Medio — 8 min</p>
+                    </div>
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">🔴 Challenge 3</h4>
+                        <p style="font-size:0.55em">SQL Injection</p>
+                        <p style="color:var(--pink);font-size:0.5em">Difícil — 10 min</p>
+                    </div>
+                </div>
+                <div class="terminal" style="margin-top:0.3em;font-size:0.55em">
+                    <div class="line"><span class="comment"># Código de participación (opcional)</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl -X POST https://ctf.flisol2026.local/register \</span></div>
+                    <div class="line"><span class="command">  -H "Content-Type: application/json" \</span></div>
+                    <div class="line"><span class="command">  -d '{"nombre": "tu_alias", "email": "tu@mail.com"}'</span></div>
+                    <div class="line"><span class="output" style="color:var(--green)">✓ Registrado! Tu ID: FL-2026-XXX</span></div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> En CTFs, siempre empieza por lo fácil. Las flags fáciles te dan confianza.</div>
+                <div class="doom-consejo"><strong>[Statick]</strong> Che, ¿listos? Primero veamos el Challenge 1. ¿Quién resuelve?</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 43: CTF CHALLENGE 1 - CRYPTO (EASY)                            -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🟢 Challenge 1 <span style="color:var(--green)">— Crypto (Easy)</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Esta cadena está编码ada. ¿Puedes decodificarla?</p>
+                <div class="info-box green" style="margin-top:0.3em">
+                    <h4>📦 Challenge: "La Caja de Doom"</h4>
+                    <p style="font-family:var(--mono);font-size:1.2em;color:var(--green);text-align:center;padding:0.3em">
+                        <strong>Wmhpc3t3ZWxjb21lX3RvX2ZsaXNvbF8yMDI2fQ==</strong>
+                    </p>
+                    <p style="font-size:0.55em;text-align:center">Flag format: <code style="color:var(--doom-gold)">FLISOL{...}</code></p>
+                </div>
+                <div class="columns" style="margin-top:0.3em">
+                    <div>
+                        <div class="info-box">
+                            <h4>💡 Pista 1 (50 pts)</h4>
+                            <p style="font-size:0.58em">Mira los últimos caracteres: <code>==</code>. Eso es un clue de encoding común.</p>
+                        </div>
+                        <div class="info-box" style="margin-top:0.2em">
+                            <h4>💡 Pista 2 (25 pts)</h4>
+                            <p style="font-size:0.58em">Usa <code>base64 -d</code> o ve a <a href="https://www.base64decode.org" target="_blank">base64decode.org</a></p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="terminal" style="font-size:0.55em">
+                            <div class="line"><span class="comment"># Intenta esto en tu terminal</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">echo "Wmhpc3t3ZWxjb21lX3RvX2ZsaXNvbF8yMDI2fQ==" | base64 -d</span></div>
+                            <div class="line"><span class="output" style="color:var(--text-muted)"># ¿Qué ves?</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># O en Python:</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">python3 -c "import base64; \</span></div>
+                            <div class="line"><span class="command">  print(base64.b64decode('Wmhpc...').decode())"</span></div>
+                        </div>
+                        <p style="font-size:0.55em;color:var(--orange);margin-top:0.2em"><strong>Tiempo:</strong> <span id="timer1">05:00</span> | Envía tu flag a: <code>@flisol_loja</code></p>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Si ves <code>==</code> al final, siempre piensa Base64 primero.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 44: CTF CHALLENGE 2 - WEB (MEDIUM)                             -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🟡 Challenge 2 <span style="color:var(--orange)">— Web (Medium)</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Encuentra la flag escondida en el código fuente. Solo mira, no atacques.</p>
+                <div class="info-box orange" style="margin-top:0.3em">
+                    <h4>🌐 Challenge: "El Comments de Doom"</h4>
+                    <p style="font-size:0.58em">Visita este sitio y busca en el <strong>View Source</strong> (Ctrl+U):</p>
+                    <p style="font-family:var(--mono);font-size:0.85em;color:var(--orange);text-align:center;padding:0.3em">
+                        <strong>https://doom-statick.github.io/ctf-flisol/</strong>
+                    </p>
+                    <p style="font-size:0.55em;text-align:center;margin-top:0.2em">Flag format: <code style="color:var(--doom-gold)">FLISOL{...}</code></p>
+                </div>
+                <div class="columns" style="margin-top:0.3em">
+                    <div>
+                        <div class="info-box">
+                            <h4>💡 Pista 1 (50 pts)</h4>
+                            <p style="font-size:0.58em">No busques en el HTML visible. Los desarrolladores olvidan secretos en comentarios HTML <code>&lt;!-- --&gt;</code></p>
+                        </div>
+                        <div class="info-box" style="margin-top:0.2em">
+                            <h4>💡 Pista 2 (25 pts)</h4>
+                            <p style="font-size:0.58em">También revisa <code>robots.txt</code> y <code>/secret.txt</code>. Los desarrolladores olvidan archivos.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="terminal" style="font-size:0.52em">
+                            <div class="line"><span class="comment"># Cómo inspeccionar el código fuente</span></div>
+                            <div class="line"><span class="prompt">Navegador:</span> <span class="command">Ctrl+U (o Cmd+U en Mac)</span></div>
+                            <div class="line"><span class="output">→ Se abrirá una nueva pestaña</span></div>
+                            <div class="line"><span class="output">→ Busca comentarios &lt;!-- ... --&gt;</span></div>
+                            <div class="line"><span class="output">→ Busca strings que contengan "FLISOL"</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># Alternativa con curl</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl -s https://doom-statick.github.io/ctf-flisol/ | grep -i "flag\|flisol"</span></div>
+                            <div class="line"><span class="output">  &lt;!-- FLISOL{...} --&gt;</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># Verificar robots.txt</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl https://doom-statick.github.io/ctf-flisol/robots.txt</span></div>
+                        </div>
+                        <p style="font-size:0.55em;color:var(--orange);margin-top:0.2em"><strong>Tiempo:</strong> <span id="timer2">08:00</span> | Envía tu flag a: <code>@flisol_loja</code></p>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> View Source (Ctrl+U) es tu mejor amigo en web challenges. SIEMPRE revisa primero.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 45: CTF CHALLENGE 3 - SQLI (HARD)                              -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🔴 Challenge 3 <span style="color:var(--pink)">— SQL Injection (Hard)</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Bypassea el login sin password. Esto es lo que hace Doom todos los días.</p>
+                <div class="info-box pink" style="margin-top:0.3em">
+                    <h4>💉 Challenge: "La Fortaleza de Latveria"</h4>
+                    <p style="font-size:0.58em">Este formulario tiene SQL Injection. ¿Puedes entrar sin password?</p>
+                    <p style="font-family:var(--mono);font-size:0.85em;color:var(--pink);text-align:center;padding:0.3em">
+                        <strong>https://doom-statick.github.io/ctf-flisol/login.php</strong>
+                    </p>
+                    <p style="font-size:0.55em;text-align:center">Flag: <code style="color:var(--doom-gold)">FLISOL{...}</code> (está dentro después del login)</p>
+                </div>
+                <div class="columns" style="margin-top:0.3em">
+                    <div>
+                        <div class="info-box">
+                            <h4>💡 Pista 1 (50 pts)</h4>
+                            <p style="font-size:0.58em">Prueba algo como <code>admin' OR 1=1--</code> en el campo de usuario. El <code>'</code> cierra la query, <code>OR 1=1</code> hace todo verdadero.</p>
+                        </div>
+                        <div class="info-box" style="margin-top:0.2em">
+                            <h4>💡 Pista 2 (25 pts)</h4>
+                            <p style="font-size:0.58em">Otra opción: <code>' OR 'a'='a</code> — también funciona. El <code>--</code> comenta el resto de la query SQL.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="terminal" style="font-size:0.5em">
+                            <div class="line"><span class="comment"># SQL Injection Básico - Login Bypass</span></div>
+                            <div class="line"><span class="line"></span></div>
+                            <div class="line"><span class="comment"># Username field:</span></div>
+                            <div class="line"><span class="command" style="color:var(--pink)">admin' OR '1'='1' --</span></div>
+                            <div class="line"><span class="comment"># Password field:</span></div>
+                            <div class="line"><span class="command">cualquiera</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># ¿Por qué funciona?</span></div>
+                            <div class="line"><span class="output">SELECT * FROM users</span></div>
+                            <div class="line"><span class="output">WHERE user='admin' OR '1'='1' --'</span></div>
+                            <div class="line"><span class="output">      AND pass='cualquiera'</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="output">El '1'='1' siempre es TRUE</span></div>
+                            <div class="line"><span class="output">El -- ignora el AND pass=...</span></div>
+                        </div>
+                        <p style="font-size:0.55em;color:var(--orange);margin-top:0.2em"><strong>Tiempo:</strong> <span id="timer3">10:00</span> | Envía tu flag a: <code>@flisol_loja</code></p>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> SQL Injection sigue siendo la vulnerabilidad #1 en OWASP Top 10. Aprende esto y dominarás Bug Bounty.</div>
+                <div class="doom-consejo"><strong>[Statick]</strong> Che, esta es la misma técnica que usamos en DVWA hace rato. ¡Aplicación directa!</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 46: CTF - SOLUCIONES                                           -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🏆 Soluciones <span style="color:var(--doom-gold)">— CTF FLISOL 2026</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Oigan bacán, veamos quién acertó. Aquí están las respuestas.</p>
+                <div class="card-grid three" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">🟢 Challenge 1</h4>
+                        <p style="font-size:0.52em;font-family:var(--mono);color:var(--green);word-break:break-all">
+                            FLISOL{welcome_to_flisol_2026}
+                        </p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Técnica: Base64 decode</p>
+                        <p style="font-size:0.48em;color:var(--green)">echo "Wmhpc..." | base64 -d</p>
+                    </div>
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">🟡 Challenge 2</h4>
+                        <p style="font-size:0.52em;font-family:var(--mono);color:var(--orange);word-break:break-all">
+                            FLISOL{html_comments_are_secrets}
+                        </p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Técnica: View Source (Ctrl+U)</p>
+                        <p style="font-size:0.48em;color:var(--orange)">Buscar &lt;!-- flag --&gt;</p>
+                    </div>
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">🔴 Challenge 3</h4>
+                        <p style="font-size:0.52em;font-family:var(--mono);color:var(--pink);word-break:break-all">
+                            FLISOL{sqli_bypass_1s_all_1s}
+                        </p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Técnica: SQL Injection</p>
+                        <p style="font-size:0.48em;color:var(--pink)">admin' OR '1'='1' --</p>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:0.3em">
+                    <h4>📊 Resumen de Técnicas Enseñadas</h4>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:0.55em;margin-top:0.15em">
+                        <div><strong style="color:var(--green)">Base64:</strong> Encoding/decoding simple</div>
+                        <div><strong style="color:var(--orange)">HTML Comments:</strong> Source code review</div>
+                        <div><strong style="color:var(--pink)">SQLi:</strong> Authentication bypass</div>
+                    </div>
+                </div>
+                <div class="savitar-alert" style="margin-top:0.3em">
+                    <h4>🎓 ¿Y ahora qué?</h4>
+                    <p>Estos 3 challenges son el <strong>primer paso</strong>. Los 70+ challenges de <a href="https://statick88.github.io/challenges/" target="_blank">statick88.github.io/challenges</a> tienen难度 progresivo para que sigan practicando.</p>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Si resolviste los 3, ya tienes base para Bug Bounty. Si no, práctica más en DVWA.</div>
+                <div class="doom-consejo"><strong>[Statick]</strong> Los que resolvieron, chévere. Los que no, también — porque aprendieron. Eso es CTF.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 47: PREMIOS Y CIERRE                                           -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🏆 Premios <span style="color:var(--doom-gold)">— CTF FLISOL 2026</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Los ganadores reciben recursos exclusivos. ¡Chévere!</p>
+                <div class="card-grid three" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--doom-gold); background:rgba(255,215,0,0.08)">
+                        <h4 style="color:var(--doom-gold)">🥇 1er Lugar</h4>
+                        <p style="font-size:0.55em">Acceso completo a:</p>
+                        <ul style="font-size:0.5em">
+                            <li>70+ Challenges Lab</li>
+                            <li>Writeups exclusivos</li>
+                            <li>Mentoría 1-on-1</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:var(--silver)">
+                        <h4 style="color:var(--silver)">🥈 2do Lugar</h4>
+                        <p style="font-size:0.55em">Acceso parcial:</p>
+                        <ul style="font-size:0.5em">
+                            <li>50+ Challenges Lab</li>
+                            <li>Writeups</li>
+                            <li>Discord privado</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">🥉 3er Lugar</h4>
+                        <p style="font-size:0.55em">Acceso básico:</p>
+                        <ul style="font-size:0.5em">
+                            <li>30+ Challenges Lab</li>
+                            <li>Writeups</li>
+                            <li>Recurso PDF</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:0.3em">
+                    <h4>📱 Cómo participar</h4>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.55em;margin-top:0.15em">
+                        <div>
+                            <strong>Tiempo real:</strong><br>
+                            Twitter/X: <a href="https://x.com/statick_ds" target="_blank">@statick_ds</a><br>
+                            WhatsApp: <a href="https://wa.me/593980192790" target="_blank">+593 980192790</a>
+                        </div>
+                        <div>
+                            <strong>Recursos:</strong><br>
+                            Web: <a href="https://statick88.github.io" target="_blank">statick88.github.io</a><br>
+                            GitHub: <a href="https://github.com/statick88" target="_blank">github.com/statick88</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Los ganadores también reciben recomendación en LinkedIn de Statick.</div>
+                <div class="doom-consejo"><strong>[Statick]</strong> Che, independiente de si ganaron o no, lo importante es que practicaron. ¡Eso es lo que cuenta!</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 48: GRACIAS                                                    -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section class="thanks-slide">
                 <h1>¡Gracias, ñaños!</h1>
@@ -1955,7 +2254,7 @@
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 41: Q&A                                                         -->
+            <!-- SLIDE 49: Q&A                                                         -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section class="qa-slide">
                 <h2>¿Preguntas?</h2>
