@@ -35,7 +35,7 @@ Charla para FLISOL - Introducción al mundo del Bug Bounty y plataformas de prá
 ## 📂 Estructura
 
 ```
-charlar-dr-doom/
+charla-dr-doom/
 ├── index.html      # Presentación principal
 ├── css/           # Temas custom
 ├── dist/          # Reveal.js build
@@ -46,7 +46,7 @@ charlar-dr-doom/
 ## 🌐 Demo
 
 La presentación estará disponible en:
-**https://statick88.github.io/charlar-dr-doom**
+**https://statick88.github.io/charla-dr-doom**
 
 ## 📜 Licencia
 
