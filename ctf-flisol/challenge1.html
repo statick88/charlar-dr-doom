@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 1: El Mensaje Codificado — CTF FLISOL 2026</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="doom-icon">🦹‍♂️</span>
+                <h1>DOOM'S CTF</h1>
+            </div>
+            <div class="event-badge">FLISOL 2026 — Loja, Ecuador</div>
+            <div class="timer" id="global-timer">
+                <span class="timer-label">⏱️ CTF ACTIVO</span>
+                <span class="timer-value" id="timer-display">00:00:00</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="challenge-page">
+        <a href="index.html" class="back-btn">← Volver a Challenges</a>
+        
+        <div class="challenge-header" style="margin-bottom: 2rem;">
+            <span class="challenge-number" style="font-size: 3rem;">01</span>
+            <span class="difficulty easy">🟢 EASY</span>
+        </div>
+        
+        <h2>"El Mensaje Codificado"</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Dificultad: Easy | Puntos: 100 | Tipo: Encoding</p>
+        
+        <div class="description">
+            <h3 style="color: var(--cyan); margin-bottom: 1rem;">📜 Descripción</h3>
+            <p>Doom dejó un mensaje secreto para los verdaderos hackers. Pero como buen villano, lo ocultó usando un encoding que cualquier script kiddie puede resolver.</p>
+            <p style="margin-top: 0.5rem;"><strong>El mensaje:</strong></p>
+            
+            <div class="terminal">
+                <span class="prompt">$</span> <span class="command">cat mensaje_secreto.txt</span><br>
+                <span class="output" style="color: var(--orange); font-size: 1.2rem;">Wmhpc3t3ZWxjb21lX3RvX2ZsaXNvbF8yMDI2fQ==</span>
+            </div>
+            
+            <p>¿Podrás decodificarlo?</p>
+        </div>
+
+        <div class="hints-section">
+            <h3 style="color: var(--doom-gold); margin-bottom: 1rem;">💡 Pistas</h3>
+            
+            <button class="hint-toggle" onclick="toggleHint('hint1')">Pista 1: Observa los caracteres</button>
+            <div id="hint1" class="hint-content">
+                <p style="color: var(--text-muted);">Mira los últimos caracteres: <code style="color: var(--doom-gold);">==</code>. Eso es un clue clásico de un encoding específico.</p>
+            </div>
+            
+            <button class="hint-toggle" onclick="toggleHint('hint2')" style="margin-top: 0.5rem;">Pista 2: Herramienta</button>
+            <div id="hint2" class="hint-content">
+                <p style="color: var(--text-muted);">Intenta con:</p>
+                <div class="terminal">
+                    <span class="prompt">$</span> <span class="command">echo "Wmhpc3t3ZWxjb21lX3RvX2ZsaXNvbF8yMDI2fQ==" | base64 -d</span>
+                </div>
+                <p style="color: var(--text-muted);">O usa: <a href="https://www.base64decode.org" target="_blank" style="color: var(--cyan);">base64decode.org</a></p>
+            </div>
+            
+            <button class="hint-toggle" onclick="toggleHint('hint3')" style="margin-top: 0.5rem;">Pista 3: Formato de Flag</button>
+            <div id="hint3" class="hint-content">
+                <p style="color: var(--text-muted);">Las flags siempre tienen el formato: <code style="color: var(--green);">FLISOL{...}</code></p>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Después de decodificar, deberías ver algo como: <code style="color: var(--green);">FLISOL{welcome_to_flisol_2026}</code></p>
+            </div>
+        </div>
+
+        <div class="quick-solve" style="margin-top: 2rem;">
+            <h3 style="color: var(--green); margin-bottom: 1rem;">⚡ Solver Rápido</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">¿Solo quieres ver la solución? No te juzgo, Doom tampoco.</p>
+            
+            <button class="hint-toggle" onclick="toggleHint('solution')">Mostrar Solución</button>
+            <div id="solution" class="hint-content" style="border-color: var(--green);">
+                <div class="terminal">
+                    <span class="prompt">$</span> <span class="command">echo "Wmhpc3t3ZWxjb21lX3RvX2ZsaXNvbF8yMDI2fQ==" | base64 -d</span><br>
+                    <span class="output" style="color: var(--green);">FLISOL{welcome_to_flisol_2026}</span>
+                </div>
+                <p style="color: var(--green); font-weight: 600;">La flag es: <code>FLISOL{welcome_to_flisol_2026}</code></p>
+            </div>
+        </div>
+
+        <section class="flag-submit" style="margin-top: 3rem;">
+            <h2>🚩 Submit Flag</h2>
+            <form id="flag-form">
+                <input type="text" id="flag-input" placeholder="FLISOL{tu_flag_aqui}" autocomplete="off">
+                <button type="submit" class="btn-submit">VERIFICAR</button>
+            </form>
+            <div id="flag-result"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Created by <strong>Statick</strong> (Diego Medardo Saavedra García)</p>
+            <p class="disclaimer">Solo para aprendizaje. Hack the planet — con permiso.</p>
+        </div>
+    </footer>
+
+    <script src="js/ctf.js"></script>
+</body>
+</html>
