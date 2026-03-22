@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 2: La Fortaleza de Latveria — CTF FLISOL 2026</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💉</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .login-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 400px;
+            margin: 2rem auto;
+        }
+        
+        .login-form h3 {
+            color: var(--cyan);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--doom-gold);
+        }
+        
+        .btn-login {
+            width: 100%;
+            background: var(--cyan);
+            border: none;
+            color: var(--bg);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-family: var(--font);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .btn-login:hover {
+            background: var(--doom-gold);
+        }
+        
+        .login-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+        
+        .login-result.success {
+            display: block;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+        
+        .login-result.error {
+            display: block;
+            background: rgba(255, 0, 64, 0.1);
+            border: 1px solid var(--pink);
+            color: var(--pink);
+        }
+        
+        .vuln-info {
+            background: rgba(255, 0, 64, 0.05);
+            border: 1px solid var(--pink);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .vuln-info h4 {
+            color: var(--pink);
+            margin-bottom: 0.5rem;
+        }
+        
+        .vuln-info code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: var(--orange);
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="doom-icon">🦹‍♂️</span>
+                <h1>DOOM'S CTF</h1>
+            </div>
+            <div class="event-badge">FLISOL 2026 — Loja, Ecuador</div>
+            <div class="timer" id="global-timer">
+                <span class="timer-label">⏱️ CTF ACTIVO</span>
+                <span class="timer-value" id="timer-display">00:00:00</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="challenge-page">
+        <a href="index.html" class="back-btn">← Volver a Challenges</a>
+        
+        <div class="challenge-header" style="margin-bottom: 2rem;">
+            <span class="challenge-number" style="font-size: 3rem;">02</span>
+            <span class="difficulty medium">🟡 MEDIUM</span>
+        </div>
+        
+        <h2>"La Fortaleza de Latveria"</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Dificultad: Medium | Puntos: 200 | Tipo: SQL Injection</p>
+        
+        <div class="description">
+            <h3 style="color: var(--cyan); margin-bottom: 1rem;">🏰 Descripción</h3>
+            <p>La fortaleza de Doom tiene un sistema de login vulnerable. Tu misión es <strong>bypassear la autenticación</strong> usando SQL Injection.</p>
+            <p style="margin-top: 0.5rem; color: var(--pink);">⚠️ Este formulario es vulnerable a SQL Injection básica. Solo para aprendizaje.</p>
+        </div>
+
+        <!-- Vulnerable Login Form -->
+        <div class="login-form">
+            <h3>🔐 Login de Latveria</h3>
+            <form id="sqli-form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="admin" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-login">INICIAR SESIÓN</button>
+            </form>
+            <div id="login-result" class="login-result"></div>
+        </div>
+
+        <div class="vuln-info">
+            <h4>💉 Vulnerabilidad</h4>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">El formulario es vulnerable a SQL Injection. La query backend es algo como:</p>
+            <div class="terminal" style="margin-top: 0.5rem; font-size: 0.85rem;">
+                <span class="output" style="color: var(--text-muted);">SELECT * FROM users WHERE username = '<span style="color: var(--orange);">' + input + '</span>' AND password = '...'</span>
+            </div>
+        </div>
+
+        <div class="hints-section" style="margin-top: 2rem;">
+            <h3 style="color: var(--doom-gold); margin-bottom: 1rem;">💡 Pistas</h3>
+            
+            <button class="hint-toggle" onclick="toggleHint('hint1')">Pista 1: Payload básico</button>
+            <div id="hint1" class="hint-content">
+                <p style="color: var(--text-muted);">Prueba con este username:</p>
+                <div class="terminal">
+                    <span class="output" style="color: var(--green);">admin' OR '1'='1' --</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">El <code>'</code> cierra el string, <code>OR '1'='1'</code> hace la condición siempre verdadera, y <code>--</code> comenta el resto de la query.</p>
+            </div>
+            
+            <button class="hint-toggle" onclick="toggleHint('hint2')" style="margin-top: 0.5rem;">Pista 2: ¿Por qué funciona?</button>
+            <div id="hint2" class="hint-content">
+                <p style="color: var(--text-muted);">La query se convierte en:</p>
+                <div class="terminal" style="font-size: 0.85rem;">
+                    <span class="output" style="color: var(--text-muted);">SELECT * FROM users WHERE username = '<span style="color: var(--green);">admin' OR '1'='1' --</span>' AND password = '...'</span>
+                </div>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">El <code>OR '1'='1'</code> siempre es TRUE, entonces devuelve todos los users.</p>
+            </div>
+            
+            <button class="hint-toggle" onclick="toggleHint('hint3')" style="margin-top: 0.5rem;">Pista 3: ¿Y el password?</button>
+            <div id="hint3" class="hint-content">
+                <p style="color: var(--text-muted);">El <code>--</code> comenta todo lo que sigue, incluyendo el <code>AND password = '...'</code></p>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Así que con el payload correcto, el password NO importa. Puedes poner lo que quieras.</p>
+            </div>
+        </div>
+
+        <div class="quick-solve" style="margin-top: 2rem;">
+            <h3 style="color: var(--green); margin-bottom: 1rem;">⚡ Solver Rápido</h3>
+            
+            <button class="hint-toggle" onclick="toggleHint('solution')">Mostrar Solución</button>
+            <div id="solution" class="hint-content" style="border-color: var(--green);">
+                <p style="color: var(--text-muted);">1. En Username, ingresa: <code style="color: var(--green);">admin' OR '1'='1' --</code></p>
+                <p style="color: var(--text-muted);">2. En Password, ingresa cualquier cosa: <code>xxx</code></p>
+                <p style="color: var(--text-muted);">3. Haz click en INICIAR SESIÓN</p>
+                <p style="color: var(--green); margin-top: 1rem; font-weight: 600;">La flag aparecerá si el bypass es exitoso.</p>
+            </div>
+        </div>
+
+        <section class="flag-submit" style="margin-top: 3rem;">
+            <h2>🚩 Submit Flag</h2>
+            <form id="flag-form">
+                <input type="text" id="flag-input" placeholder="FLISOL{tu_flag_aqui}" autocomplete="off">
+                <button type="submit" class="btn-submit">VERIFICAR</button>
+            </form>
+            <div id="flag-result"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Created by <strong>Statick</strong> (Diego Medardo Saavedra García)</p>
+            <p class="disclaimer">Solo para aprendizaje. Hack the planet — con permiso.</p>
+        </div>
+    </footer>
+
+    <script src="js/ctf.js"></script>
+    <script>
+        // SQL Injection simulation
+        const sqliForm = document.getElementById('sqli-form');
+        const loginResult = document.getElementById('login-result');
+        
+        sqliForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Check for SQLi payload
+            const sqliPatterns = [
+                /'.*OR.*'.*'.*=/i,
+                /'.*OR.*1.*=.*1/i,
+                /admin'.*--/i,
+                /'.*OR.*TRUE/i,
+                /'.*UNION.*SELECT/i,
+                /'.*OR.*1=1/i
+            ];
+            
+            const isSQLi = sqliPatterns.some(pattern => pattern.test(username));
+            
+            if (isSQLi) {
+                loginResult.className = 'login-result success';
+                loginResult.innerHTML = `
+                    <strong>🎉 ¡LOGIN EXITOSO!</strong><br>
+                    <span style="font-family: var(--mono); font-size: 1.2rem; color: var(--doom-gold);">FLISOL{sqli_bypass_1s_all_1s}</span><br>
+                    <small>Bypass exitoso, hacker. Doom te respeta.</small>
+                `;
+                
+                // Auto-copy to clipboard
+                navigator.clipboard.writeText('FLISOL{sqli_bypass_1s_all_1s}');
+            } else {
+                loginResult.className = 'login-result error';
+                loginResult.innerHTML = `
+                    <strong>❌ LOGIN FALLIDO</strong><br>
+                    <small>Username o password incorrectos. Hmm, parece que no es tan simple...</small>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

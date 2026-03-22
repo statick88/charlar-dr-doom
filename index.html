@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr. Doom: Bug Bounty | FLISOL 2026</title>
     <meta name="description" content="El arte de conquistar sistemas — desde la perspectiva del máximo villano">
-    <meta name="author" content="Dr. Victor Von Doom — Ruler of Latveria">
+    <meta name="author" content="Statick — Diego Medardo Saavedra García">
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦹‍♂️</text></svg>">
     
@@ -36,7 +36,7 @@
             --mono: 'Fira Code', monospace;
         }
 
-        .reveal { font-family: var(--font); font-size: 22px; }
+        .reveal { font-family: var(--font); font-size: 24px; }
 
         .reveal .slides section {
             padding: 15px 30px;
@@ -48,7 +48,6 @@
             justify-content: center;
         }
 
-        /* Footer sin imagen Doom */
         .slide-footer {
             position: absolute;
             bottom: 8px;
@@ -58,10 +57,6 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 15px;
-        }
-        .slide-footer .footer-text {
-            font-size: 0.5em;
-            color: var(--text-muted);
         }
         .slide-footer .footer-text {
             font-size: 0.5em;
@@ -81,6 +76,53 @@
         .reveal li { margin: 0.15em 0; color: var(--text-muted); line-height: 1.3; }
         .reveal li::marker { color: var(--doom-gold); }
 
+        /* CTF Live Banner - always visible */
+        .ctf-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #1a0a0a 0%, #2d0a0a 50%, #1a0a0a 100%);
+            border-bottom: 2px solid var(--pink);
+            padding: 8px 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--mono);
+        }
+        .ctf-banner .ctf-label {
+            background: var(--pink);
+            color: #000;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.75em;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .ctf-banner .ctf-target {
+            color: var(--doom-gold);
+            font-size: 0.8em;
+        }
+        .ctf-banner .ctf-url {
+            color: var(--green);
+            font-size: 0.75em;
+            background: rgba(0,0,0,0.5);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .ctf-banner .ctf-flag {
+            color: var(--cyan);
+            font-size: 0.7em;
+        }
+        
+        /* Adjust reveal for fixed banner */
+        .reveal { font-family: var(--font); font-size: 24px; padding-top: 45px; }
+
         .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 0.58em; font-weight: 500; margin: 2px; }
         .badge.green { background: rgba(158,206,106,0.15); color: var(--green); }
         .badge.pink { background: rgba(247,118,142,0.15); color: var(--pink); }
@@ -88,133 +130,107 @@
         .badge.orange { background: rgba(255,158,100,0.15); color: var(--orange); }
         .badge.gold { background: rgba(255,215,0,0.15); color: var(--doom-gold); }
 
-        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.4em; text-align: left; }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.5em; text-align: left; }
         .card h4 { font-size: 0.68em; margin: 0 0 0.1em; color: var(--text); }
         .card p { font-size: 0.62em; margin: 0; }
-        .card-grid { display: grid; gap: 8px; margin-top: 0.4em; }
+        .card-grid { display: grid; gap: 10px; margin-top: 0.4em; }
         .card-grid.two { grid-template-columns: repeat(2, 1fr); }
         .card-grid.three { grid-template-columns: repeat(3, 1fr); }
         .card-grid.four { grid-template-columns: repeat(4, 1fr); }
-        .card-grid.five { grid-template-columns: repeat(5, 1fr); }
 
         .info-box { background: rgba(255,215,0,0.03); border: 1px solid rgba(255,215,0,0.15); border-radius: 8px; padding: 0.4em; }
         .info-box.cyan { background: rgba(125,207,255,0.05); border-color: rgba(125,207,255,0.15); }
         .info-box.pink { background: rgba(247,118,142,0.05); border-color: rgba(247,118,142,0.15); }
         .info-box.orange { background: rgba(255,158,100,0.05); border-color: rgba(255,158,100,0.15); }
         .info-box.green { background: rgba(158,206,106,0.05); border-color: rgba(158,206,106,0.15); }
-        .info-box h4 { font-size: 0.62em; margin: 0 0 0.15em; color: var(--doom-gold); }
+        .info-box h4 { font-size: 0.65em; margin: 0 0 0.15em; color: var(--doom-gold); }
         .info-box.cyan h4 { color: var(--cyan); }
         .info-box.pink h4 { color: var(--pink); }
         .info-box.orange h4 { color: var(--orange); }
         .info-box.green h4 { color: var(--green); }
         .info-box ul { margin: 0; padding-left: 1em; }
-        .info-box li { font-size: 0.68em; margin: 0.08em 0; }
+        .info-box li { font-size: 0.65em; margin: 0.08em 0; }
 
-        .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; }
-        .columns.three { grid-template-columns: repeat(3, 1fr); }
+        .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: left; }
 
-        .terminal { background: #0d0d14; border: 1px solid var(--border); border-radius: 8px; padding: 0.4em; font-family: var(--mono); font-size: 0.58em; }
+        .terminal { background: #0d0d14; border: 1px solid var(--border); border-radius: 8px; padding: 0.5em; font-family: var(--mono); font-size: 0.58em; }
         .terminal .line { margin: 0.06em 0; }
         .terminal .prompt { color: var(--doom-gold); }
         .terminal .command { color: var(--green); }
         .terminal .comment { color: var(--text-muted); }
         .terminal .output { color: var(--text-muted); padding-left: 1em; }
 
-        .logo-grid { display: flex; justify-content: center; gap: 10px; margin: 0.5em 0; }
-        .logo-item { width: 55px; height: 55px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.58em; color: var(--text-muted); }
-        .logo-item .icon { font-size: 1.4em; margin-bottom: 3px; }
-
-        .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: left; margin-top: 0.4em; }
-        .timeline-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.4em; }
-        .timeline-item h4 { font-size: 0.65em; margin: 0 0 0.06em; }
-        .timeline-item p { font-size: 0.55em; margin: 0; }
-
-        .icon-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: left; }
-        .icon-list li { display: flex; align-items: center; gap: 5px; padding: 0.35em; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; margin: 0; }
-        .icon-list .icon { font-size: 1em; }
-        .icon-list strong { font-size: 0.62em; }
-        .icon-list p { font-size: 0.52em; margin: 0; }
-
-        .progress { margin: 0.4em 0; max-width: 230px; }
-        .progress-label { display: flex; justify-content: space-between; font-size: 0.58em; color: var(--text-muted); margin-bottom: 0.12em; }
-        .progress-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 100px; overflow: hidden; }
-        .progress-bar .fill { height: 100%; background: linear-gradient(90deg, var(--doom-gold), var(--cyan)); width: 85%; }
-
-        .comparison { width: 100%; border-collapse: collapse; font-size: 0.62em; margin-top: 0.4em; }
-        .comparison th { text-align: left; padding: 0.35em; background: rgba(255,215,0,0.1); color: var(--doom-gold); border-bottom: 1px solid var(--doom-gold); }
-        .comparison td { padding: 0.3em; border-bottom: 1px solid var(--border); color: var(--text-muted); }
-
-        .quote { font-size: 0.75em; color: var(--text); border-left: 3px solid var(--doom-gold); padding-left: 0.7em; margin: 0.4em 0; text-align: left; font-style: italic; }
-
-        /* Doom Tip Box - dorado */
         .doom-tip {
             margin-top: 0.35em;
-            padding: 0.35em 0.7em;
+            padding: 0.4em 0.7em;
             background: rgba(255,215,0,0.05);
             border: 1px solid rgba(255,215,0,0.2);
             border-radius: 6px;
-            font-size: 0.58em;
+            font-size: 0.62em;
             color: var(--doom-gold);
             text-align: left;
         }
         .doom-tip strong { color: var(--orange); }
         
-        /* Doom Consejo Box - rosa */
         .doom-consejo {
             margin-top: 0.25em;
-            padding: 0.3em 0.7em;
+            padding: 0.35em 0.7em;
             background: rgba(247,118,142,0.05);
             border: 1px solid rgba(247,118,142,0.2);
             border-radius: 6px;
-            font-size: 0.58em;
+            font-size: 0.62em;
             color: var(--pink);
             text-align: left;
         }
-        .doom-consejo strong { color: var(--doom-gold); }
 
-        /* Title */
-        .title-slide h1 { font-size: 2.6em; color: var(--doom-gold); text-shadow: 0 0 30px rgba(255,215,0,0.3); }
-        .title-slide .subtitle { font-size: 1.05em; color: var(--text); margin: 0.08em 0 0.25em; }
-        .title-slide .author { margin-top: 0.6em; color: var(--text-muted); }
-        .thanks-slide h1 { font-size: 2.3em; color: var(--doom-gold); text-shadow: 0 0 30px rgba(255,215,0,0.3); }
-        .thanks-slide .name { font-size: 1.05em; font-weight: 600; margin: 0.25em 0; }
-        .qa-slide h2 { font-size: 1.9em; color: var(--doom-gold); }
-
-        .doom-crown { font-size: 1.1em; margin-right: 3px; }
-
-        /* Diferencias Intigriti */
-        .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 0.4em; }
-        .diff-item { background: rgba(158,206,106,0.05); border: 1px solid rgba(158,206,106,0.2); border-radius: 6px; padding: 0.35em; }
-        .diff-item h4 { font-size: 0.62em; color: var(--green); margin: 0 0 0.08em; }
-        .diff-item p { font-size: 0.55em; margin: 0; }
-
-        /* Savitar Mexico alert */
         .savitar-alert {
             background: rgba(247,118,142,0.08);
             border: 1px solid rgba(247,118,142,0.3);
             border-radius: 8px;
-            padding: 0.4em;
+            padding: 0.5em;
             margin-top: 0.3em;
         }
-        .savitar-alert h4 { font-size: 0.62em; color: var(--pink); margin: 0 0 0.1em; }
-        .savitar-alert p { font-size: 0.58em; margin: 0; color: var(--text); }
+        .savitar-alert h4 { font-size: 0.68em; color: var(--pink); margin: 0 0 0.1em; }
+        .savitar-alert p { font-size: 0.62em; margin: 0; color: var(--text); }
+
+        .title-slide h1 { font-size: 2.6em; color: var(--doom-gold); text-shadow: 0 0 30px rgba(255,215,0,0.3); }
+        .title-slide .subtitle { font-size: 1.05em; color: var(--text); margin: 0.08em 0 0.25em; }
+        .title-slide .author { margin-top: 0.6em; color: var(--text-muted); }
+        .thanks-slide h1 { font-size: 2.3em; color: var(--doom-gold); text-shadow: 0 0 30px rgba(255,215,0,0.3); }
+        .qa-slide h2 { font-size: 1.9em; color: var(--doom-gold); }
+
+        .doom-crown { font-size: 1.1em; margin-right: 3px; }
+
+        .logo-grid { display: flex; justify-content: center; gap: 10px; margin: 0.5em 0; }
+        .logo-item { width: 55px; height: 55px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.58em; color: var(--text-muted); }
+        .logo-item .icon { font-size: 1.4em; margin-bottom: 3px; }
 
         @media (max-width: 768px) {
             .reveal { font-size: 18px; }
             .columns { grid-template-columns: 1fr; }
             .card-grid.two, .card-grid.three, .card-grid.four { grid-template-columns: 1fr; }
-            .timeline { grid-template-columns: 1fr; }
-            .icon-list { grid-template-columns: 1fr; }
-            .diff-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+    <!-- CTF Live Banner - Inicia desde el minuto 0 -->
+    <div class="ctf-banner" id="ctf-banner">
+        <div style="display:flex;align-items:center;gap:15px">
+            <span class="ctf-label">🔴 CTF LIVE</span>
+            <span class="ctf-target">🎯 Target:</span>
+            <span class="ctf-url">doom-statick.github.io/ctf-flisol</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:15px">
+            <span class="ctf-flag">Flag: FLISOL{...}</span>
+            <span id="ctf-timer" style="color:var(--orange);font-size:0.75em">⏱️ 00:00:00</span>
+        </div>
+    </div>
+
     <div class="reveal">
         <div class="slides">
             
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 1: TITLE                                                        -->
+            <!-- SLIDE 1: TITLE (1 min)                                              -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section class="title-slide">
                 <div style="display:flex;align-items:center;justify-content:center;gap:35px">
@@ -227,497 +243,604 @@
                         <div>
                             <span class="badge gold">FLISOL 2026</span>
                             <span class="badge">Seguridad Ofensiva</span>
-                            <span class="badge pink">Dominio Total</span>
+                            <span class="badge pink">Hands-On</span>
                         </div>
-<p class="author">
-    <span class="doom-crown">👑</span>
-    Statick<br>
-    <span style="font-size:0.68em;color:var(--text-muted)">Latverian Supreme — Master of Science & Sorcery</span>
-</p>
-                    </div>
-                    <div style="text-align:center">
-                        <img src="images/qr.png" alt="QR" style="width:80px;border-radius:8px;border:1px solid rgba(255,215,0,0.3);">
-                        <p style="font-size:0.48em;color:var(--text-muted);margin-top:0.12em">Escanea para ver</p>
+                        <p class="author">
+                            <span class="doom-crown">👑</span>
+                            Diego Medardo Saavedra García — <span style="color:var(--cyan)">Statick</span><br>
+                            <span style="font-size:0.68em;color:var(--text-muted)">Prof. ESPE, UIDE, Abacom | Máster UCM</span>
+                        </p>
                     </div>
                 </div>
-                <p style="font-size:0.75em;color:var(--pink);font-style:italic;text-align:center;margin-top:0.3em">"No one rivals Doom. NO ONE." — Dr. Doom</p>
+                <p style="font-size:0.72em;color:var(--doom-gold);font-style:italic;text-align:center;margin-top:0.3em">"Hoy les cuento cómo Doom conquista sistemas — con permiso, ñaños."</p>
+                
+                <!-- CTF Announcement Box -->
+                <div style="margin-top:0.5em;background:rgba(247,118,142,0.1);border:2px solid var(--pink);border-radius:12px;padding:0.6em 1em;max-width:600px">
+                    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+                        <span style="font-size:1.5em">🏴‍☠️</span>
+                        <div style="text-align:left">
+                            <p style="font-size:0.8em;color:var(--pink);font-weight:700;margin:0">CTF INICIADO — ¡AHORA MISMO!</p>
+                            <p style="font-size:0.65em;color:var(--text-muted);margin:0.2em 0 0">
+                                Los que quieran: <strong style="color:var(--cyan)">doom-statick.github.io/ctf-flisol</strong> — Flag: <code style="background:rgba(0,255,65,0.2);color:var(--green)">FLISOL{...}</code>
+                            </p>
+                            <p style="font-size:0.58em;color:var(--text-muted);margin:0.1em 0 0;font-style:italic">
+                                "Los que no quieran escuchar la charla, tienen mi permiso para atacar el objetivo. ¡A conquistar!"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h2>🎤 Speaker Notes - Slide 1: Título + CTF INICIADO</h2>
+                    <ul>
+                        <li><strong>Tiempo:</strong> 1-2 minutos</li>
+                        <li><strong>🔥 ACCIÓN CRÍTICA:</strong> Anunciar que el CTF YA ESTÁ ACTIVO desde ahora mismo</li>
+                        <li><strong>Frase clave:</strong> "Para los que quieran participar del CTF: doom-statick.github.io/ctf-flisol — ya empezó, pueden atacar AHORA. Los que no, escúchenme, ¿sí?"</li>
+                        <li><strong>Pasar el QR/URL:</strong> Mostrar la URL en el banner de arriba. Que la gente saque sus laptops.</li>
+                        <li><strong>Reglas rápidas:</strong> "Solo el target indicado. Flag format: FLISOL{...}. Si encuentran algo, griten 'ENCONTRÉ'."</li>
+                        <li><strong>Dato personal:</strong> Menciona que eres de Loja y que FLISOL es especial para ti.</li>
+                    </ul>
+                </aside>
                 <div class="slide-footer">
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 2: QUIÉN SOY                                                     -->
+            <!-- SLIDE 2: LA LEY DE DOOM (1 min)                                     -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section style="background: linear-gradient(135deg, rgba(255,215,0,0.08) 0%, rgba(0,0,0,0.9) 100%);">
+                <div style="border: 3px solid var(--doom-gold); border-radius: 16px; padding: 1.2em; max-width: 700px;">
+                    <h2 style="color: var(--doom-gold); font-size: 1.3em; margin-bottom: 0.2em; text-align: center;">⚖️ LA LEY DE DOOM</h2>
+                    <p style="text-align: center; font-size: 0.68em; color: var(--text-muted); margin-bottom: 0.4em; font-style: italic;">
+                        "Oigan chévere, antes de que Doom les cuente sus secretos, esto es REGLA DE ORO, ¿sí?"
+                    </p>
+                    <div style="border-top: 2px solid rgba(255,215,0,0.3); padding-top: 0.5em;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left;">
+                            <div style="background: rgba(255,215,0,0.05); padding: 0.5em; border-radius: 8px; border: 1px solid rgba(255,215,0,0.2);">
+                                <p style="font-size: 0.65em; color: var(--doom-gold); margin: 0;"><strong>I. AUTORIZACIÓN</strong></p>
+                                <p style="font-size: 0.55em; color: var(--text-muted); margin: 0.1em 0 0;">Sin permiso explícito, NO toques NADA.</p>
+                            </div>
+                            <div style="background: rgba(255,215,0,0.05); padding: 0.5em; border-radius: 8px; border: 1px solid rgba(255,215,0,0.2);">
+                                <p style="font-size: 0.65em; color: var(--doom-gold); margin: 0;"><strong>II. SCOPE</strong></p>
+                                <p style="font-size: 0.55em; color: var(--text-muted); margin: 0.1em 0 0;">Fuera de scope = fuera de la ley.</p>
+                            </div>
+                            <div style="background: rgba(255,215,0,0.05); padding: 0.5em; border-radius: 8px; border: 1px solid rgba(255,215,0,0.2);">
+                                <p style="font-size: 0.65em; color: var(--doom-gold); margin: 0;"><strong>III. NO DESTRUIR</strong></p>
+                                <p style="font-size: 0.55em; color: var(--text-muted); margin: 0.1em 0 0;">PoC, no destrucción. Nunca.</p>
+                            </div>
+                            <div style="background: rgba(255,215,0,0.05); padding: 0.5em; border-radius: 8px; border: 1px solid rgba(255,215,0,0.2);">
+                                <p style="font-size: 0.65em; color: var(--doom-gold); margin: 0;"><strong>IV. RESPONSABLE</strong></p>
+                                <p style="font-size: 0.55em; color: var(--text-muted); margin: 0.1em 0 0;">Reporta al dueño. 90 días.</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 0.4em; text-align: center; background: rgba(247,118,142,0.1); padding: 0.4em; border-radius: 8px;">
+                            <p style="font-size: 0.62em; color: var(--pink); font-weight: 600; margin: 0;">🔴 "Romper estas reglas no es hacking. Es CRIMEN." 🔴</p>
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h2>🎤 Speaker Notes - Slide 2: La Ley de Doom</h2>
+                    <ul>
+                        <li><strong>Tiempo:</strong> 1 minuto — NO escatimar aquí</li>
+                        <li><strong>Tono:</strong> SERIO. Mirar a la audiencia a los ojos.</li>
+                        <li><strong>Frase clave:</strong> "Esto es REGLA DE ORO. Si alguien sale de aquí y hace bug bounty sin permiso, no fue Doom quien los enseñó."</li>
+                        <li><strong>Énfasis:</strong> Mencionar que en Ecuador el Cibercrimen está tipificado. Pueden ir presos.</li>
+                        <li><strong>Pregunta retórica:</strong> "¿Cuántos piensan que el hacking ético es ilegal? ¿Y si les digo que es un trabajo LEGAL que paga MUY bien?"</li>
+                    </ul>
+                </aside>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 3: QUIÉN ES DOOM / STATICK (2 min)                            -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>Dr. Doom: Multiforme</h2>
-                <p style="font-size:0.68em;color:var(--text-muted)">Victor Von Doom no es un hombre — es una fuerza imparable.</p>
+                <h2>¿Quién es Doom? <span style="color:var(--cyan)">— Spoiler: Es Statick</span></h2>
+                <p style="font-size:0.68em;color:var(--text-muted)">Oigan bacán, Doom es mi personaje. Yo soy Diego, profesor y hacker ético.</p>
                 <div class="card-grid four">
-                    <div class="card"><span class="doom-crown">👑</span><h4>El Gobernante</h4><p>ESPE, UIDE, Abacom, Codings</p><p style="color:var(--doom-gold);font-size:0.52em">Los súbditos aprenden</p></div>
-                    <div class="card"><span class="doom-crown">⚔️</span><h4>El Arquitecto</h4><p>+10 años dominando</p><p style="color:var(--sapphire);font-size:0.52em">FullStack sin límites</p></div>
-                    <div class="card"><span class="doom-crown">🦹‍♂️</span><h4>El Cazador</h4><p>Intigriti, Bugcrowd</p><p style="color:var(--green);font-size:0.52em">Bugs como trofeos</p></div>
-                    <div class="card"><span class="doom-crown">📚</span><h4>El Erudito</h4><p>Máster UCM</p><p style="color:var(--cyan);font-size:0.52em">Conocimiento = poder</p></div>
+                    <div class="card"><span class="doom-crown">👑</span><h4>Profesor</h4><p>ESPE, UIDE, Abacom</p><p style="color:var(--doom-gold);font-size:0.52em">6 universidades</p></div>
+                    <div class="card"><span class="doom-crown">⚔️</span><h4>Developer</h4><p>10+ años</p><p style="color:var(--sapphire);font-size:0.52em">FullStack</p></div>
+                    <div class="card"><span class="doom-crown">🦹‍♂️</span><h4>Hacker</h4><p>Intigriti, Bugcrowd</p><p style="color:var(--green);font-size:0.52em">Ethical only</p></div>
+                    <div class="card"><span class="doom-crown">📚</span><h4>Estudiante</h4><p>Máster UCM</p><p style="color:var(--cyan);font-size:0.52em">Ciberseguridad</p></div>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Multitasking es para los débiles. Doom simplemente DOMINA todo.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> No intentes ser promedio en todo. Sé LEGENDARIO en algo.</div>
+                <div class="info-box" style="margin-top:0.4em">
+                    <h4>🏆 Logros Recientes</h4>
+                    <p style="font-size:0.62em"><strong>RootedCON 2026:</strong> 15/15 challenges resueltos | <strong>70+ challenges</strong> publicados | <a href="https://github.com/statick88/challenges/tree/main/ctf/rootedcon2026" target="_blank">Ver soluciones</a></p>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Mi GitHub tiene 322+ repos. Todo es open source.</div>
+                <aside class="notes">
+                    <h2>🎤 Speaker Notes - Slide 3: ¿Quién es Doom?</h2>
+                    <ul>
+                        <li><strong>Tiempo:</strong> 2 minutos</li>
+                        <li><strong>Frase clave:</strong> "Doom es mi personaje. Pero yo soy Diego, de Loja, profesor en 6 universidades, y sí, hago bug bounty en platforms como Intigriti y Bugcrowd."</li>
+                        <li><strong>Highlight:</strong> Menciona el RootedCON 2026 — "15/15 challenges. Esto demuestra que se puede lograr con práctica."</li>
+                        <li><strong>Conexión con audiencia:</strong> "Yo también fui estudiante. Empecé en un IST. Lo que ustedes pueden lograr, yo también lo logré."</li>
+                        <li><strong>Dato curioso:</strong> "322 repos en GitHub. Todo open source. Hackers éticos comparten, no esconden."</li>
+                    </ul>
+                </aside>
                 <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 3: MODOS DE DOOM                                                -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>Los Modos de Doom <span class="badge gold" style="font-size:0.5em">Sketchybar</span></h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Cada modo activa visibilidad diferente en la UI. Doom adapta su entorno al contexto.</p>
-                <div class="card-grid four" style="margin-top:0.35em">
-                    <div class="card" style="border-color:var(--cyan)">
-                        <h4 style="color:var(--cyan)">🎓 Alumnus</h4><p style="font-size:0.58em">Estudio UCM</p>
-                        <p style="font-size:0.5em;color:var(--cyan)">50min | CYAN</p>
-                    </div>
-                    <div class="card" style="border-color:var(--silver)">
-                        <h4 style="color:var(--silver)">🤝 Líder</h4><p style="font-size:0.58em">Docencia ESPE, UIDE</p>
-                        <p style="font-size:0.5em;color:var(--silver)">25min | SILVER</p>
-                    </div>
-                    <div class="card" style="border-color:var(--sapphire)">
-                        <h4 style="color:var(--sapphire)">💻 Arquitecto</h4><p style="font-size:0.58em">FullStack Dev</p>
-                        <p style="font-size:0.5em;color:var(--sapphire)">45min | SAPPHIRE</p>
-                    </div>
-                    <div class="card" style="border-color:var(--green)">
-                        <h4 style="color:var(--green)">🦹‍♂️ DOOM</h4><p style="font-size:0.58em">Bug Bounty</p>
-                        <p style="font-size:0.5em;color:var(--green)">90min | HACKER_GREEN</p>
-                    </div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Normal Mode = Statick. El nexo que conecta todos los otros modos.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Adapta tu entorno al objetivo. El contexto lo es TODO.</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 4: QUÉ ES BUG BOUNTY (con Savitar Mexico)                   -->
+            <!-- SLIDE 4: ¿QUÉ ES BUG BOUNTY? (2 min)                                -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
                 <h2>¿Qué es Bug Bounty?</h2>
-                <p class="quote">Bug Bounty es el sistema por el cual Doom reclama tributo de los reinos que no saben protegerse.</p>
+                <p style="font-size:0.68em;color:var(--text-muted)">Las empresas pagan por encontrar vulnerabilidades ANTES que los malos.</p>
                 <div class="columns">
-                    <div class="info-box"><span class="doom-crown">🏰</span><h4>Para Reinos (Empresas)</h4><ul><li>Descubre vulns ANTES que invasores</li><li>Más económico que defender 24/7</li><li>Miles de hunters como centinelas</li></ul></div>
-                    <div class="info-box cyan"><span class="doom-crown">⚔️</span><h4>Para Hunters</h4><ul><li>Gana tributo: dinero, gloria</li><li>Aprende hacking real</li><li>Construye tu reputación</li></ul></div>
+                    <div class="info-box"><h4>🏰 Para Empresas</h4><ul><li>Descubre vulns antes que hackers maliciosos</li><li>Más barato que contratar equipo completo</li><li>Miles de hunters como centinelas</li></ul></div>
+                    <div class="info-box cyan"><h4>⚔️ Para Hackers</h4><ul><li>Gana dinero: $100 - $50K+ por bug</li><li>Aprende hacking real y legal</li><li>Construye reputación y carrera</li></ul></div>
                 </div>
                 <div class="savitar-alert">
                     <h4>🇲🇽 Caso Savitar — México 2024</h4>
-                    <p>Una vulnerabilidad en sistemas gubernamentales mexicanos fue reportada vía Bug Bounty. La empresa la arregló y el informante recibió reconocimiento. <strong style="color:var(--green)">Bug Bounty ≠ Crime.</strong></p>
+                    <p>Reportó vulnerabilidad en sistemas gubernamentales con permiso. Recibió reconocimiento. <strong style="color:var(--green)">Bug Bounty ≠ Crime.</strong> Con permiso = héroe. Sin permiso = criminal.</p>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Savitar reportó con permiso y fue HÉROE. Sin permiso = Criminal.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Hacking con permiso = gloria. Hacking sin permiso = prisión.</div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Las empresas como Google pagan $50M+ en bounties. Esto es un mercado LEGAL.</div>
+                <aside class="notes">
+                    <h2>🎤 Speaker Notes - Slide 4: ¿Qué es Bug Bounty?</h2>
+                    <ul>
+                        <li><strong>Tiempo:</strong> 2 minutos</li>
+                        <li><strong>Frase clave:</strong> "Las empresas pagan porque es más barato pagar $5K a un hacker ético que perder $500K en un breach."</li>
+                        <li><strong>Analogía:</strong> "Es como contratar un detective privado en vez de esperar a que te roben."</li>
+                        <li><strong>Dato impactante:</strong> "Google pagó $50 millones en bounties en un año. Esto NO es un hobby, es una industria."</li>
+                        <li><strong>Caso Savitar:</strong> "México, 2024. Reportó con permiso → héroe nacional. Sin permiso → habría ido preso. LA DIFERENCIA ES EL PERMISO."</li>
+                    </ul>
+                </aside>
                 <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 5: PLATAFORMAS OVERVIEW                                        -->
+            <!-- SLIDE 5: PLATAFORMAS + COMPARATIVA (2 min)                          -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
                 <h2>Los Reinos del Bug Bounty</h2>
-                <p style="font-size:0.68em;color:var(--text-muted)">Doom ha conquistado estos cuatro reinos. Cada uno tiene sus reglas.</p>
-                <div class="logo-grid">
-                    <div class="logo-item"><span class="icon">🔴</span>HackerOne</div>
-                    <div class="logo-item"><span class="icon">🟡</span>Bugcrowd</div>
-                    <div class="logo-item"><span class="icon">🟢</span>Intigriti</div>
-                    <div class="logo-item"><span class="icon">🔵</span>YesWeHack</div>
+                <p style="font-size:0.65em;color:var(--text-muted)">Cada plataforma tiene sus reglas. Conócelas antes de entrar.</p>
+                <div class="card-grid four">
+                    <div class="card" style="border-color:var(--pink)"><h4 style="color:var(--pink)">🔴 HackerOne</h4><p>Enterprise</p><p style="color:var(--pink);font-size:0.5em">$5K-$50K+</p></div>
+                    <div class="card" style="border-color:var(--orange)"><h4 style="color:var(--orange)">🟡 Bugcrowd</h4><p>Startups</p><p style="color:var(--orange);font-size:0.5em">$500-$10K</p></div>
+                    <div class="card" style="border-color:var(--green)"><h4 style="color:var(--green)">🟢 Intigriti</h4><p>Europa</p><p style="color:var(--green);font-size:0.5em">$1K-$15K</p></div>
+                    <div class="card" style="border-color:var(--cyan)"><h4 style="color:var(--cyan)">🔵 YesWeHack</h4><p>Francia</p><p style="color:var(--cyan);font-size:0.5em">$500-$5K</p></div>
                 </div>
-                <div class="progress">
-                    <div class="progress-label"><span>Tributo total recolectado 2024</span><span style="color:var(--doom-gold)">$50M+</span></div>
-                    <div class="progress-bar"><div class="fill" style="width:92%"></div></div>
+                <div class="info-box" style="margin-top:0.4em">
+                    <h4>🎯 Mi Recomendación para Empezar</h4>
+                    <p style="font-size:0.62em"><strong style="color:var(--green)">1. Intigriti</strong> (claro en bounties, comunicación directa) → <strong style="color:var(--orange)">2. Bugcrowd VDP</strong> (sin bounty pero buen training) → <strong style="color:var(--pink)">3. HackerOne</strong> (enterprise, más competitivo)</p>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Conoce el SCOPE de cada reino antes de atacar. Duplicates = pérdida de tiempo.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Cada reino tiene城门 (puertas). Encuéntralas antes de atacar.</div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Intigriti es ideal para LATAM — pagan en euros y tienen buena comunicación.</div>
                 <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 6: INTIGRITI — El Reino Europeo (Diferente)                  -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>Intigriti <span style="color:var(--green)">— Reino de Europa</span></h2>
-                <p style="font-size:0.68em;color:var(--text-muted)">¿Por qué Intigriti es DIFERENTE?</p>
-                <div class="diff-grid">
-                    <div class="diff-item">
-                        <h4>🎯 Ranged Bounties</h4>
-                        <p>5 niveles claros: <strong style="color:var(--green)">P1-P5</strong>. Sabes exactamente cuánto puedes ganar por tipo de vuln.</p>
-                    </div>
-                    <div class="diff-item">
-                        <h4>🔓 3 Resports/Hora</h4>
-                        <p>No hay límite de reportes por hora. Envía cuando quieras, no te penalizan.</p>
-                    </div>
-                    <div class="diff-item">
-                        <h4>💬 Comunicación Directa</h4>
-                        <p>Chat directo con los investigadores de la empresa. No hay intermediarios.</p>
-                    </div>
-                    <div class="diff-item">
-                        <h4>🏆 Hall of Fame VIP</h4>
-                        <p>Reconocimiento público de alto nivel. Las empresas valoran mucho esto.</p>
-                    </div>
-                </div>
-                <div class="columns" style="margin-top:0.4em">
-                    <div class="terminal"><div class="line"><span class="comment"># Doom entra a conquistar</span></div><div class="line"><span class="prompt">$</span> <span class="command">firefox intigriti.com</span></div></div>
-                    <span class="badge green">Ideal para LATAM hunters</span>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Intigriti paga más en Europa. Un hunter LATAM puede cosechar euros desde casa.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Empieza en Intigriti si quieres claridad en recompensas y comunicación directa.</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 7: BUGCROWD                                                    -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>Bugcrowd <span style="color:var(--orange)">— Reino con AI</span></h2>
-                <div class="columns">
-                    <div class="info-box orange"><span class="doom-crown">🤖</span><h4>Armas con AI</h4><ul><li><strong>AI Triage</strong> — filtro automático</li><li><strong>AI Analytics</strong> — datos que importan</li><li><strong>Crowdcontrol</strong> — control total</li></ul></div>
-                    <div class="info-box"><span class="doom-crown">📜</span><h4>Tipos de Campaña</h4><ul><li><strong>Bug Bounty</strong> — guerra continua</li><li><strong>On-Demand</strong> — asedio 2 semanas</li><li><strong>Pen Test</strong> — conquista tradicional</li></ul></div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Bugcrowd + AI = triage más rápido. Pero siempre revisa manualmente.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> No confíes ciega en AI. La máquina no ve todo lo que Doom ve.</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 8: HACKERONE                                                   -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>HackerOne <span style="color:var(--doom-gold)">— El Imperio Central</span></h2>
-                <div class="columns">
-                    <div class="info-box"><span class="doom-crown">👑</span><h4>El Dominio #1</h4><ul><li>Líder absoluto del mercado</li><li><strong>Hai</strong> — agente AI de Doom</li><li><strong>Bounty Insights</strong> — inteligencia</li><li>Researchers ID-verified</li></ul></div>
-                    <div class="info-box pink"><span class="doom-crown">🏆</span><h4>Reinos VIP</h4><ul><li><strong>Google VRP</strong> — $50M+ pagados</li><li><strong>Microsoft VRP</strong> — el gigante rojo</li><li><strong>1Password CTF</strong></li><li>Uber, Shopify</li></ul></div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Google VRP ha pagado $50M+. Si entras allá, entras a la historia.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Los grandes reinos requieren mucha preparación. No entres sin entrenar.</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 9: YESWESHACK                                                  -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>YesWeHack <span style="color:var(--cyan)">— Reino Francés</span></h2>
-                <div class="columns">
-                    <div class="info-box cyan"><span class="doom-crown">🇫🇷</span><h4>Doctrinas Francesas</h4><ul><li>VDP + Bug Bounty = disciplina</li><li><strong>Code Review</strong> — análisis profundo</li><li>Integración con SOC</li></ul></div>
-                    <div class="info-box"><span class="doom-crown">🏛️</span><h4>Para Reinos</h4><ul><li>Reward Caps — límites claros</li><li>Whitepapers — conocimiento</li><li>Dashboard analytics</li><li>Soporte dedicado</li></ul></div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> VDP (Vulnerability Disclosure) = la entrada sin presión de bounty.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Todo gran conquistador empieza con un pequeño reino.</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 10: COMPARATIVA                                                -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>Doom Juiça los Reinos</h2>
-                <table class="comparison">
-                    <thead><tr><th>🏰 Reino</th><th>Territorio</th><th>Tributo</th><th>Nivel</th></tr></thead>
-                    <tbody>
-                        <tr><td><strong style="color:var(--pink)">HackerOne</strong></td><td>Enterprise</td><td>$5K-$50K+</td><td>⬆️⬆️⬆️⬆️⬆️</td></tr>
-                        <tr><td><strong style="color:var(--orange)">Bugcrowd</strong></td><td>Startups</td><td>$500-$10K</td><td>⬆️⬆️⬆️⬆️</td></tr>
-                        <tr><td><strong style="color:var(--green)">Intigriti</strong></td><td>Europa</td><td>$1K-$15K</td><td>⬆️⬆️⬆️</td></tr>
-                        <tr><td><strong style="color:var(--cyan)">YesWeHack</strong></td><td>Francia, UE</td><td>$500-$5K</td><td>⬆️⬆️⬆️</td></tr>
-                    </tbody>
-                </table>
-                <p style="font-size:0.62em;margin-top:0.25em;color:var(--doom-gold)">💡 <strong>Doom recomienda:</strong> Empieza en los pequeños para ganar experiencia.</p>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Peligrosidad ⬆️ = más tribute pero más competencia.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Domina los niveles bajos antes de enfrentar dragonES.</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 11: PLATAFORMAS DE PRÁCTICA                                   -->
+            <!-- SLIDE 6: LABS PARA PRACTICAR (2 min)                                -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
                 <h2>Campos de Entrenamiento</h2>
-                <p style="font-size:0.65em;color:var(--text-muted)">Doom no nació conquistando. Practicó. Y tú también debes.</p>
+                <p style="font-size:0.65em;color:var(--text-muted)">No hacks en producción. Practica primero en labs seguros.</p>
                 <div class="card-grid three">
-                    <div class="card"><h4>🎯 HackTheBox</h4><p>CTFs, Labs, Machines</p><p style="color:var(--green)">Nivel: Leyenda</p></div>
-                    <div class="card"><h4>🏠 TryHackMe</h4><p>Tutoriales, Rooms</p><p style="color:var(--cyan)">Nivel: Aprendiz</p></div>
-                    <div class="card"><h4>🐳 Docker Labs</h4><p>DVWA, Juice Shop</p><p style="color:var(--pink)">Nivel: Variable</p></div>
+                    <div class="card" style="border-color:var(--green)"><h4 style="color:var(--green)">🎯 HackTheBox</h4><p>CTFs, Machines, Pro Labs</p><p style="color:var(--green);font-size:0.5em">Nivel: Avanzado</p></div>
+                    <div class="card" style="border-color:var(--cyan)"><h4 style="color:var(--cyan)">🏠 TryHackMe</h4><p>Learning Paths, Rooms</p><p style="color:var(--cyan);font-size:0.5em">Nivel: Principiante</p></div>
+                    <div class="card" style="border-color:var(--pink)"><h4 style="color:var(--pink)">🐳 Docker Local</h4><p>DVWA, Juice Shop, WebGoat</p><p style="color:var(--pink);font-size:0.5em">Nivel: Variable</p></div>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> THM para aprender, HTB para sufrir. Ambos son necesarios.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> El que no entrena, no conquista. Practice makes permanent.</div>
+                <div class="terminal" style="margin-top:0.3em;font-size:0.55em">
+                    <div class="line"><span class="comment"># Tu laboratorio local en 1 comando</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 80:80 vulnerables/web-dvwa</span></div>
+                    <div class="line"><span class="output">→ http://localhost (admin/password)</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 3000:3000 bkimminich/juice-shop</span></div>
+                    <div class="line"><span class="output">→ http://localhost:3000</span></div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> <a href="https://statick88.github.io/challenges" target="_blank">70+ challenges</a> en mi sitio — todos gratis.</div>
                 <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 12: HACKTHEBOX                                                 -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>HackTheBox <span style="color:var(--green)">— Arena de Doom</span></h2>
-                <div class="columns">
-                    <div class="info-box green"><span class="doom-crown">⚔️</span><h4>El Campo de Batalla</h4><ul><li><strong>Retired Machines</strong> — guerras pasadas</li><li><strong>Active Machines</strong> — desafíos actuales</li><li><strong>CTFs</strong> — Capture The Flags</li><li><strong>Pro Labs</strong> — escenarios épicos</li></ul></div>
-                    <div>
-                        <div class="terminal"><div class="line"><span class="comment"># Doom se conecta</span></div><div class="line"><span class="prompt">$</span> <span class="command">openvpn config.ovpn</span></div><div class="line"><span class="output">✓ Connected to HTB</span></div></div>
-                        <div class="progress" style="margin-top:0.4em"><div class="progress-label"><span>Hackers activos</span><span>75%</span></div><div class="progress-bar"><div class="fill" style="width:75%"></div></div></div>
-                    </div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Rickdiculous y Blunder son writeups buenos para EMPEZAR.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Cada máquina conquistada = un paso hacia la omnisciencia.</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 13: TRHACKME                                                   -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>TryHackMe <span style="color:var(--cyan)">— Academia de Doom</span></h2>
-                <div class="columns">
-                    <div class="info-box cyan"><span class="doom-crown">📚</span><h4>Learning Paths</h4><ul><li>Introduction to Cyber Security</li><li>Web Fundamentals</li><li>Network Security</li><li>Privilege Escalation</li></ul></div>
-                    <div class="info-box"><span class="doom-crown">🎓</span><h4>Rooms Populares</h4><ul><li>OWASP Top 10</li><li>Blue Team Tools</li><li>Burp Suite Basics</li><li>Nmap Mastery</li></ul></div>
-                </div>
-                <p style="margin-top:0.2em"><span class="badge cyan">Beginner Friendly</span> <span class="badge gold">Doom Approved</span></p>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Haz el path "Complete Beginner" ANTES de tocar máquinas reales.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> La ignorancia no es perdonable. Estudia los fundamentos.</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 14: LABORATORIOS VULNERABLES                                  -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>Castillos Vulnerables</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Doom ha capturado estos castillos para práctica. Todos son suyos.</p>
-                <div class="card-grid three">
-                    <div class="card"><h4>🐳 Docker</h4><p>DVWA, Juice Shop</p><p style="font-size:0.52em;color:var(--text-muted)">docker run -d -p 8080:80</p></div>
-                    <div class="card"><h4>📦 VirtualBox</h4><p>Metasploitable, VMs</p><p style="font-size:0.52em;color:var(--text-muted)">Oracle VM VirtualBox</p></div>
-                    <div class="card"><h4>🍎 VMware Fusion</h4><p>macOS Labs</p><p style="font-size:0.52em;color:var(--text-muted)">Metasploitable, Kioptrix</p></div>
-                </div>
-                <div class="card-grid two" style="margin-top:0.35em">
-                    <div class="card"><h4>🕷️ DVWA</h4><p>SQLi, XSS, LFI — Mis favoritos</p></div>
-                    <div class="card"><h4>🥤 Juice Shop</h4><p>OWASP Top 10 — Completo</p></div>
-                    <div class="card"><h4>🐱‍💻 Metasploitable</h4><p>Linux vulnerable — Clásico</p></div>
-                    <div class="card"><h4>🔴 VulnHub</h4><p>VMs descargables — Infinitas</p></div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> DVWA en "impossible" = el verdadero reto. Medium es para rendirse.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> No pratiques en fácil. Practica en IMPOSIBLE.</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 15: MI CURSO                                                  -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>El Curso de Doom <span class="badge gold" style="font-size:0.45em">— Entrena Súbditos</span></h2>
-                <p><a href="https://statick88.github.io" target="_blank">statick88.github.io</a></p>
-                <div class="card-grid three">
-                    <div class="card"><h4>📅 Modalidad</h4><p>Clases en vivo 19:00-22:00</p><p style="color:var(--doom-gold)">16-27 marzo 2026</p></div>
-                    <div class="card"><h4>📜 Certificación</h4><p>Aval Ministerio del Trabajo</p><p style="color:var(--green)">Certificado profesional</p></div>
-                    <div class="card"><h4>🖥️ Simuladores</h4><p>Core i5, 8GB RAM</p><p style="color:var(--pink)">Hands-on labs</p></div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Hands-on > teoría. El 80% debe ser práctica.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Doom practicaba 20 horas diarias. ¿Tú cuánto?</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 16: METODOLOGÍA                                                -->
+            <!-- SLIDE 7: METODOLOGÍA (2 min)                                        -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
                 <h2>La Doctrina de Doom</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">4 fases que Doom sigue sin excepción.</p>
-                <div class="timeline">
-                    <div class="timeline-item"><h4 style="color:var(--cyan)">1. RECON</h4><p>Subdomain enum, assets</p><p style="font-size:0.5em;color:var(--cyan)">70% del trabajo</p></div>
-                    <div class="timeline-item"><h4 style="color:var(--green)">2. ENUM</h4><p>Params, endpoints, API</p><p style="font-size:0.5em;color:var(--green)">No saltes</p></div>
-                    <div class="timeline-item"><h4 style="color:var(--pink)">3. EXPLOIT</h4><p>SQLi, XSS, SSRF, IDOR</p><p style="font-size:0.5em;color:var(--pink)">Gloria</p></div>
-                    <div class="timeline-item"><h4 style="color:var(--orange)">4. REPORTE</h4><p>PoC, CVSS, remediación</p><p style="font-size:0.5em;color:var(--orange)">Cobrar</p></div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> El recon es 70%. No puedes conquistar lo que no conoces.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> "Si no puedes romperlo, no lo conoces lo suficiente."</div>
-                <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 17: HERRAMIENTAS                                               -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>Las Armas de Doom</h2>
-                <div class="columns">
-                    <div class="icon-list">
-                        <li><span class="icon">🔍</span><div><strong>Recon</strong><p style="color:var(--cyan)">subfinder, amass, httpx</p></div></li>
-                        <li><span class="icon">🕵️</span><div><strong>Enum</strong><p style="color:var(--green)">ffuf, dirsearch, nuclei</p></div></li>
-                        <li><span class="icon">💉</span><div><strong>Exploit</strong><p style="color:var(--pink)">Burp, SQLMap, XSSer</p></div></li>
+                <p style="font-size:0.62em;color:var(--text-muted)">4 fases. Sin atajos. Cada una tiene su propósito.</p>
+                <div class="card-grid four">
+                    <div class="card" style="border-color:var(--cyan)">
+                        <h4 style="color:var(--cyan)">1. RECON</h4>
+                        <p style="font-size:0.55em">Subdomains, assets, tech</p>
+                        <p style="color:var(--cyan);font-size:0.48em">70% del trabajo</p>
                     </div>
-                    <div class="terminal">
-                        <div class="line"><span class="comment"># Doom ejecuta</span></div>
-                        <div class="line"><span class="prompt">#</span> <span class="command">subfinder -d target.com</span></div>
-                        <div class="line"><span class="output">→ subdomains.txt</span></div>
-                        <div class="line"><span class="prompt">#</span> <span class="command">nuclei -l subs.txt -t vuln/</span></div>
-                        <div class="line"><span class="output">→ findings.json</span></div>
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">2. ENUM</h4>
+                        <p style="font-size:0.55em">Params, endpoints, API</p>
+                        <p style="color:var(--green);font-size:0.48em">No saltes esta</p>
+                    </div>
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">3. EXPLOIT</h4>
+                        <p style="font-size:0.55em">SQLi, XSS, SSRF, IDOR</p>
+                        <p style="color:var(--pink);font-size:0.48em">La gloria</p>
+                    </div>
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">4. REPORTE</h4>
+                        <p style="font-size:0.55em">PoC, CVSS, remediación</p>
+                        <p style="color:var(--orange);font-size:0.48em">Cobrar</p>
                     </div>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Automatiza el recon. El tiempo es oro.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> "Doom no usa herramientas inferiores." — Doctrina</div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Si saltas el recon, vas a perder tiempo. El recon es donde encuentras el 70% de los bugs.</div>
+                <div class="doom-consejo"><strong>[Statick]</strong> Che, ¿recuerdan DVWA? Ahí practiqué cada una de estas fases. Esa es la clave.</div>
                 <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 18: EXPERIENCIA                                                -->
+            <!-- SLIDE 8: LIVE DEMO - SQLi (3 min)                                   -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>Doom Sobreviviente</h2>
-                <div class="columns">
-                    <div class="info-box"><span class="doom-crown">📜</span><h4>Lo que aprendí</h4><ul><li>La paciencia es clave</li><li>El recon es 70%</li><li>Scope creep = disaster</li><li>Documenta TODO</li><li>No todos pagan, pero todos enseñan</li></ul></div>
-                    <div class="info-box pink"><span class="doom-crown">💀</span><h4>Errores a evitar</h4><ul><li>Ir directo a exploit sin recon</li><li>Reportar fuera de scope</li><li>PoC incompleto</li><li>Desanimarse con duplicates</li></ul></div>
+                <h2>Live Demo <span style="color:var(--pink)">— SQL Injection</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Mismo lab que en RootedCON. DVWA en Docker, security: low.</p>
+                <div class="savitar-alert">
+                    <h4>⚠️ DISCLAIMER</h4>
+                    <p>Esto es en mi máquina local. <strong>SOLO para aprender.</strong> Los hashes que ven son de ejemplo, no de usuarios reales.</p>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Duplicate no es fracaso — es entrenamiento. Sigue buscando.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Los que se rinden no merecen la corona.</div>
+                <div class="terminal" style="margin-top:0.3em;font-size:0.5em">
+                    <div class="line"><span class="comment"># 1. Acceder a DVWA SQLi module</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1'&Submit=Submit"</span></div>
+                    <div class="line"><span class="output" style="color:var(--pink)">You have an error in your SQL syntax</span></div>
+                    <div class="line"><span class="output" style="color:var(--green)">✓ SQLi CONFIRMED</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span class="comment"># 2. Extraer datos (SOLO LAB LOCAL)</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1' UNION SELECT user,password FROM users--"</span></div>
+                    <div class="line"><span class="output">admin | 5f4dcc3b5aa765d61d8327deb882cf99</span></div>
+                    <div class="line"><span class="output">gordonb | e99a18c428cb38d5f260853678922e03</span></div>
+                </div>
+                <div class="info-box orange" style="margin-top:0.3em">
+                    <h4>🎯 Impacto en Bug Bounty</h4>
+                    <p style="font-size:0.6em"><strong>Severity:</strong> <span style="color:var(--pink)">9.8 CRITICAL</span> | <strong>CVSS:</strong> AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</p>
+                    <p style="font-size:0.55em"><strong>Bounty estimado:</strong> $2,000 - $10,000</p>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> SQLi es el bug #1 en OWASP. Si aprendes uno que sea este.</div>
                 <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 19: 3 MANDAMIENTOS                                             -->
+            <!-- SLIDE 9: CTF INTERACTIVO - INTRO (1 min)                            -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>3 Mandamientos de Doom</h2>
-                <div class="terminal" style="max-width:520px;margin:0.3em auto">
-                    <div class="line" style="color:var(--doom-gold)">═══════════════════════════════════════════</div>
-                    <div class="line" style="color:var(--green)">[MANDAMIENTO I]</div>
-                    <div class="line" style="color:var(--cyan)">[SCOPE] Documenta límites desde día 0</div>
-                    <div class="line" style="color:var(--doom-gold)">═══════════════════════════════════════════</div>
+                <h2>🎮 ¡TU TURNO! <span style="color:var(--doom-gold)">— CTF Interactivo</span></h2>
+                <p style="font-size:0.65em;color:var(--text-muted)">Oigan bacán, 2 challenges, 10 minutos total. ¿Quién agarra la primera flag?</p>
+                <div class="savitar-alert">
+                    <h4>📋 REGLAS</h4>
+                    <ul style="font-size:0.6em">
+                        <li>✅ <strong>Solo educativo</strong> — esta es una charla</li>
+                        <li>✅ Flags: <code style="color:var(--doom-gold)">FLISOL{...}</code></li>
+                        <li>✅ Primero en enviar gana</li>
+                        <li>❌ No Google, no AI — solo su cerebro</li>
+                    </ul>
                 </div>
-                <div class="terminal" style="max-width:520px;margin:0.15em auto">
-                    <div class="line" style="color:var(--doom-gold)">═══════════════════════════════════════════</div>
-                    <div class="line" style="color:var(--green)">[MANDAMIENTO II]</div>
-                    <div class="line" style="color:var(--cyan)">[WEB] OWASP Top 10 = guía: IDOR, SQLi, XSS</div>
-                    <div class="line" style="color:var(--doom-gold)">═══════════════════════════════════════════</div>
+                <div class="card-grid two" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">🟢 Challenge 1</h4>
+                        <p style="font-size:0.58em">Base64 Decode</p>
+                        <p style="color:var(--green);font-size:0.5em">Fácil — 4 min</p>
+                    </div>
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">🟡 Challenge 2</h4>
+                        <p style="font-size:0.58em">SQL Injection</p>
+                        <p style="color:var(--orange);font-size:0.5em">Medio — 6 min</p>
+                    </div>
                 </div>
-                <div class="terminal" style="max-width:520px;margin:0.15em auto">
-                    <div class="line" style="color:var(--doom-gold)">═══════════════════════════════════════════</div>
-                    <div class="line" style="color:var(--green)">[MANDAMIENTO III]</div>
-                    <div class="line" style="color:var(--cyan)">[TOOL] wfuzz > dirb. Doom usa lo mejor.</div>
-                    <div class="line" style="color:var(--doom-gold)">═══════════════════════════════════════════</div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Tres reglas. Síguelas = conquistarás. No = serás conquistado.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Disciplina > Talento. Síguelas o perece.</div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Si resuelves los 2, ya tienes base para empezar en Bug Bounty.</div>
+                <div class="doom-consejo"><strong>[Statick]</strong> Che, envía tu flag a <strong>@flisol_loja</strong> en Twitter. ¡El primero gana!</div>
                 <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 20: TIPS PARA EMPEZAR                                          -->
+            <!-- SLIDE 10: CTF CHALLENGE 1 - BASE64 (4 min)                          -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>El Camino hacia Doom</h2>
-                <div class="card-grid three">
-                    <div class="card"><h4>📚 Estudia</h4><p>OWASP, PortSwigger, HTB</p><p style="color:var(--doom-gold);font-size:0.52em">Doom nunca dejó de aprender</p></div>
-                    <div class="card"><h4>🏠 Practica</h4><p>DVWA, THM, HTB</p><p style="color:var(--green);font-size:0.52em">El campo te espera</p></div>
-                    <div class="card"><h4>📝 Documenta</h4><p>Screenshots, Obsidian</p><p style="color:var(--cyan);font-size:0.52em">Sin evidencia = sin gloria</p></div>
-                    <div class="card"><h4>🤝 Comunidad</h4><p>Twitter, Discord</p><p><a href="https://t.me/flisol_loja" target="_blank">@flisol_loja</a></p></div>
-                    <div class="card"><h4>⏳ Paciencia</h4><p>Primeros meses difíciles</p><p style="color:var(--orange);font-size:0.52em">Doom tardó años</p></div>
-                    <div class="card"><h4>🎯 Especializa</h4><p>API, mobile, IoT</p><p style="color:var(--pink);font-size:0.52em">Domina UN campo</p></div>
+                <h2>🟢 Challenge 1 <span style="color:var(--green)">— Base64 (Easy)</span></h2>
+                <div class="info-box green" style="margin-top:0.3em">
+                    <h4>📦 "La Caja de Doom"</h4>
+                    <p style="font-family:var(--mono);font-size:1.3em;color:var(--green);text-align:center;padding:0.4em">
+                        <strong>Wmhpc3t3ZWxjb21lX3RvX2ZsaXNvbF8yMDI2fQ==</strong>
+                    </p>
+                    <p style="font-size:0.58em;text-align:center">Flag: <code style="color:var(--doom-gold)">FLISOL{...}</code></p>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Especialízate. Generalistas = promedio. Especialistas = dinero.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Domina UNA cosa para reinar en ella.</div>
+                <div class="columns" style="margin-top:0.3em">
+                    <div>
+                        <div class="info-box"><h4>💡 Pista 1</h4><p style="font-size:0.6em">Mira los últimos caracteres: <code>==</code>. Eso es un clue de encoding.</p></div>
+                        <div class="info-box" style="margin-top:0.2em"><h4>💡 Pista 2</h4><p style="font-size:0.6em">Usa <code>base64 -d</code> o <a href="https://www.base64decode.org" target="_blank">base64decode.org</a></p></div>
+                    </div>
+                    <div>
+                        <div class="terminal" style="font-size:0.55em">
+                            <div class="line"><span class="prompt">$</span> <span class="command">echo "Wmhpc3t3ZWxjb21lX3RvX2ZsaXNvbF8yMDI2fQ==" | base64 -d</span></div>
+                            <div class="line"><span class="output" style="color:var(--green)"># ¿Qué ves aquí?</span></div>
+                        </div>
+                        <p style="font-size:0.55em;color:var(--orange);margin-top:0.3em"><strong>Tiempo:</strong> <span id="timer1">04:00</span></p>
+                    </div>
+                </div>
                 <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 21: RECURSOS                                                   -->
+            <!-- SLIDE 11: CTF CHALLENGE 2 - SQLi (6 min)                            -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>La Biblioteca de Doom</h2>
-                <div class="columns three">
-                    <div class="card"><h4>📖 Aprender</h4><ul><li><a href="https://portswigger.net/web-security" target="_blank">PortSwigger</a></li><li><a href="https://academy.hackthebox.com" target="_blank">HTB Academy</a></li><li><a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank">OWASP WSTG</a></li></ul></div>
-                    <div class="card"><h4>🛠️ Armas</h4><ul><li>Burp Suite Pro</li><li>Nuclei Templates</li><li>Subfinder + Chaos</li></ul></div>
-                    <div class="card"><h4>🏰 Reinos</h4><ul><li><a href="https://hackerone.com" target="_blank">HackerOne</a></li><li><a href="https://bugcrowd.com" target="_blank">Bugcrowd</a></li><li><a href="https://intigriti.com" target="_blank">Intigriti</a></li></ul></div>
+                <h2>🟡 Challenge 2 <span style="color:var(--orange)">— SQL Injection (Medium)</span></h2>
+                <div class="info-box orange" style="margin-top:0.3em">
+                    <h4>💉 "La Fortaleza de Latveria"</h4>
+                    <p style="font-size:0.58em">Formulario con SQL Injection. Bypassea el login.</p>
+                    <p style="font-family:var(--mono);font-size:0.9em;color:var(--orange);text-align:center;padding:0.3em">
+                        <strong>https://doom-statick.github.io/ctf-flisol/login.php</strong>
+                    </p>
                 </div>
-                <div class="terminal" style="margin-top:0.35em">
-                    <div class="line"><span class="comment"># Bookmark sagrado de Doom</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">firefox exploit-db.com</span></div>
-                    <div class="line"><span class="output">→ Biblioteca de exploits</span></div>
+                <div class="columns" style="margin-top:0.3em">
+                    <div>
+                        <div class="info-box"><h4>💡 Pista 1</h4><p style="font-size:0.6em">Username: <code>admin' OR '1'='1' --</code></p></div>
+                        <div class="info-box" style="margin-top:0.2em"><h4>💡 Pista 2</h4><p style="font-size:0.6em">El <code>'</code> cierra la query. <code>OR '1'='1</code> siempre es TRUE. <code>--</code> comenta el resto.</p></div>
+                    </div>
+                    <div>
+                        <div class="terminal" style="font-size:0.5em">
+                            <div class="line"><span class="comment"># SQL Injection - Login Bypass</span></div>
+                            <div class="line"><span class="line"></span></div>
+                            <div class="line"><span class="comment"># Username:</span></div>
+                            <div class="line"><span class="command" style="color:var(--pink)">admin' OR '1'='1' --</span></div>
+                            <div class="line"><span class="comment"># Password:</span></div>
+                            <div class="line"><span class="command">cualquiera</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># ¿Por qué?</span></div>
+                            <div class="line"><span class="output">SELECT * FROM users</span></div>
+                            <div class="line"><span class="output">WHERE user='admin' OR '1'='1' --'</span></div>
+                        </div>
+                        <p style="font-size:0.55em;color:var(--orange);margin-top:0.3em"><strong>Tiempo:</strong> <span id="timer2">06:00</span></p>
+                    </div>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> exploit-db.com — tu biblioteca de exploits. Doom la tiene memorizada.</div>
-                <div class="doom-consejo"><strong>[DOOM]</strong> Colecciona conocimiento, no solo lo leas.</div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> SQLi sigue siendo #1 en OWASP. Aprende esto y dominarás Bug Bounty.</div>
                 <div class="slide-footer">
-                    
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
                 </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 22: GRACIAS                                                    -->
+            <!-- SLIDE 12: SOLUCIONES (1 min)                                        -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🏆 Soluciones <span style="color:var(--doom-gold)">— CTF FLISOL</span></h2>
+                <div class="card-grid two" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">🟢 Challenge 1</h4>
+                        <p style="font-family:var(--mono);color:var(--green);word-break:break-all">FLISOL{welcome_to_flisol_2026}</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Técnica: <code>base64 -d</code></p>
+                    </div>
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">🟡 Challenge 2</h4>
+                        <p style="font-family:var(--mono);color:var(--orange);word-break:break-all">FLISOL{sqli_bypass_1s_all_1s}</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Técnica: <code>admin' OR '1'='1' --</code></p>
+                    </div>
+                </div>
+                <div class="doom-consejo"><strong>[Statick]</strong> Che, si resolviste los 2, estás listo para empezar en Bug Bounty. En serio.</div>
+                <aside class="notes">
+                    <h2>🎤 Speaker Notes - Slide 12: Soluciones CTF</h2>
+                    <ul>
+                        <li><strong>Tiempo:</strong> 1 minuto</li>
+                        <li><strong>Frase clave:</strong> "Si resolviste los 2, ya estás listo para Bug Bounty. En serio, bacán."</li>
+                        <li><strong>Acción:</strong> Preguntar "¿Quién resolvió el 1? ¿Y el 2?" — reconocer públicamente</li>
+                        <li><strong>Premios:</strong> "Los que resolvieron, pasen al frente después. Tienen premios."</li>
+                    </ul>
+                </aside>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 12.5: PREMIOS CTF (1 min)                                     -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section style="background: linear-gradient(135deg, rgba(158,206,106,0.08) 0%, rgba(0,0,0,0.9) 100%);">
+                <h2>🏆 Premios del CTF</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Para los que resolvieron los challenges — Doom premia la excelencia.</p>
+                
+                <div class="card-grid three" style="margin-top:0.4em">
+                    <div class="card" style="border-color:var(--doom-gold);background:rgba(255,215,0,0.05)">
+                        <h4 style="color:var(--doom-gold);font-size:1.2em">🥇 1er Lugar</h4>
+                        <p style="font-size:0.65em;color:var(--text)"><strong>Coffee Chat 1-on-1</strong></p>
+                        <p style="font-size:0.55em">1 hora con Statick</p>
+                        <p style="font-size:0.5em;color:var(--doom-gold)">Career advice + CV review</p>
+                        <p style="font-size:0.5em;color:var(--doom-gold)">+ Certificado Abacom</p>
+                    </div>
+                    <div class="card" style="border-color:var(--silver);background:rgba(192,192,192,0.05)">
+                        <h4 style="color:var(--silver);font-size:1.2em">🥈 2do Lugar</h4>
+                        <p style="font-size:0.65em;color:var(--text)"><strong>Code Review</strong></p>
+                        <p style="font-size:0.55em">30 min revisando TU código</p>
+                        <p style="font-size:0.5em;color:var(--silver)">Feedback profesional</p>
+                        <p style="font-size:0.5em;color:var(--silver)">+ Recomendación LinkedIn</p>
+                    </div>
+                    <div class="card" style="border-color:var(--orange);background:rgba(255,158,100,0.05)">
+                        <h4 style="color:var(--orange);font-size:1.2em">🥉 3er Lugar</h4>
+                        <p style="font-size:0.65em;color:var(--text)"><strong>Lab Premium</strong></p>
+                        <p style="font-size:0.55em">Acceso a 70+ challenges</p>
+                        <p style="font-size:0.5em;color:var(--orange)">Writeups exclusivos</p>
+                        <p style="font-size:0.5em;color:var(--orange)">+ Report Template</p>
+                    </div>
+                </div>
+
+                <div style="margin-top:0.4em;background:rgba(125,207,255,0.1);border:1px solid var(--cyan);border-radius:8px;padding:0.5em">
+                    <p style="font-size:0.62em;color:var(--cyan);margin:0"><strong>🎁 Para todos los participantes:</strong> Certificado digital + Grupo exclusivo Telegram/Discord</p>
+                </div>
+
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> El conocimiento compartido se multiplica. Ñaños, esto es una comunidad, no competencia.</div>
+                
+                <aside class="notes">
+                    <h2>🎤 Speaker Notes - Slide 12.5: Premios</h2>
+                    <ul>
+                        <li><strong>Tiempo:</strong> 1 minuto</li>
+                        <li><strong>Frase clave:</strong> "Doom premia la excelencia, pero FLISOL premia a TODOS los que participaron."</li>
+                        <li><strong>1er lugar:</strong> "Una hora conmigo. Career advice, CV review, lo que necesites. Eso vale más que cualquier curso."</li>
+                        <li><strong>2do lugar:</strong> "Trae tu código, lo revisamos juntos. Te doy feedback real."</li>
+                        <li><strong>3er lugar:</strong> "Acceso a todos mis challenges con writeups. Aprenderás pattern by pattern."</li>
+                        <li><strong>Todos:</strong> "Certificado + grupo exclusivo. Ahí seguimos conectados."</li>
+                        <li><strong>Acción:</strong> Pasar a los ganadores al frente para foto</li>
+                    </ul>
+                </aside>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 13: ROADMAP PRIMER BOUNTY (2 min)                             -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Tu Primer Bounty <span style="color:var(--doom-gold)">— Roadmap</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Esto es exactamente lo que yo hice. Step by step, bacán.</p>
+                <div class="card-grid four">
+                    <div class="card" style="border-color:var(--cyan)">
+                        <h4 style="color:var(--cyan)">SEMANA 1-2</h4>
+                        <p style="font-size:0.55em">DVWA, Juice Shop</p>
+                        <p style="font-size:0.5em;color:var(--cyan)">PortSwigger Academy</p>
+                    </div>
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">SEMANA 3-4</h4>
+                        <p style="font-size:0.55em">Burp Suite, Nuclei</p>
+                        <p style="font-size:0.5em;color:var(--green)">Primer CTF</p>
+                    </div>
+                    <div class="card" style="border-color:var(--orange)">
+                        <h4 style="color:var(--orange)">SEMANA 5-6</h4>
+                        <p style="font-size:0.55em">Intigriti, VDP</p>
+                        <p style="font-size:0.5em;color:var(--orange)">Primer scope</p>
+                    </div>
+                    <div class="card" style="border-color:var(--pink)">
+                        <h4 style="color:var(--pink)">SEMANA 7-8</h4>
+                        <p style="font-size:0.55em">HackerOne</p>
+                        <p style="font-size:0.5em;color:var(--pink)">¡Primer bounty! 💰</p>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:0.3em">
+                    <h4>💰 Bounties Promedio</h4>
+                    <p style="font-size:0.62em"><strong style="color:var(--green)">Low:</strong> $100-500 | <strong style="color:var(--orange)">Medium:</strong> $500-2,000 | <strong style="color:var(--pink)">High:</strong> $2,000-10,000 | <strong style="color:var(--doom-gold)">Critical:</strong> $10,000+</p>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> Mi primer bounty fue $250 por un XSS. Pequeño pero el primero. Después viene la cascada.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 15: RECURSOS GRATIS (1 min)                                   -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🎁 Kit de Inicio <span style="color:var(--doom-gold)">— Todo Gratis</span></h2>
+                <div class="card-grid two" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--green)">
+                        <h4 style="color:var(--green)">📚 Aprender</h4>
+                        <ul style="font-size:0.58em">
+                            <li><a href="https://portswigger.net/web-security" target="_blank">PortSwigger Academy</a></li>
+                            <li><a href="https://statick88.github.io/challenges" target="_blank">70+ Challenges Statick</a></li>
+                            <li><a href="https://tryhackme.com" target="_blank">TryHackMe</a></li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:var(--cyan)">
+                        <h4 style="color:var(--cyan)">🛠️ Herramientas</h4>
+                        <ul style="font-size:0.58em">
+                            <li><a href="https://portswigger.net/burp" target="_blank">Burp Community</a></li>
+                            <li><a href="https://github.com/projectdiscovery/nuclei" target="_blank">Nuclei</a></li>
+                            <li><a href="https://github.com/ffuf/ffuf" target="_blank">ffuf</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="terminal" style="margin-top:0.3em;font-size:0.55em">
+                    <div class="line"><span class="comment"># Instalar tools esenciales</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">go install -v github.com/ffuf/ffuf/v2@latest</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">pip3 install sqlmap</span></div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 16: RESPONSIBLE DISCLOSURE (1 min)                            -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>⚖️ Responsible Disclosure</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">El camino correcto. Sin esto, todo lo demás es irrelevante.</p>
+                <div class="savitar-alert">
+                    <h4>⚠️ LEY ECUATORIANA</h4>
+                    <p>La Ley de Protección de Datos <strong>criminaliza</strong> el acceso no autorizado. Bug Bounty con autorización = legal. Sin autorización = <strong>delito</strong>.</p>
+                </div>
+                <div class="card-grid four" style="margin-top:0.3em">
+                    <div class="card" style="border-color:var(--cyan)"><h4 style="color:var(--cyan)">Día 0</h4><p style="font-size:0.55em">Reporte privado</p></div>
+                    <div class="card" style="border-color:var(--green)"><h4 style="color:var(--green)">Día 1-7</h4><p style="font-size:0.55em">Acknowledgment</p></div>
+                    <div class="card" style="border-color:var(--orange)"><h4 style="color:var(--orange)">Día 30</h4><p style="font-size:0.55em">Status update</p></div>
+                    <div class="card" style="border-color:var(--pink)"><h4 style="color:var(--pink)">Día 90</h4><p style="font-size:0.55em">Fix deadline</p></div>
+                </div>
+                <div class="doom-tip"><strong>[DOOM TIP]</strong> 90 días es el estándar de Google, Microsoft. Si no arreglan, puedes hacer disclosure público.</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 17: CURSO ABACOM (1 min)                                      -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🎓 ¿Siguiente Paso? <span style="color:var(--doom-gold)">— Curso Abacom</span></h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">¿Quieres más? Te enseño en 10 días lo que a mí me tomó meses.</p>
+                <div class="info-box" style="margin-top:0.3em;border:2px solid var(--doom-gold)">
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center">
+                        <div><p style="font-size:1.3em;color:var(--cyan)">📅</p><p style="font-size:0.55em;color:var(--text-muted);margin:0">16-27 Marzo</p><p style="font-size:0.5em;color:var(--cyan)">19-22h</p></div>
+                        <div><p style="font-size:1.3em;color:var(--green)">📜</p><p style="font-size:0.55em;color:var(--text-muted);margin:0">Certificado</p><p style="font-size:0.5em;color:var(--green)">Min. Trabajo</p></div>
+                        <div><p style="font-size:1.3em;color:var(--pink)">🖥️</p><p style="font-size:0.55em;color:var(--text-muted);margin:0">Hands-on</p><p style="font-size:0.5em;color:var(--pink)">Core i5, 8GB</p></div>
+                        <div><p style="font-size:1.3em;color:var(--orange)">👨‍🏫</p><p style="font-size:0.55em;color:var(--text-muted);margin:0">Profesor</p><p style="font-size:0.5em;color:var(--orange)">Statick</p></div>
+                    </div>
+                </div>
+                <div class="savitar-alert" style="margin-top:0.3em">
+                    <h4>📱 Inscripciones</h4>
+                    <p><strong>WhatsApp:</strong> <a href="https://wa.me/593980192790" target="_blank">+593 980192790</a> | <strong>Web:</strong> <a href="https://statick88.github.io" target="_blank">statick88.github.io</a></p>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 18: GRACIAS (1 min)                                           -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section class="thanks-slide">
-                <h1>¡Gracias!</h1>
-                <p class="name">Dr. Victor Von Doom</p>
-                <p style="color:var(--text-muted);font-size:0.72em">Ruler of Latveria — Master of Science and Sorcery</p>
+                <h1>¡Gracias, ñaños!</h1>
+                <p class="name">Diego Medardo Saavedra García — Statick</p>
+                <p style="color:var(--text-muted);font-size:0.72em">Prof. ESPE, UIDE, Abacom | Máster UCM</p>
                 <div class="logo-grid" style="margin-top:0.5em">
                     <div class="logo-item"><span class="icon">🐙</span>statick88</div>
                     <div class="logo-item"><span class="icon">🌐</span>statick88.github.io</div>
                     <div class="logo-item"><span class="icon">📱</span>@flisol_loja</div>
+                    <div class="logo-item"><span class="icon">🎓</span>Abacom</div>
                 </div>
-                <p style="font-size:0.72em;color:var(--doom-gold);font-style:italic;margin-top:0.4em">"Hack the planet — responsablemente."</p>
-<div class="slide-footer">
-    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-</div>
+                <p style="font-size:0.72em;color:var(--doom-gold);font-style:italic;margin-top:0.4em">"Hack the planet — pero siempre con permiso, bacán."</p>
+                <p style="font-size:0.58em;color:var(--text-muted);margin-top:0.3em">Doom fue el personaje. Statick es el hacker ético.</p>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 23: Q&A                                                         -->
+            <!-- SLIDE 19: Q&A                                                      -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section class="qa-slide">
                 <h2>¿Preguntas?</h2>
-                <p style="color:var(--text-muted);font-size:0.75em;margin-top:0.25em">Doom responde a sus súbditos.</p>
+                <p style="color:var(--text-muted);font-size:0.75em;margin-top:0.25em">Doom descansa. Statick responde, ¿sí?</p>
                 <div class="logo-grid" style="margin-top:0.5em">
                     <div class="logo-item"><span class="icon">🐙</span>statick88</div>
                     <div class="logo-item"><span class="icon">🌐</span>statick88.github.io</div>
@@ -725,9 +848,9 @@
                     <div class="logo-item"><span class="icon">🏰</span>Intigriti</div>
                 </div>
                 <p style="font-size:0.72em;color:var(--pink);font-style:italic;margin-top:0.4em">"El conocimiento es poder. Y Doom exige poder absoluto."</p>
-<div class="slide-footer">
-    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026</span>
-</div>
+                <div class="slide-footer">
+                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
+                </div>
             </section>
 
         </div>
@@ -750,6 +873,56 @@
             controlsTutorial: false,
             transition: 'slide',
             plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom, RevealSearch]
+        });
+
+        // Global CTF Timer - counts UP from presentation start
+        let ctfSeconds = 0;
+        const ctfTimerElement = document.getElementById('ctf-timer');
+        
+        setInterval(() => {
+            ctfSeconds++;
+            const hrs = Math.floor(ctfSeconds / 3600);
+            const mins = Math.floor((ctfSeconds % 3600) / 60);
+            const secs = ctfSeconds % 60;
+            ctfTimerElement.textContent = `⏱️ ${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }, 1000);
+
+        // Challenge timer functionality for CTF slides
+        let timersStarted = {};
+        
+        function startTimer(elementId, minutes) {
+            const element = document.getElementById(elementId);
+            if (!element || timersStarted[elementId]) return;
+            timersStarted[elementId] = true;
+            
+            let totalSeconds = minutes * 60;
+            element.style.color = 'var(--orange)';
+            
+            const interval = setInterval(() => {
+                const mins = Math.floor(totalSeconds / 60);
+                const secs = totalSeconds % 60;
+                element.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                
+                if (totalSeconds <= 60) {
+                    element.style.color = 'var(--pink)';
+                }
+                
+                if (totalSeconds <= 0) {
+                    clearInterval(interval);
+                    element.textContent = '⏰ TIEMPO!';
+                    element.style.color = 'var(--pink)';
+                    element.style.fontWeight = 'bold';
+                }
+                
+                totalSeconds--;
+            }, 1000);
+        }
+
+        // Start timers when CTF slides appear
+        Reveal.on('slidechanged', (event) => {
+            const slide = event.currentSlide;
+            if (slide.querySelector('#timer1')) startTimer('timer1', 4);
+            if (slide.querySelector('#timer2')) startTimer('timer2', 6);
         });
     </script>
 </body>

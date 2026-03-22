@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏴‍☠️ CTF FLISOL 2026 — Doom's Challenge</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦹‍♂️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="doom-icon">🦹‍♂️</span>
+                <h1>DOOM'S CTF</h1>
+            </div>
+            <div class="event-badge">FLISOL 2026 — Loja, Ecuador</div>
+            <div class="timer" id="global-timer">
+                <span class="timer-label">⏱️ CTF ACTIVO</span>
+                <span class="timer-value" id="timer-display">00:00:00</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <div class="doom-quote">
+                <p>"Bienvenidos a Latveria, ñaños. Aquí Doom pone a prueba sus skills."</p>
+                <span class="author">— Statick</span>
+            </div>
+        </section>
+
+        <section class="challenges-grid">
+            <h2>🎯 Challenges</h2>
+            
+            <div class="challenge-card" onclick="window.location.href='challenge1.html'">
+                <div class="challenge-header">
+                    <span class="challenge-number">01</span>
+                    <span class="difficulty easy">🟢 EASY</span>
+                </div>
+                <h3>"El Mensaje Codificado"</h3>
+                <p>Doom dejó un mensaje secreto. ¿Podrás decodificarlo?</p>
+                <div class="challenge-meta">
+                    <span class="type">Encoding</span>
+                    <span class="points">100 pts</span>
+                </div>
+                <button class="btn-challenge">ATACAR →</button>
+            </div>
+
+            <div class="challenge-card" onclick="window.location.href='challenge2.html'">
+                <div class="challenge-header">
+                    <span class="challenge-number">02</span>
+                    <span class="difficulty medium">🟡 MEDIUM</span>
+                </div>
+                <h3>"La Fortaleza de Latveria"</h3>
+                <p>Formulario con SQL Injection. Bypassea el login de Doom.</p>
+                <div class="challenge-meta">
+                    <span class="type">SQL Injection</span>
+                    <span class="points">200 pts</span>
+                </div>
+                <button class="btn-challenge">ATACAR →</button>
+            </div>
+        </section>
+
+        <section class="leaderboard">
+            <h2>🏆 Leaderboard</h2>
+            <div class="leaderboard-table">
+                <div class="table-header">
+                    <span>#</span>
+                    <span>Hacker</span>
+                    <span>Challenges</span>
+                    <span>Time</span>
+                </div>
+                <div id="leaderboard-body">
+                    <div class="empty-state">
+                        <p>🦹‍♂️ Sé el primero en conquistar el CTF</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rules">
+            <h2>⚖️ Reglas de Engagement</h2>
+            <div class="rules-grid">
+                <div class="rule">
+                    <span class="rule-icon">✅</span>
+                    <p>Solo este target</p>
+                </div>
+                <div class="rule">
+                    <span class="rule-icon">✅</span>
+                    <p>Formato de flag: <code>FLISOL{...}</code></p>
+                </div>
+                <div class="rule">
+                    <span class="rule-icon">❌</span>
+                    <p>NO fuerza bruta</p>
+                </div>
+                <div class="rule">
+                    <span class="rule-icon">❌</span>
+                    <p>NO DoS/DDoS</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="flag-submit">
+            <h2>🚩 Submit Flag</h2>
+            <form id="flag-form">
+                <input type="text" id="flag-input" placeholder="FLISOL{tu_flag_aqui}" autocomplete="off">
+                <button type="submit" class="btn-submit">VERIFICAR</button>
+            </form>
+            <div id="flag-result"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Created by <strong>Statick</strong> (Diego Medardo Saavedra García)</p>
+            <p class="social">
+                <a href="https://github.com/statick88" target="_blank">🐙 GitHub</a>
+                <a href="https://twitter.com/statick_ds" target="_blank">🐦 Twitter</a>
+                <a href="https://linkedin.com/in/diego-saavedra-developer" target="_blank">💼 LinkedIn</a>
+            </p>
+            <p class="disclaimer">Solo para aprendizaje. Hack the planet — con permiso.</p>
+        </div>
+    </footer>
+
+    <script src="js/ctf.js"></script>
+</body>
+</html>
