@@ -48,21 +48,6 @@
             justify-content: center;
         }
 
-        .slide-footer {
-            position: absolute;
-            bottom: 8px;
-            left: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 15px;
-        }
-        .slide-footer .footer-text {
-            font-size: 0.5em;
-            color: var(--text-muted);
-        }
-
         .reveal h1 { font-size: 2.5em; font-weight: 700; margin: 0 0 0.2em; color: var(--text); }
         .reveal h2 { font-size: 1.1em; font-weight: 600; color: var(--doom-gold); margin: 0 0 0.3em; border-bottom: 2px solid var(--doom-gold); padding-bottom: 0.1em; display: inline-block; }
         .reveal h3 { font-size: 0.85em; font-weight: 600; color: var(--cyan); margin: 0 0 0.25em; }
@@ -116,50 +101,11 @@
         .terminal .comment { color: var(--text-muted); }
         .terminal .output { color: var(--text-muted); padding-left: 1em; }
 
-        .doom-tip {
-            margin-top: 0.35em;
-            padding: 0.4em 0.7em;
-            background: rgba(255,215,0,0.05);
-            border: 1px solid rgba(255,215,0,0.2);
-            border-radius: 6px;
-            font-size: 0.62em;
-            color: var(--doom-gold);
-            text-align: left;
-        }
-        .doom-tip strong { color: var(--orange); }
-        
-        .doom-consejo {
-            margin-top: 0.25em;
-            padding: 0.35em 0.7em;
-            background: rgba(247,118,142,0.05);
-            border: 1px solid rgba(247,118,142,0.2);
-            border-radius: 6px;
-            font-size: 0.62em;
-            color: var(--pink);
-            text-align: left;
-        }
-
-        .savitar-alert {
-            background: rgba(247,118,142,0.08);
-            border: 1px solid rgba(247,118,142,0.3);
-            border-radius: 8px;
-            padding: 0.5em;
-            margin-top: 0.3em;
-        }
-        .savitar-alert h4 { font-size: 0.68em; color: var(--pink); margin: 0 0 0.1em; }
-        .savitar-alert p { font-size: 0.62em; margin: 0; color: var(--text); }
-
         .title-slide h1 { font-size: 2.6em; color: var(--doom-gold); text-shadow: 0 0 30px rgba(255,215,0,0.3); }
         .title-slide .subtitle { font-size: 1.05em; color: var(--text); margin: 0.08em 0 0.25em; }
         .title-slide .author { margin-top: 0.6em; color: var(--text-muted); }
         .thanks-slide h1 { font-size: 2.3em; color: var(--doom-gold); text-shadow: 0 0 30px rgba(255,215,0,0.3); }
         .qa-slide h2 { font-size: 1.9em; color: var(--doom-gold); }
-
-        .doom-crown { font-size: 1.1em; margin-right: 3px; }
-
-        .logo-grid { display: flex; justify-content: center; gap: 10px; margin: 0.5em 0; }
-        .logo-item { width: 55px; height: 55px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; font-size: 0.58em; color: var(--text-muted); }
-        .logo-item .icon { font-size: 1.4em; margin-bottom: 3px; }
 
         @media (max-width: 768px) {
             .reveal { font-size: 18px; }
@@ -198,7 +144,7 @@
                 <p style="font-size:0.72em;color:var(--doom-gold);font-style:italic;text-align:center;margin-top:0.3em">"Hoy les cuento cómo Doom conquista sistemas — con permiso, ñaños."</p>
                 
 
-                <aside class="notes">
+                <!-- notes removed -->
                     <h2>🎤 Speaker Notes - Slide 1: Título</h2>
                     <ul>
                         <li><strong>Tiempo:</strong> 1-2 minutos</li>
@@ -206,9 +152,7 @@
                         <li><strong>Dato personal:</strong> Menciona que eres de Loja y que FLISOL es especial para ti.</li>
                     </ul>
                 </aside>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -244,7 +188,7 @@
                         </div>
                     </div>
                 </div>
-                <aside class="notes">
+                <!-- notes removed -->
                     <h2>🎤 Speaker Notes - Slide 2: La Ley de Doom</h2>
                     <ul>
                         <li><strong>Tiempo:</strong> 1 minuto — NO escatimar aquí</li>
@@ -254,9 +198,7 @@
                         <li><strong>Pregunta retórica:</strong> "¿Cuántos piensan que el hacking ético es ilegal? ¿Y si les digo que es un trabajo LEGAL que paga MUY bien?"</li>
                     </ul>
                 </aside>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -275,8 +217,8 @@
                     <h4>🏆 Logros Recientes</h4>
                     <p style="font-size:0.62em"><strong>RootedCON 2026:</strong> 15/15 challenges resueltos | <strong>70+ challenges</strong> publicados | <a href="https://github.com/statick88/challenges/tree/main/ctf/rootedcon2026" target="_blank">Ver soluciones</a></p>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Mi GitHub tiene 322+ repos. Todo es open source.</div>
-                <aside class="notes">
+                
+                <!-- notes removed -->
                     <h2>🎤 Speaker Notes - Slide 3: ¿Quién es Doom?</h2>
                     <ul>
                         <li><strong>Tiempo:</strong> 2 minutos</li>
@@ -286,9 +228,7 @@
                         <li><strong>Dato curioso:</strong> "322 repos en GitHub. Todo open source. Hackers éticos comparten, no esconden."</li>
                     </ul>
                 </aside>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -301,24 +241,8 @@
                     <div class="info-box"><h4>🏰 Para Empresas</h4><ul><li>Descubre vulns antes que hackers maliciosos</li><li>Más barato que contratar equipo completo</li><li>Miles de hunters como centinelas</li></ul></div>
                     <div class="info-box cyan"><h4>⚔️ Para Hackers</h4><ul><li>Gana dinero: $100 - $50K+ por bug</li><li>Aprende hacking real y legal</li><li>Construye reputación y carrera</li></ul></div>
                 </div>
-                <div class="savitar-alert">
-                    <h4>🇲🇽 Caso Savitar — México 2024</h4>
-                    <p>Reportó vulnerabilidad en sistemas gubernamentales con permiso. Recibió reconocimiento. <strong style="color:var(--green)">Bug Bounty ≠ Crime.</strong> Con permiso = héroe. Sin permiso = criminal.</p>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Las empresas como Google pagan $50M+ en bounties. Esto es un mercado LEGAL.</div>
-                <aside class="notes">
-                    <h2>🎤 Speaker Notes - Slide 4: ¿Qué es Bug Bounty?</h2>
-                    <ul>
-                        <li><strong>Tiempo:</strong> 2 minutos</li>
-                        <li><strong>Frase clave:</strong> "Las empresas pagan porque es más barato pagar $5K a un hacker ético que perder $500K en un breach."</li>
-                        <li><strong>Analogía:</strong> "Es como contratar un detective privado en vez de esperar a que te roben."</li>
-                        <li><strong>Dato impactante:</strong> "Google pagó $50 millones en bounties en un año. Esto NO es un hobby, es una industria."</li>
-                        <li><strong>Caso Savitar:</strong> "México, 2024. Reportó con permiso → héroe nacional. Sin permiso → habría ido preso. LA DIFERENCIA ES EL PERMISO."</li>
-                    </ul>
-                </aside>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -337,10 +261,8 @@
                     <h4>🎯 Mi Recomendación para Empezar</h4>
                     <p style="font-size:0.62em"><strong style="color:var(--green)">1. Intigriti</strong> (claro en bounties, comunicación directa) → <strong style="color:var(--orange)">2. Bugcrowd VDP</strong> (sin bounty pero buen training) → <strong style="color:var(--pink)">3. HackerOne</strong> (enterprise, más competitivo)</p>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Intigriti es ideal para LATAM — pagan en euros y tienen buena comunicación.</div>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+                
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -361,10 +283,8 @@
                     <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 3000:3000 bkimminich/juice-shop</span></div>
                     <div class="line"><span class="output">→ http://localhost:3000</span></div>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> <a href="https://statick88.github.io/challenges" target="_blank">70+ challenges</a> en mi sitio — todos gratis.</div>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+                <div class="doom-tip" style="display:none"><strong>[DOOM TIP]</strong> <a href="https://statick88.github.io/challenges" target="_blank">70+ challenges</a> en mi sitio — todos gratis.</div>
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -395,11 +315,8 @@
                         <p style="color:var(--orange);font-size:0.48em">Cobrar</p>
                     </div>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Si saltas el recon, vas a perder tiempo. El recon es donde encuentras el 70% de los bugs.</div>
-                <div class="doom-consejo"><strong>[Statick]</strong> Che, ¿recuerdan DVWA? Ahí practiqué cada una de estas fases. Esa es la clave.</div>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -408,10 +325,7 @@
             <section>
                 <h2>Live Demo <span style="color:var(--pink)">— SQL Injection</span></h2>
                 <p style="font-size:0.62em;color:var(--text-muted)">Mismo lab que en RootedCON. DVWA en Docker, security: low.</p>
-                <div class="savitar-alert">
-                    <h4>⚠️ DISCLAIMER</h4>
-                    <p>Esto es en mi máquina local. <strong>SOLO para aprender.</strong> Los hashes que ven son de ejemplo, no de usuarios reales.</p>
-                </div>
+
                 <div class="terminal" style="margin-top:0.3em;font-size:0.5em">
                     <div class="line"><span class="comment"># 1. Acceder a DVWA SQLi module</span></div>
                     <div class="line"><span class="prompt">$</span> <span class="command">curl "http://localhost/vulnerabilities/sqli/?id=1'&Submit=Submit"</span></div>
@@ -428,10 +342,8 @@
                     <p style="font-size:0.6em"><strong>Severity:</strong> <span style="color:var(--pink)">9.8 CRITICAL</span> | <strong>CVSS:</strong> AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</p>
                     <p style="font-size:0.55em"><strong>Bounty estimado:</strong> $2,000 - $10,000</p>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> SQLi es el bug #1 en OWASP. Si aprendes uno que sea este.</div>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+                <div class="doom-tip" style="display:none"><strong>[DOOM TIP]</strong> SQLi es el bug #1 en OWASP. Si aprendes uno que sea este.</div>
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -466,10 +378,8 @@
                     <h4>💰 Bounties Promedio</h4>
                     <p style="font-size:0.62em"><strong style="color:var(--green)">Low:</strong> $100-500 | <strong style="color:var(--orange)">Medium:</strong> $500-2,000 | <strong style="color:var(--pink)">High:</strong> $2,000-10,000 | <strong style="color:var(--doom-gold)">Critical:</strong> $10,000+</p>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Mi primer bounty fue $250 por un XSS. Pequeño pero el primero. Después viene la cascada.</div>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+                <div class="doom-tip" style="display:none"><strong>[DOOM TIP]</strong> Mi primer bounty fue $250 por un XSS. Pequeño pero el primero. Después viene la cascada.</div>
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -501,9 +411,7 @@
                     <div class="line"><span class="prompt">$</span> <span class="command">go install -v github.com/ffuf/ffuf/v2@latest</span></div>
                     <div class="line"><span class="prompt">$</span> <span class="command">pip3 install sqlmap</span></div>
                 </div>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -512,20 +420,15 @@
             <section>
                 <h2>⚖️ Responsible Disclosure</h2>
                 <p style="font-size:0.62em;color:var(--text-muted)">El camino correcto. Sin esto, todo lo demás es irrelevante.</p>
-                <div class="savitar-alert">
-                    <h4>⚠️ LEY ECUATORIANA</h4>
-                    <p>La Ley de Protección de Datos <strong>criminaliza</strong> el acceso no autorizado. Bug Bounty con autorización = legal. Sin autorización = <strong>delito</strong>.</p>
-                </div>
+
                 <div class="card-grid four" style="margin-top:0.3em">
                     <div class="card" style="border-color:var(--cyan)"><h4 style="color:var(--cyan)">Día 0</h4><p style="font-size:0.55em">Reporte privado</p></div>
                     <div class="card" style="border-color:var(--green)"><h4 style="color:var(--green)">Día 1-7</h4><p style="font-size:0.55em">Acknowledgment</p></div>
                     <div class="card" style="border-color:var(--orange)"><h4 style="color:var(--orange)">Día 30</h4><p style="font-size:0.55em">Status update</p></div>
                     <div class="card" style="border-color:var(--pink)"><h4 style="color:var(--pink)">Día 90</h4><p style="font-size:0.55em">Fix deadline</p></div>
                 </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> 90 días es el estándar de Google, Microsoft. Si no arreglan, puedes hacer disclosure público.</div>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+                <div class="doom-tip" style="display:none"><strong>[DOOM TIP]</strong> 90 días es el estándar de Google, Microsoft. Si no arreglan, puedes hacer disclosure público.</div>
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -542,13 +445,8 @@
                         <div><p style="font-size:1.3em;color:var(--orange)">👨‍🏫</p><p style="font-size:0.55em;color:var(--text-muted);margin:0">Profesor</p><p style="font-size:0.5em;color:var(--orange)">Statick</p></div>
                     </div>
                 </div>
-                <div class="savitar-alert" style="margin-top:0.3em">
-                    <h4>📱 Inscripciones</h4>
-                    <p><strong>WhatsApp:</strong> <a href="https://wa.me/593980192790" target="_blank">+593 980192790</a> | <strong>Web:</strong> <a href="https://statick88.github.io" target="_blank">statick88.github.io</a></p>
-                </div>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+
+
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -558,17 +456,8 @@
                 <h1>¡Gracias, ñaños!</h1>
                 <p class="name">Diego Medardo Saavedra García — Statick</p>
                 <p style="color:var(--text-muted);font-size:0.72em">Prof. ESPE, UIDE, Abacom | Máster UCM</p>
-                <div class="logo-grid" style="margin-top:0.5em">
-                    <div class="logo-item"><span class="icon">🐙</span>statick88</div>
-                    <div class="logo-item"><span class="icon">🌐</span>statick88.github.io</div>
-                    <div class="logo-item"><span class="icon">📱</span>@flisol_loja</div>
-                    <div class="logo-item"><span class="icon">🎓</span>Abacom</div>
-                </div>
-                <p style="font-size:0.72em;color:var(--doom-gold);font-style:italic;margin-top:0.4em">"Hack the planet — pero siempre con permiso, bacán."</p>
-                <p style="font-size:0.58em;color:var(--text-muted);margin-top:0.3em">Doom fue el personaje. Statick es el hacker ético.</p>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+                <p style="color:var(--cyan);font-size:0.65em;margin-top:0.5em">statick88.github.io | @flisol_loja</p>
+                <p style="font-size:0.65em;color:var(--text-muted);margin-top:0.3em">Hack the planet — pero siempre con permiso, bacán.</p>
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -576,17 +465,7 @@
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section class="qa-slide">
                 <h2>¿Preguntas?</h2>
-                <p style="color:var(--text-muted);font-size:0.75em;margin-top:0.25em">Doom descansa. Statick responde, ¿sí?</p>
-                <div class="logo-grid" style="margin-top:0.5em">
-                    <div class="logo-item"><span class="icon">🐙</span>statick88</div>
-                    <div class="logo-item"><span class="icon">🌐</span>statick88.github.io</div>
-                    <div class="logo-item"><span class="icon">📱</span>@flisol_loja</div>
-                    <div class="logo-item"><span class="icon">🏰</span>Intigriti</div>
-                </div>
-                <p style="font-size:0.72em;color:var(--pink);font-style:italic;margin-top:0.4em">"El conocimiento es poder. Y Doom exige poder absoluto."</p>
-                <div class="slide-footer">
-                    <span class="footer-text">Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
+                <p style="color:var(--text-muted);font-size:0.75em;margin-top:0.25em">Statick responde, ¿sí?</p>
             </section>
 
         </div>
