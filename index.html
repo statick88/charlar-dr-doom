@@ -726,7 +726,349 @@
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 14: RESUMEN MARVEL TL;DR                                     -->
+            <!-- SLIDE 13: INFRAESTRUCTURA — La Sala de Máquinas                    -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🖥️ Infraestructura del Hacker</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">La sala de máquinas donde trabajas. Como el taller de Tony Stark.</p>
+                
+                <div style="display:flex;justify-content:center;gap:15px;margin:0.4em 0">
+                    <div style="text-align:center;background:rgba(125,207,255,0.1);padding:0.6em;border-radius:10px">
+                        <p style="font-size:1.5em;margin:0">🏠</p>
+                        <p style="font-size:0.65em;color:var(--cyan);margin:0;font-weight:600">TU PC</p>
+                        <p style="font-size:0.48em;margin:0">El "HQ" principal</p>
+                    </div>
+                    <span style="font-size:1.5em;color:var(--gold)">+</span>
+                    <div style="text-align:center;background:rgba(158,206,106,0.1);padding:0.6em;border-radius:10px">
+                        <p style="font-size:1.5em;margin:0">🐳</p>
+                        <p style="font-size:0.65em;color:var(--green);margin:0;font-weight:600">DOCKER</p>
+                        <p style="font-size:0.48em;margin:0">Laboratorios</p>
+                    </div>
+                    <span style="font-size:1.5em;color:var(--gold)">+</span>
+                    <div style="text-align:center;background:rgba(247,118,142,0.1);padding:0.6em;border-radius:10px">
+                        <p style="font-size:1.5em;margin:0">🐧</p>
+                        <p style="font-size:0.65em;color:var(--pink);margin:0;font-weight:600">KALI/PARROT</p>
+                        <p style="font-size:0.48em;margin:0">Tu base de operaciones</p>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top:0.4em">
+                    <h4>🎬 Analogía Marvel</h4>
+                    <p style="font-size:0.58em"><strong>Tony tiene su taller</strong> con reactores, armaduras, JARVIS. <strong>Tú tienes tu HQ</strong> con Docker, VMs, SSH. Ambos son el centro de operaciones.</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 14: DOCKER — Las Cápsulas de Entrenamiento                   -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🐳 Docker = Cápsulas de Entrenamiento</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Crea laboratorios aislados en segundos. Como las cápsulas de Iron Man.</p>
+                
+                <div class="columns">
+                    <div>
+                        <div class="info-box purple">
+                            <h4 style="color:var(--purple)">🎬 En la película</h4>
+                            <p style="font-size:0.55em">Tony usa cápsulas para probar armaduras en ambientes seguros. Si algo explota, no daña su laboratorio.</p>
+                        </div>
+                        
+                        <div class="info-box cyan" style="margin-top:0.3em">
+                            <h4 style="color:var(--cyan)">💻 En hacking</h4>
+                            <p style="font-size:0.55em">Docker crea "cápsulas" (contenedores) donde instalas apps vulnerables para practicar SIN riesgo.</p>
+                        </div>
+                    </div>
+                    <div class="terminal" style="font-size:0.48em">
+                        <div class="line"><span class="comment"># 🐳 Crear laboratorio DVWA en 30 segundos</span></div>
+                        <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 80:80 vulnerables/web-dvwa</span></div>
+                        <div class="line"><span class="output"># ✅ ¡Listo! http://localhost</span></div>
+                        <div class="line">&nbsp;</div>
+                        <div class="line"><span class="comment"># 🧃 OWASP Juice Shop</span></div>
+                        <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 3000:3000 bkimminich/juice-shop</span></div>
+                        <div class="line"><span class="output"># ✅ ¡Listo! http://localhost:3000</span></div>
+                        <div class="line">&nbsp;</div>
+                        <div class="line"><span class="comment"># 🗑️ Limpiar cuando termines</span></div>
+                        <div class="line"><span class="prompt">$</span> <span class="command">docker stop $(docker ps -q) && docker rm $(docker ps -aq)</span></div>
+                    </div>
+                </div>
+
+                <div class="card-grid three" style="margin-top:0.3em">
+                    <div class="card" style="border-left:3px solid var(--green)">
+                        <h4 style="color:var(--green)">✅ Aislado</h4>
+                        <p style="font-size:0.5em">No afecta tu PC</p>
+                    </div>
+                    <div class="card" style="border-left:3px solid var(--cyan)">
+                        <h4 style="color:var(--cyan)">✅ Rápido</h4>
+                        <p style="font-size:0.5em">30 segundos</p>
+                    </div>
+                    <div class="card" style="border-left:3px solid var(--pink)">
+                        <h4 style="color:var(--pink)">✅ Portátil</h4>
+                        <p style="font-size:0.5em">Funciona en cualquier PC</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 15: KALI & PARROT — Las Armaduras Especializadas             -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section style="background: linear-gradient(135deg, rgba(247,118,142,0.08) 0%, rgba(15,17,23,1) 100%);">
+                <h2>🐧 Kali & Parrot = Las Armaduras</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Sistemas operativos especializados en seguridad. Como las armaduras de Tony.</p>
+                
+                <div class="columns">
+                    <div class="card" style="border:2px solid var(--pink);text-align:center">
+                        <p style="font-size:2em;margin:0">🐉</p>
+                        <h4 style="color:var(--pink);margin:0.2em 0">KALI LINUX</h4>
+                        <p style="font-size:0.52em">La armadura MARK 85</p>
+                        <ul style="font-size:0.5em;text-align:left;margin-top:0.2em">
+                            <li>600+ herramientas preinstaladas</li>
+                            <li>Estándar de la industria</li>
+                            <li>Basado en Debian</li>
+                            <li>Ideal para: Profesionales</li>
+                        </ul>
+                        <p style="font-size:0.48em;color:var(--pink)">"La más famosa, la más completa"</p>
+                    </div>
+                    <div class="card" style="border:2px solid var(--green);text-align:center">
+                        <p style="font-size:2em;margin:0">🦜</p>
+                        <h4 style="color:var(--green);margin:0.2em 0">PARROT OS</h4>
+                        <p style="font-size:0.52em">La armadura STEALTH</p>
+                        <ul style="font-size:0.5em;text-align:left;margin-top:0.2em">
+                            <li>Más ligero que Kali</li>
+                            <li>Interfaz más amigable</li>
+                            <li>Incluye anonimato</li>
+                            <li>Ideal para: Principiantes</li>
+                        </ul>
+                        <p style="font-size:0.48em;color:var(--green)">"Más accesible, más liviano"</p>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top:0.4em">
+                    <h4>💡 ¿Cuál elegir?</h4>
+                    <p style="font-size:0.58em"><strong>Si empiezas:</strong> Parrot OS (más amigable) | <strong>Si quieres lo estándar:</strong> Kali Linux | <strong>Truco:</strong> Puedes usar ambas en Docker 🐳</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 16: SSH — Teletransportación Segura                          -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🔐 SSH = Teletransportación</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Conecta a cualquier máquina como si estuvieras ahí. Como el portal de Doctor Strange.</p>
+                
+                <div style="display:flex;align-items:center;justify-content:center;gap:15px;margin:0.4em 0">
+                    <div style="text-align:center">
+                        <p style="font-size:0.55em;color:var(--text-muted);margin:0">Tu PC (Ecuador)</p>
+                        <p style="font-size:1.5em;margin:0">🏠</p>
+                    </div>
+                    <div style="text-align:center">
+                        <p style="font-size:0.55em;color:var(--gold);margin:0;font-weight:600">SSH</p>
+                        <p style="font-size:1.5em;margin:0">🌀</p>
+                        <p style="font-size:0.45em;color:var(--text-muted);margin:0">Conexión segura</p>
+                    </div>
+                    <div style="text-align:center">
+                        <p style="font-size:0.55em;color:var(--text-muted);margin:0">Servidor (Alemania)</p>
+                        <p style="font-size:1.5em;margin:0">🖥️</p>
+                    </div>
+                </div>
+
+                <div class="columns" style="margin-top:0.3em">
+                    <div class="terminal" style="font-size:0.48em">
+                        <div class="line"><span class="comment"># 🔐 Conectar a Kali Linux vía SSH</span></div>
+                        <div class="line"><span class="prompt">$</span> <span class="command">ssh usuario@192.168.1.100</span></div>
+                        <div class="line"><span class="output">The authenticity of host... </span></div>
+                        <div class="line"><span class="output">Are you sure? (yes/no) <span class="command">yes</span></span></div>
+                        <div class="line"><span class="output">Password: ********</span></div>
+                        <div class="line"><span class="highlight">user@kali:~$ ✅ Conectado</span></div>
+                        <div class="line">&nbsp;</div>
+                        <div class="line"><span class="comment"># 🔑 Conectar con clave (más seguro)</span></div>
+                        <div class="line"><span class="prompt">$</span> <span class="command">ssh -i ~/.ssh/id_rsa usuario@ip</span></div>
+                    </div>
+                    <div>
+                        <div class="info-box cyan">
+                            <h4 style="color:var(--cyan)">🌐 ¿Qué es SSH?</h4>
+                            <ul style="font-size:0.52em">
+                                <li><strong>Secure Shell</strong> - Protocolo seguro</li>
+                                <li>Encripta toda la comunicación</li>
+                                <li>Acceso remoto a terminales</li>
+                                <li>Como un túnel cifrado</li>
+                            </ul>
+                        </div>
+                        <div class="info-box green" style="margin-top:0.3em">
+                            <h4 style="color:var(--green)">🎯 Usos comunes</h4>
+                            <ul style="font-size:0.52em">
+                                <li>Administrar VPS (servidores)</li>
+                                <li>Acceder a Kali/Parrot remoto</li>
+                                <li>Hacking desde la nube</li>
+                                <li>Túneles seguros</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 17: SETUP COMPLETO — Tu Estación de Hacking                  -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🛠️ Setup Completo — Tu Estación</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Cómo configurar tu entorno de hacking como un profesional.</p>
+                
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+                    <div class="card" style="border-left:3px solid var(--cyan)">
+                        <h4 style="color:var(--cyan)">📦 PASO 1: Docker</h4>
+                        <div class="terminal" style="font-size:0.4em">
+                            <div class="line"><span class="comment"># Instalar Docker</span></div>
+                            <div class="line"><span class="comment"># Mac: brew install --cask docker</span></div>
+                            <div class="line"><span class="comment"># Linux: sudo apt install docker</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># Crear red de hacking</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">docker network create hacknet</span></div>
+                        </div>
+                    </div>
+                    <div class="card" style="border-left:3px solid var(--pink)">
+                        <h4 style="color:var(--pink)">🐧 PASO 2: Kali/Parrot</h4>
+                        <div class="terminal" style="font-size:0.4em">
+                            <div class="line"><span class="comment"># Opción A: VirtualBox</span></div>
+                            <div class="line"><span class="comment"># Descargar .iso → Instalar en VM</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># Opción B: Docker (recomendado)</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">docker pull kalilinux/kali</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">docker run -it kalilinux/kali bash</span></div>
+                        </div>
+                    </div>
+                    <div class="card" style="border-left:3px solid var(--green)">
+                        <h4 style="color:var(--green)">🔐 PASO 3: SSH Keys</h4>
+                        <div class="terminal" style="font-size:0.4em">
+                            <div class="line"><span class="comment"># Generar clave SSH</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">ssh-keygen -t ed25519</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># Ver tu clave pública</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">cat ~/.ssh/id_ed25519.pub</span></div>
+                            <div class="line">&nbsp;</div>
+                            <div class="line"><span class="comment"># Copiar al servidor</span></div>
+                            <div class="line"><span class="prompt">$</span> <span class="command">ssh-copy-id user@server</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box purple" style="margin-top:0.4em">
+                    <h4>🎬 Como Tony Stark en Infinity War</h4>
+                    <p style="font-size:0.58em">Tony prepara su estación de trabajo antes de cada misión. <strong>Tú también debes preparar tu setup antes de cazar bugs.</strong></p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 18: ARQUITECTURA TÍPICA — Diagrama del Sistema               -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🏗️ Arquitectura Típica</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Cómo se conecta todo en un setup de hacking ético.</p>
+                
+                <div style="background:#0d0d14;padding:1em;border-radius:10px;font-family:var(--mono);font-size:0.5em;text-align:left">
+                    <div style="text-align:center;margin-bottom:0.5em">
+                        <span style="color:var(--gold)">┌─────────────────────────────────────────────────────────┐</span>
+                    </div>
+                    <div style="text-align:center">
+                        <span style="color:var(--gold)">│</span> <span style="color:var(--cyan)">🖥️ TU PC (Mac/Windows/Linux)</span> <span style="color:var(--gold)">│</span>
+                    </div>
+                    <div style="text-align:center">
+                        <span style="color:var(--gold)">│</span> <span style="color:var(--text-muted)">Terminal + Burp Suite + Navegador</span> <span style="color:var(--gold)">│</span>
+                    </div>
+                    <div style="text-align:center;margin-bottom:0.5em">
+                        <span style="color:var(--gold)">└──────────────────┬──────────────────┘</span>
+                    </div>
+                    <div style="text-align:center">
+                        <span style="color:var(--gold)">│</span>
+                    </div>
+                    <div style="text-align:center;color:var(--green)">▼ SSH / Docker</div>
+                    <div style="text-align:center">
+                        <span style="color:var(--gold)">┌──────────────────┴──────────────────┐</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-around">
+                        <div style="text-align:center">
+                            <span style="color:var(--gold)">│</span> <span style="color:var(--pink)">🐧 Kali VM</span> <span style="color:var(--gold)">│</span>
+                            <br><span style="color:var(--gold)">│</span> <span style="color:var(--text-muted)">600+ tools</span> <span style="color:var(--gold)">│</span>
+                        </div>
+                        <div style="text-align:center">
+                            <span style="color:var(--gold)">│</span> <span style="color:var(--green)">🐳 Docker Labs</span> <span style="color:var(--gold)">│</span>
+                            <br><span style="color:var(--gold)">│</span> <span style="color:var(--text-muted)">DVWA, Juice</span> <span style="color:var(--gold)">│</span>
+                        </div>
+                        <div style="text-align:center">
+                            <span style="color:var(--gold)">│</span> <span style="color:var(--orange)">☁️ VPS</span> <span style="color:var(--gold)">│</span>
+                            <br><span style="color:var(--gold)">│</span> <span style="color:var(--text-muted)">HackBox</span> <span style="color:var(--gold)">│</span>
+                        </div>
+                    </div>
+                    <div style="text-align:center">
+                        <span style="color:var(--gold)">└─────────────────────────────────────┘</span>
+                    </div>
+                    <div style="text-align:center;margin-top:0.5em;color:var(--pink)">
+                        🎯 OBJETIVO (Sitio web autorizado)
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top:0.3em">
+                    <h4>💡 Nota importante</h4>
+                    <p style="font-size:0.58em">Todo este setup es para <strong>práctica y testing autorizado</strong>. Como Tony prueba sus armaduras antes de usarlas en batalla.</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 19: RESUMEN TECNOLOGÍAS — TL;DR Infraestructura              -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🔧 TL;DR — Tecnologías Clave</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Resumen de infraestructura para hacking ético.</p>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tecnología</th>
+                            <th>¿Qué es?</th>
+                            <th>Marvel Analogy</th>
+                            <th>Instalación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color:var(--green)">🐳 Docker</td>
+                            <td>Contenedores aislados</td>
+                            <td>Cápsulas de entrenamiento</td>
+                            <td><code>brew install --cask docker</code></td>
+                        </tr>
+                        <tr>
+                            <td style="color:var(--pink)">🐉 Kali Linux</td>
+                            <td>SO para penetration testing</td>
+                            <td>Armadura Mark 85</td>
+                            <td><code>VM o docker pull kalilinux</code></td>
+                        </tr>
+                        <tr>
+                            <td style="color:var(--green)">🦜 Parrot OS</td>
+                            <td>SO ligero de seguridad</td>
+                            <td>Armadura Stealth</td>
+                            <td><code>VM o docker pull parrot</code></td>
+                        </tr>
+                        <tr>
+                            <td style="color:var(--cyan)">🔐 SSH</td>
+                            <td>Acceso remoto seguro</td>
+                            <td>Portal de Doctor Strange</td>
+                            <td><code>Ya incluido en Mac/Linux</code></td>
+                        </tr>
+                        <tr>
+                            <td style="color:var(--orange)">☁️ VPS</td>
+                            <td>Servidor virtual privado</td>
+                            <td>Base secreta</td>
+                            <td><code>$5-10/mes (Hetzner, AWS)</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box green" style="margin-top:0.4em">
+                    <h4>🚀 Setup mínimo para empezar</h4>
+                    <p style="font-size:0.58em"><strong>1.</strong> Docker instalado → <strong>2.</strong> docker run DVWA → <strong>3.</strong> Practicar → <strong>4.</strong> Conectar Kali vía SSH → <strong>5.</strong> ¡A cazar bugs!</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 20: RESUMEN MARVEL TL;DR                                     -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
                 <h2>🦹‍♂️ TL;DR — Resumen Marvel</h2>
