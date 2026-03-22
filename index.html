@@ -76,52 +76,8 @@
         .reveal li { margin: 0.15em 0; color: var(--text-muted); line-height: 1.3; }
         .reveal li::marker { color: var(--doom-gold); }
 
-        /* CTF Live Banner - always visible */
-        .ctf-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(90deg, #1a0a0a 0%, #2d0a0a 50%, #1a0a0a 100%);
-            border-bottom: 2px solid var(--pink);
-            padding: 8px 20px;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--mono);
-        }
-        .ctf-banner .ctf-label {
-            background: var(--pink);
-            color: #000;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.75em;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        .ctf-banner .ctf-target {
-            color: var(--doom-gold);
-            font-size: 0.8em;
-        }
-        .ctf-banner .ctf-url {
-            color: var(--green);
-            font-size: 0.75em;
-            background: rgba(0,0,0,0.5);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-        .ctf-banner .ctf-flag {
-            color: var(--cyan);
-            font-size: 0.7em;
-        }
-        
-        /* Adjust reveal for fixed banner */
-        .reveal { font-family: var(--font); font-size: 24px; padding-top: 45px; }
+        /* Adjust reveal - no fixed banner */
+        .reveal { font-family: var(--font); font-size: 24px; }
 
         .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 0.58em; font-weight: 500; margin: 2px; }
         .badge.green { background: rgba(158,206,106,0.15); color: var(--green); }
@@ -213,19 +169,6 @@
     </style>
 </head>
 <body>
-    <!-- CTF Live Banner - Inicia desde el minuto 0 -->
-    <div class="ctf-banner" id="ctf-banner">
-        <div style="display:flex;align-items:center;gap:15px">
-            <span class="ctf-label">🔴 CTF LIVE</span>
-            <span class="ctf-target">🎯 Target:</span>
-            <span class="ctf-url">doom-statick.github.io/ctf-flisol</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:15px">
-            <span class="ctf-flag">Flag: FLISOL{...}</span>
-            <span id="ctf-timer" style="color:var(--orange);font-size:0.75em">⏱️ 00:00:00</span>
-        </div>
-    </div>
-
     <div class="reveal">
         <div class="slides">
             
@@ -254,30 +197,12 @@
                 </div>
                 <p style="font-size:0.72em;color:var(--doom-gold);font-style:italic;text-align:center;margin-top:0.3em">"Hoy les cuento cómo Doom conquista sistemas — con permiso, ñaños."</p>
                 
-                <!-- CTF Announcement Box -->
-                <div style="margin-top:0.5em;background:rgba(247,118,142,0.1);border:2px solid var(--pink);border-radius:12px;padding:0.6em 1em;max-width:600px">
-                    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
-                        <span style="font-size:1.5em">🏴‍☠️</span>
-                        <div style="text-align:left">
-                            <p style="font-size:0.8em;color:var(--pink);font-weight:700;margin:0">CTF INICIADO — ¡AHORA MISMO!</p>
-                            <p style="font-size:0.65em;color:var(--text-muted);margin:0.2em 0 0">
-                                Los que quieran: <strong style="color:var(--cyan)">doom-statick.github.io/ctf-flisol</strong> — Flag: <code style="background:rgba(0,255,65,0.2);color:var(--green)">FLISOL{...}</code>
-                            </p>
-                            <p style="font-size:0.58em;color:var(--text-muted);margin:0.1em 0 0;font-style:italic">
-                                "Los que no quieran escuchar la charla, tienen mi permiso para atacar el objetivo. ¡A conquistar!"
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
+
                 <aside class="notes">
-                    <h2>🎤 Speaker Notes - Slide 1: Título + CTF INICIADO</h2>
+                    <h2>🎤 Speaker Notes - Slide 1: Título</h2>
                     <ul>
                         <li><strong>Tiempo:</strong> 1-2 minutos</li>
-                        <li><strong>🔥 ACCIÓN CRÍTICA:</strong> Anunciar que el CTF YA ESTÁ ACTIVO desde ahora mismo</li>
-                        <li><strong>Frase clave:</strong> "Para los que quieran participar del CTF: doom-statick.github.io/ctf-flisol — ya empezó, pueden atacar AHORA. Los que no, escúchenme, ¿sí?"</li>
-                        <li><strong>Pasar el QR/URL:</strong> Mostrar la URL en el banner de arriba. Que la gente saque sus laptops.</li>
-                        <li><strong>Reglas rápidas:</strong> "Solo el target indicado. Flag format: FLISOL{...}. Si encuentran algo, griten 'ENCONTRÉ'."</li>
+                        <li><strong>Saludo:</strong> "¡Hola! Soy Diego, Statick. Hoy les cuento cómo conquer sistemas desde el lado del bien."</li>
                         <li><strong>Dato personal:</strong> Menciona que eres de Loja y que FLISOL es especial para ti.</li>
                     </ul>
                 </aside>
@@ -510,196 +435,7 @@
             </section>
 
             <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 9: CTF INTERACTIVO - INTRO (1 min)                            -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>🎮 ¡TU TURNO! <span style="color:var(--doom-gold)">— CTF Interactivo</span></h2>
-                <p style="font-size:0.65em;color:var(--text-muted)">Oigan bacán, 2 challenges, 10 minutos total. ¿Quién agarra la primera flag?</p>
-                <div class="savitar-alert">
-                    <h4>📋 REGLAS</h4>
-                    <ul style="font-size:0.6em">
-                        <li>✅ <strong>Solo educativo</strong> — esta es una charla</li>
-                        <li>✅ Flags: <code style="color:var(--doom-gold)">FLISOL{...}</code></li>
-                        <li>✅ Primero en enviar gana</li>
-                        <li>❌ No Google, no AI — solo su cerebro</li>
-                    </ul>
-                </div>
-                <div class="card-grid two" style="margin-top:0.3em">
-                    <div class="card" style="border-color:var(--green)">
-                        <h4 style="color:var(--green)">🟢 Challenge 1</h4>
-                        <p style="font-size:0.58em">Base64 Decode</p>
-                        <p style="color:var(--green);font-size:0.5em">Fácil — 4 min</p>
-                    </div>
-                    <div class="card" style="border-color:var(--orange)">
-                        <h4 style="color:var(--orange)">🟡 Challenge 2</h4>
-                        <p style="font-size:0.58em">SQL Injection</p>
-                        <p style="color:var(--orange);font-size:0.5em">Medio — 6 min</p>
-                    </div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> Si resuelves los 2, ya tienes base para empezar en Bug Bounty.</div>
-                <div class="doom-consejo"><strong>[Statick]</strong> Che, envía tu flag a <strong>@flisol_loja</strong> en Twitter. ¡El primero gana!</div>
-                <div class="slide-footer">
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 10: CTF CHALLENGE 1 - BASE64 (4 min)                          -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>🟢 Challenge 1 <span style="color:var(--green)">— Base64 (Easy)</span></h2>
-                <div class="info-box green" style="margin-top:0.3em">
-                    <h4>📦 "La Caja de Doom"</h4>
-                    <p style="font-family:var(--mono);font-size:1.3em;color:var(--green);text-align:center;padding:0.4em">
-                        <strong>Wmhpc3t3ZWxjb21lX3RvX2ZsaXNvbF8yMDI2fQ==</strong>
-                    </p>
-                    <p style="font-size:0.58em;text-align:center">Flag: <code style="color:var(--doom-gold)">FLISOL{...}</code></p>
-                </div>
-                <div class="columns" style="margin-top:0.3em">
-                    <div>
-                        <div class="info-box"><h4>💡 Pista 1</h4><p style="font-size:0.6em">Mira los últimos caracteres: <code>==</code>. Eso es un clue de encoding.</p></div>
-                        <div class="info-box" style="margin-top:0.2em"><h4>💡 Pista 2</h4><p style="font-size:0.6em">Usa <code>base64 -d</code> o <a href="https://www.base64decode.org" target="_blank">base64decode.org</a></p></div>
-                    </div>
-                    <div>
-                        <div class="terminal" style="font-size:0.55em">
-                            <div class="line"><span class="prompt">$</span> <span class="command">echo "Wmhpc3t3ZWxjb21lX3RvX2ZsaXNvbF8yMDI2fQ==" | base64 -d</span></div>
-                            <div class="line"><span class="output" style="color:var(--green)"># ¿Qué ves aquí?</span></div>
-                        </div>
-                        <p style="font-size:0.55em;color:var(--orange);margin-top:0.3em"><strong>Tiempo:</strong> <span id="timer1">04:00</span></p>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 11: CTF CHALLENGE 2 - SQLi (6 min)                            -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>🟡 Challenge 2 <span style="color:var(--orange)">— SQL Injection (Medium)</span></h2>
-                <div class="info-box orange" style="margin-top:0.3em">
-                    <h4>💉 "La Fortaleza de Latveria"</h4>
-                    <p style="font-size:0.58em">Formulario con SQL Injection. Bypassea el login.</p>
-                    <p style="font-family:var(--mono);font-size:0.9em;color:var(--orange);text-align:center;padding:0.3em">
-                        <strong>https://doom-statick.github.io/ctf-flisol/login.php</strong>
-                    </p>
-                </div>
-                <div class="columns" style="margin-top:0.3em">
-                    <div>
-                        <div class="info-box"><h4>💡 Pista 1</h4><p style="font-size:0.6em">Username: <code>admin' OR '1'='1' --</code></p></div>
-                        <div class="info-box" style="margin-top:0.2em"><h4>💡 Pista 2</h4><p style="font-size:0.6em">El <code>'</code> cierra la query. <code>OR '1'='1</code> siempre es TRUE. <code>--</code> comenta el resto.</p></div>
-                    </div>
-                    <div>
-                        <div class="terminal" style="font-size:0.5em">
-                            <div class="line"><span class="comment"># SQL Injection - Login Bypass</span></div>
-                            <div class="line"><span class="line"></span></div>
-                            <div class="line"><span class="comment"># Username:</span></div>
-                            <div class="line"><span class="command" style="color:var(--pink)">admin' OR '1'='1' --</span></div>
-                            <div class="line"><span class="comment"># Password:</span></div>
-                            <div class="line"><span class="command">cualquiera</span></div>
-                            <div class="line">&nbsp;</div>
-                            <div class="line"><span class="comment"># ¿Por qué?</span></div>
-                            <div class="line"><span class="output">SELECT * FROM users</span></div>
-                            <div class="line"><span class="output">WHERE user='admin' OR '1'='1' --'</span></div>
-                        </div>
-                        <p style="font-size:0.55em;color:var(--orange);margin-top:0.3em"><strong>Tiempo:</strong> <span id="timer2">06:00</span></p>
-                    </div>
-                </div>
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> SQLi sigue siendo #1 en OWASP. Aprende esto y dominarás Bug Bounty.</div>
-                <div class="slide-footer">
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 12: SOLUCIONES (1 min)                                        -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section>
-                <h2>🏆 Soluciones <span style="color:var(--doom-gold)">— CTF FLISOL</span></h2>
-                <div class="card-grid two" style="margin-top:0.3em">
-                    <div class="card" style="border-color:var(--green)">
-                        <h4 style="color:var(--green)">🟢 Challenge 1</h4>
-                        <p style="font-family:var(--mono);color:var(--green);word-break:break-all">FLISOL{welcome_to_flisol_2026}</p>
-                        <p style="font-size:0.5em;color:var(--text-muted)">Técnica: <code>base64 -d</code></p>
-                    </div>
-                    <div class="card" style="border-color:var(--orange)">
-                        <h4 style="color:var(--orange)">🟡 Challenge 2</h4>
-                        <p style="font-family:var(--mono);color:var(--orange);word-break:break-all">FLISOL{sqli_bypass_1s_all_1s}</p>
-                        <p style="font-size:0.5em;color:var(--text-muted)">Técnica: <code>admin' OR '1'='1' --</code></p>
-                    </div>
-                </div>
-                <div class="doom-consejo"><strong>[Statick]</strong> Che, si resolviste los 2, estás listo para empezar en Bug Bounty. En serio.</div>
-                <aside class="notes">
-                    <h2>🎤 Speaker Notes - Slide 12: Soluciones CTF</h2>
-                    <ul>
-                        <li><strong>Tiempo:</strong> 1 minuto</li>
-                        <li><strong>Frase clave:</strong> "Si resolviste los 2, ya estás listo para Bug Bounty. En serio, bacán."</li>
-                        <li><strong>Acción:</strong> Preguntar "¿Quién resolvió el 1? ¿Y el 2?" — reconocer públicamente</li>
-                        <li><strong>Premios:</strong> "Los que resolvieron, pasen al frente después. Tienen premios."</li>
-                    </ul>
-                </aside>
-                <div class="slide-footer">
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 12.5: PREMIOS CTF (1 min)                                     -->
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <section style="background: linear-gradient(135deg, rgba(158,206,106,0.08) 0%, rgba(0,0,0,0.9) 100%);">
-                <h2>🏆 Premios del CTF</h2>
-                <p style="font-size:0.62em;color:var(--text-muted)">Para los que resolvieron los challenges — Doom premia la excelencia.</p>
-                
-                <div class="card-grid three" style="margin-top:0.4em">
-                    <div class="card" style="border-color:var(--doom-gold);background:rgba(255,215,0,0.05)">
-                        <h4 style="color:var(--doom-gold);font-size:1.2em">🥇 1er Lugar</h4>
-                        <p style="font-size:0.65em;color:var(--text)"><strong>Coffee Chat 1-on-1</strong></p>
-                        <p style="font-size:0.55em">1 hora con Statick</p>
-                        <p style="font-size:0.5em;color:var(--doom-gold)">Career advice + CV review</p>
-                        <p style="font-size:0.5em;color:var(--doom-gold)">+ Certificado Abacom</p>
-                    </div>
-                    <div class="card" style="border-color:var(--silver);background:rgba(192,192,192,0.05)">
-                        <h4 style="color:var(--silver);font-size:1.2em">🥈 2do Lugar</h4>
-                        <p style="font-size:0.65em;color:var(--text)"><strong>Code Review</strong></p>
-                        <p style="font-size:0.55em">30 min revisando TU código</p>
-                        <p style="font-size:0.5em;color:var(--silver)">Feedback profesional</p>
-                        <p style="font-size:0.5em;color:var(--silver)">+ Recomendación LinkedIn</p>
-                    </div>
-                    <div class="card" style="border-color:var(--orange);background:rgba(255,158,100,0.05)">
-                        <h4 style="color:var(--orange);font-size:1.2em">🥉 3er Lugar</h4>
-                        <p style="font-size:0.65em;color:var(--text)"><strong>Lab Premium</strong></p>
-                        <p style="font-size:0.55em">Acceso a 70+ challenges</p>
-                        <p style="font-size:0.5em;color:var(--orange)">Writeups exclusivos</p>
-                        <p style="font-size:0.5em;color:var(--orange)">+ Report Template</p>
-                    </div>
-                </div>
-
-                <div style="margin-top:0.4em;background:rgba(125,207,255,0.1);border:1px solid var(--cyan);border-radius:8px;padding:0.5em">
-                    <p style="font-size:0.62em;color:var(--cyan);margin:0"><strong>🎁 Para todos los participantes:</strong> Certificado digital + Grupo exclusivo Telegram/Discord</p>
-                </div>
-
-                <div class="doom-tip"><strong>[DOOM TIP]</strong> El conocimiento compartido se multiplica. Ñaños, esto es una comunidad, no competencia.</div>
-                
-                <aside class="notes">
-                    <h2>🎤 Speaker Notes - Slide 12.5: Premios</h2>
-                    <ul>
-                        <li><strong>Tiempo:</strong> 1 minuto</li>
-                        <li><strong>Frase clave:</strong> "Doom premia la excelencia, pero FLISOL premia a TODOS los que participaron."</li>
-                        <li><strong>1er lugar:</strong> "Una hora conmigo. Career advice, CV review, lo que necesites. Eso vale más que cualquier curso."</li>
-                        <li><strong>2do lugar:</strong> "Trae tu código, lo revisamos juntos. Te doy feedback real."</li>
-                        <li><strong>3er lugar:</strong> "Acceso a todos mis challenges con writeups. Aprenderás pattern by pattern."</li>
-                        <li><strong>Todos:</strong> "Certificado + grupo exclusivo. Ahí seguimos conectados."</li>
-                        <li><strong>Acción:</strong> Pasar a los ganadores al frente para foto</li>
-                    </ul>
-                </aside>
-                <div class="slide-footer">
-                    <span class="footer-text">Dr. Doom: Bug Bounty | FLISOL 2026 | Statick</span>
-                </div>
-            </section>
-
-            <!-- ═══════════════════════════════════════════════════════════════════ -->
-            <!-- SLIDE 13: ROADMAP PRIMER BOUNTY (2 min)                             -->
+            <!-- SLIDE 9: ROADMAP PRIMER BOUNTY (2 min)                             -->
             <!-- ═══════════════════════════════════════════════════════════════════ -->
             <section>
                 <h2>Tu Primer Bounty <span style="color:var(--doom-gold)">— Roadmap</span></h2>
@@ -873,56 +609,6 @@
             controlsTutorial: false,
             transition: 'slide',
             plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom, RevealSearch]
-        });
-
-        // Global CTF Timer - counts UP from presentation start
-        let ctfSeconds = 0;
-        const ctfTimerElement = document.getElementById('ctf-timer');
-        
-        setInterval(() => {
-            ctfSeconds++;
-            const hrs = Math.floor(ctfSeconds / 3600);
-            const mins = Math.floor((ctfSeconds % 3600) / 60);
-            const secs = ctfSeconds % 60;
-            ctfTimerElement.textContent = `⏱️ ${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }, 1000);
-
-        // Challenge timer functionality for CTF slides
-        let timersStarted = {};
-        
-        function startTimer(elementId, minutes) {
-            const element = document.getElementById(elementId);
-            if (!element || timersStarted[elementId]) return;
-            timersStarted[elementId] = true;
-            
-            let totalSeconds = minutes * 60;
-            element.style.color = 'var(--orange)';
-            
-            const interval = setInterval(() => {
-                const mins = Math.floor(totalSeconds / 60);
-                const secs = totalSeconds % 60;
-                element.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                
-                if (totalSeconds <= 60) {
-                    element.style.color = 'var(--pink)';
-                }
-                
-                if (totalSeconds <= 0) {
-                    clearInterval(interval);
-                    element.textContent = '⏰ TIEMPO!';
-                    element.style.color = 'var(--pink)';
-                    element.style.fontWeight = 'bold';
-                }
-                
-                totalSeconds--;
-            }, 1000);
-        }
-
-        // Start timers when CTF slides appear
-        Reveal.on('slidechanged', (event) => {
-            const slide = event.currentSlide;
-            if (slide.querySelector('#timer1')) startTimer('timer1', 4);
-            if (slide.querySelector('#timer2')) startTimer('timer2', 6);
         });
     </script>
 </body>
