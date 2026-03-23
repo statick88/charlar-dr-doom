@@ -191,8 +191,8 @@
 │   │                  HACKER AGENT                       │          │
 │   │                                                     │          │
 │   │   ⚡ SKILLS:                                        │          │
-│   │   • bug-bounty-recon    →  Reconocimiento          │          │
-│   │   • bug-bounty-exploit  →  Explotación             │          │
+│   │   • ctf-recon    →  Reconocimiento          │          │
+│   │   • bug-bounty-exploitation  →  Explotación             │          │
 │   │   • ctf-solver          →  Resolver CTFs           │          │
 │   │   • cyber-intelligence  →  Buscar CVEs             │          │
 │   │                                                     │          │
@@ -202,9 +202,8 @@
 │                                                                     │
 │   Tú dices: "Necesito hacer un bug bounty"                         │
 │   El sistema carga automáticamente:                                │
-│   • bug-bounty-recon (para buscar)                                 │
-│   • bug-bounty-exploit (para probar)                               │
-│   • bug-bounty-reporting (para documentar)                         │
+│   • ctf-recon (para buscar)                                 │
+│   • bug-bounty-exploitation (para probar)                               │
 │                                                                     │
 │   💡 Skills = Armaduras de Iron Man                                │
 │   Cada skill es una herramienta especializada                      │
